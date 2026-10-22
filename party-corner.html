@@ -665,6 +665,16 @@
       star.style.opacity = '0';
     }, 50);
 
+    if (typeof AnswersSync !== 'undefined') {
+      AnswersSync.record({
+        room: 'Room 8: Party Corner',
+        section: "Amma's Wish Jar",
+        questionId: 'wish_jar',
+        question: "Amma's Birthday Wish in the Jar",
+        answer: text
+      });
+    }
+
     setTimeout(() => {
       star.remove();
       celebrate();

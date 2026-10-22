@@ -28,131 +28,149 @@
       margin-bottom: 0.8rem;
     }
 
-    /* Video Wall Grid */
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.8rem;
-      margin: 2.5rem 0 3.5rem;
-    }
-
-    .video-card {
-      border-radius: var(--radius-card);
+    /* Single Family Video Showcase */
+    .family-video-card {
+      max-width: 820px;
+      margin: 2.2rem auto 3.5rem;
+      border-radius: var(--radius-lg, 24px);
       overflow: hidden;
-      background: linear-gradient(145deg, rgba(62,11,108,0.7) 0%, rgba(28,4,52,0.9) 100%);
-      border: 2px solid rgba(212,175,55,0.4);
-      cursor: pointer;
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s, border-color 0.3s;
+      background: linear-gradient(145deg, rgba(62,11,108,0.85) 0%, rgba(28,4,52,0.95) 100%);
+      border: 2px solid var(--gold-metallic);
+      box-shadow: 0 14px 45px rgba(0,0,0,0.6), var(--glow-gold);
       position: relative;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.45);
     }
 
-    .video-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      border-color: var(--gold-bright);
-      box-shadow: var(--glow-gold), var(--shadow-card);
-    }
-
-    .video-card.watched {
-      border-color: rgba(255, 215, 0, 0.85);
-    }
-
-    .video-thumb-wrap {
+    .family-video-screen {
+      position: relative;
       width: 100%;
       aspect-ratio: 16/9;
-      background: radial-gradient(circle at center, #4A0E80 0%, #1A0332 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
+      background: #000;
       overflow: hidden;
     }
 
-    .video-thumb-icon {
-      font-size: 3.8rem;
-      filter: drop-shadow(0 0 15px rgba(255,215,0,0.5));
-      transition: transform 0.3s;
+    #family-video-player {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #000;
     }
 
-    .video-card:hover .video-thumb-icon {
-      transform: scale(1.15);
-    }
-
-    .play-overlay {
+    .family-play-overlay {
       position: absolute;
       inset: 0;
+      background: rgba(20, 2, 40, 0.55);
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: rgba(0,0,0,0.35);
-      transition: background 0.3s;
+      cursor: pointer;
+      transition: background 0.3s, opacity 0.4s;
+      backdrop-filter: blur(2px);
     }
 
-    .video-card:hover .play-overlay {
-      background: rgba(0,0,0,0.55);
+    .family-play-overlay:hover {
+      background: rgba(20, 2, 40, 0.4);
     }
 
-    .play-btn {
-      width: 60px;
-      height: 60px;
+    .family-play-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .family-play-btn {
+      width: 84px;
+      height: 84px;
       border-radius: 50%;
       background: var(--grad-gold);
       color: var(--purple-deep);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
-      padding-left: 4px;
-      box-shadow: var(--glow-gold);
-      transition: transform 0.25s;
+      font-size: 2.4rem;
+      padding-left: 6px;
+      box-shadow: 0 0 35px rgba(255, 215, 0, 0.8), 0 8px 25px rgba(0,0,0,0.5);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    .video-card:hover .play-btn {
+    .family-play-overlay:hover .family-play-btn {
       transform: scale(1.15);
     }
 
-    .video-info {
-      padding: 1.4rem;
-    }
-
-    .video-name {
+    .family-overlay-text {
+      margin-top: 1.2rem;
       font-family: var(--font-heading);
       font-size: 1.15rem;
       color: var(--gold-champagne);
-      font-weight: 700;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+      letter-spacing: 0.04em;
+    }
+
+    .family-video-body {
+      padding: clamp(1.4rem, 4vw, 2.2rem);
+    }
+
+    .family-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.8rem;
+    }
+
+    .family-name {
+      font-family: var(--font-heading);
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      background: var(--grad-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       margin-bottom: 0.2rem;
     }
 
-    .video-relation {
-      font-size: 0.8rem;
+    .family-tagline {
+      font-size: 0.95rem;
       color: var(--purple-orchid);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-family: var(--font-heading);
-    }
-
-    .video-message {
-      font-size: 0.92rem;
-      color: var(--purple-lavender);
+      letter-spacing: 0.05em;
       font-style: italic;
-      margin-top: 0.8rem;
-      line-height: 1.5;
     }
 
-    .video-badges {
+    .family-quote {
+      font-size: 1.05rem;
+      color: var(--gold-champagne);
+      font-style: italic;
+      line-height: 1.7;
+      margin: 1rem 0 1.4rem;
+      background: rgba(20, 2, 40, 0.45);
+      border-left: 3px solid var(--gold-bright);
+      padding: 1rem 1.2rem;
+      border-radius: 0 12px 12px 0;
+    }
+
+    .family-badges-row {
       display: flex;
-      gap: 0.6rem;
-      margin-top: 1rem;
       align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
     }
 
     .badge-watched {
       background: rgba(77, 208, 225, 0.18);
       border: 1px solid var(--teal);
       color: var(--teal);
-      padding: 0.25rem 0.75rem;
+      padding: 0.35rem 1rem;
       border-radius: 50px;
-      font-size: 0.75rem;
+      font-size: 0.82rem;
+      font-family: var(--font-heading);
+    }
+
+    .badge-pill-gold {
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: var(--gold-champagne);
+      padding: 0.35rem 1rem;
+      border-radius: 50px;
+      font-size: 0.82rem;
       font-family: var(--font-heading);
     }
 
@@ -160,11 +178,15 @@
       background: rgba(244, 143, 177, 0.18);
       border: 1px solid var(--rose);
       color: var(--rose);
-      padding: 0.25rem 0.85rem;
+      padding: 0.4rem 1.2rem;
       border-radius: 50px;
-      font-size: 0.78rem;
+      font-size: 0.9rem;
       cursor: pointer;
       transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-heading);
     }
 
     .badge-heart:hover,
@@ -174,75 +196,7 @@
       transform: scale(1.05);
     }
 
-    /* ─── CINEMA MODAL ────────────────────────────────────────── */
-    #cinema-modal {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: rgba(8, 1, 18, 0.96);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
-      backdrop-filter: blur(12px);
-    }
 
-    #cinema-modal.open {
-      display: flex;
-      animation: fadeIn 0.3s ease;
-    }
-
-    .cinema-box {
-      max-width: 820px;
-      width: 100%;
-      background: linear-gradient(135deg, rgba(62,11,108,0.95), rgba(28,4,52,0.98));
-      border: 2px solid var(--gold-metallic);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      box-shadow: 0 12px 50px rgba(0,0,0,0.85), var(--glow-gold);
-      position: relative;
-    }
-
-    .cinema-close {
-      position: absolute;
-      top: -15px;
-      right: -15px;
-      width: 40px;
-      height: 40px;
-      background: var(--grad-gold);
-      color: var(--purple-deep);
-      border: none;
-      border-radius: 50%;
-      font-weight: bold;
-      font-size: 1.25rem;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-    }
-
-    .video-viewport {
-      width: 100%;
-      aspect-ratio: 16/9;
-      background: #000;
-      border-radius: 10px;
-      overflow: hidden;
-      margin-bottom: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .video-viewport iframe,
-    .video-viewport video {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    .cinema-placeholder {
-      text-align: center;
-      padding: 2.5rem 1.5rem;
-      color: var(--gold-champagne);
-    }
 
     /* ─── UNSCRAMBLE GAME ("AMMA LOVE") ───────────────────────── */
     .game-box {
@@ -397,8 +351,44 @@
       </p>
     </div>
 
-    <!-- Video Grid -->
-    <div class="video-grid" id="video-wall" role="region" aria-label="Family video messages"></div>
+    <!-- Single Family Video Showcase (All of Us Together) -->
+    <div class="family-video-card" id="family-video-card">
+      <div class="family-video-screen">
+        <video
+          id="family-video-player"
+          src="assets/videos/video-1.mp4"
+          poster="assets/photos/appa/photo1.jpeg"
+          controls
+          playsinline
+          preload="metadata"
+        ></video>
+        <div class="family-play-overlay" id="family-overlay">
+          <div class="family-play-btn" id="overlay-play-icon">▶</div>
+          <p class="family-overlay-text">Tap to Play Our Family's Video Wish, Amma 💜</p>
+        </div>
+      </div>
+
+      <div class="family-video-body">
+        <div class="family-header-row">
+          <div>
+            <h2 class="family-name">The Family 🌸</h2>
+            <p class="family-tagline">All of Us Together With You, Amma 💜</p>
+          </div>
+          <button class="badge-heart" id="family-heart-btn" type="button" aria-label="Love this video">
+            🤍 Love
+          </button>
+        </div>
+
+        <p class="family-quote" id="family-message-text">
+          "Amma, you are the pillar of our home, our greatest blessing, and the purest love in our lives. Everything we are is shaped by your warmth, your prayers, and your love. Happy Birthday to the Queen of our hearts! Porandhadhuku romba nandri Amma! 💜"
+        </p>
+
+        <div class="family-badges-row">
+          <span class="badge-watched" id="family-watched-badge" style="display:none;">Watched with love ✓</span>
+          <span class="badge-pill-gold">✦ From all our hearts to yours ✦</span>
+        </div>
+      </div>
+    </div>
 
     <!-- Unscramble Game: AMMA LOVE -->
     <section class="game-box" aria-label="Unscramble word game">
@@ -435,17 +425,7 @@
   </div>
 </main>
 
-<!-- Cinema Modal -->
-<div id="cinema-modal" role="dialog" aria-modal="true" aria-label="Watch family video">
-  <div class="cinema-box">
-    <button class="cinema-close" id="cinema-close" aria-label="Close cinema view">✕</button>
-    <div class="video-viewport" id="cinema-viewport"></div>
-    <div style="text-align:center;">
-      <h3 id="cinema-title" style="color:var(--gold-champagne); font-family:var(--font-heading); font-size:1.2rem; margin-bottom:0.4rem;"></h3>
-      <p id="cinema-desc" style="color:var(--purple-lavender); font-style:italic; font-size:0.95rem;"></p>
-    </div>
-  </div>
-</div>
+
 
 <script src="js/config.js"></script>
 <script src="js/main.js"></script>
@@ -454,132 +434,82 @@
   guardPage(4);
   sharedInit(4);
 
-  // ── 1. RENDER VIDEO WALL ───────────────────────────────────
-  const videoWall = document.getElementById('video-wall');
-  const videoData = CONFIG.videos || [];
+  // ── 1. SINGLE FAMILY VIDEO LOGIC ─────────────────────────────
+  const familyVideoEl      = document.getElementById('family-video-player');
+  const familyOverlay      = document.getElementById('family-overlay');
+  const familyHeartBtn     = document.getElementById('family-heart-btn');
+  const familyWatchedBadge = document.getElementById('family-watched-badge');
 
-  let watchedSet = new Set();
-  let lovedSet = new Set();
-  try {
-    const w = localStorage.getItem('amma_watched_videos');
-    if (w) watchedSet = new Set(JSON.parse(w));
-    const l = localStorage.getItem('amma_loved_videos');
-    if (l) lovedSet = new Set(JSON.parse(l));
-  } catch {}
+  // Load video settings from CONFIG
+  const fVid = CONFIG.familyVideo || (CONFIG.videos && CONFIG.videos[0]) || {
+    src: "assets/videos/video-1.mp4",
+    poster: "assets/photos/appa/photo1.jpeg",
+    message: "Amma, you are the pillar of our home, our greatest blessing, and the purest love in our lives. Happy Birthday to the Queen of our hearts! Porandhadhuku romba nandri Amma! 💜"
+  };
 
-  const emojis = ['🧸', '💍', '🏡', '🌸'];
+  if (fVid.src) familyVideoEl.src = fVid.src;
+  if (fVid.poster) familyVideoEl.poster = fVid.poster;
+  if (fVid.message) document.getElementById('family-message-text').textContent = `"${fVid.message}"`;
 
-  videoData.forEach((v, idx) => {
-    const card = document.createElement('div');
-    card.className = 'video-card' + (watchedSet.has(idx) ? ' watched' : '');
-    card.setAttribute('role', 'button');
-    card.setAttribute('tabindex', '0');
-    card.setAttribute('aria-label', `Watch message from ${v.name}`);
+  // Check saved state
+  if (localStorage.getItem('amma_family_video_watched') === '1') {
+    familyWatchedBadge.style.display = 'inline-block';
+  }
+  let isLoved = localStorage.getItem('amma_family_video_loved') === '1';
+  if (isLoved) {
+    familyHeartBtn.classList.add('liked');
+    familyHeartBtn.innerHTML = '❤️ Loved';
+  }
 
-    card.innerHTML = `
-      <div class="video-thumb-wrap">
-        <div class="video-thumb-icon">${emojis[idx % emojis.length]}</div>
-        <div class="play-overlay">
-          <div class="play-btn">▶</div>
-        </div>
-      </div>
-      <div class="video-info">
-        <h3 class="video-name">${v.name}</h3>
-        <p class="video-relation">${v.relation}</p>
-        <p class="video-message">"${v.message}"</p>
-        <div class="video-badges">
-          ${watchedSet.has(idx) ? '<span class="badge-watched">Watched ✓</span>' : ''}
-          <button class="badge-heart ${lovedSet.has(idx) ? 'liked' : ''}" type="button">
-            ${lovedSet.has(idx) ? '❤️ Loved' : '🤍 Love'}
-          </button>
-        </div>
-      </div>
-    `;
-
-    // Play video
-    card.querySelector('.play-overlay').addEventListener('click', () => openCinema(v, idx, card));
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') openCinema(v, idx, card);
-    });
-
-    // Heart reaction
-    const heartBtn = card.querySelector('.badge-heart');
-    heartBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (lovedSet.has(idx)) {
-        lovedSet.delete(idx);
-        heartBtn.classList.remove('liked');
-        heartBtn.textContent = '🤍 Love';
-      } else {
-        lovedSet.add(idx);
-        heartBtn.classList.add('liked');
-        heartBtn.textContent = '❤️ Loved';
-        playSound('pop');
-        launchConfetti(25);
-      }
-      try {
-        localStorage.setItem('amma_loved_videos', JSON.stringify([...lovedSet]));
-      } catch {}
-    });
-
-    videoWall.appendChild(card);
-  });
-
-  // Cinema modal
-  const cinema = document.getElementById('cinema-modal');
-  const viewport = document.getElementById('cinema-viewport');
-  const cinemaTitle = document.getElementById('cinema-title');
-  const cinemaDesc = document.getElementById('cinema-desc');
-
-  function openCinema(v, idx, card) {
-    cinemaTitle.textContent = `${v.name} — ${v.relation}`;
-    cinemaDesc.textContent = `"${v.message}"`;
-
-    if (v.youtube) {
-      viewport.innerHTML = `<iframe src="${v.youtube}?autoplay=1" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
-    } else if (v.src) {
-      viewport.innerHTML = `<video src="${v.src}" controls autoplay></video>`;
-    } else {
-      viewport.innerHTML = `
-        <div class="cinema-placeholder">
-          <div style="font-size:3.5rem; margin-bottom:0.8rem;">🎥 💜</div>
-          <p style="font-size:1.1rem; line-height:1.6; max-width:550px; margin:0 auto;">
-            "${v.message}"
-          </p>
-        </div>
-      `;
-    }
-
-    cinema.classList.add('open');
+  function playFamilyVideo() {
+    familyOverlay.classList.add('hidden');
     Music.pauseForVideo();
-
-    // Mark as watched
-    watchedSet.add(idx);
-    try {
-      localStorage.setItem('amma_watched_videos', JSON.stringify([...watchedSet]));
-    } catch {}
-    card.classList.add('watched');
-    const badgesWrap = card.querySelector('.video-badges');
-    if (!badgesWrap.querySelector('.badge-watched')) {
-      const wSpan = document.createElement('span');
-      wSpan.className = 'badge-watched';
-      wSpan.textContent = 'Watched ✓';
-      badgesWrap.prepend(wSpan);
-    }
+    familyVideoEl.play().catch(e => {
+      console.warn('Playback error or gesture needed:', e);
+    });
   }
 
-  function closeCinema() {
-    cinema.classList.remove('open');
-    viewport.innerHTML = '';
-    Music.resumeAfterVideo();
-  }
+  familyOverlay.addEventListener('click', playFamilyVideo);
 
-  document.getElementById('cinema-close').addEventListener('click', closeCinema);
-  cinema.addEventListener('click', (e) => {
-    if (e.target === cinema) closeCinema();
+  familyVideoEl.addEventListener('play', () => {
+    familyOverlay.classList.add('hidden');
+    Music.pauseForVideo();
+    markWatched();
   });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeCinema();
+
+  familyVideoEl.addEventListener('pause', () => {
+    if (!familyVideoEl.seeking) {
+      Music.resumeAfterVideo();
+    }
+  });
+
+  familyVideoEl.addEventListener('ended', () => {
+    Music.resumeAfterVideo();
+    familyOverlay.classList.remove('hidden');
+    celebrate();
+    markWatched();
+    showToast("We love you so much, Amma! 💜", 4000);
+  });
+
+  function markWatched() {
+    localStorage.setItem('amma_family_video_watched', '1');
+    familyWatchedBadge.style.display = 'inline-block';
+  }
+
+  familyHeartBtn.addEventListener('click', () => {
+    isLoved = !isLoved;
+    if (isLoved) {
+      localStorage.setItem('amma_family_video_loved', '1');
+      familyHeartBtn.classList.add('liked');
+      familyHeartBtn.innerHTML = '❤️ Loved';
+      playSound('pop');
+      launchConfetti(35);
+      showToast("Loved by Queen Glory! 💖");
+    } else {
+      localStorage.removeItem('amma_family_video_loved');
+      familyHeartBtn.classList.remove('liked');
+      familyHeartBtn.innerHTML = '🤍 Love';
+    }
   });
 
   // ── 2. UNSCRAMBLE GAME ("AMMA LOVE") ───────────────────────

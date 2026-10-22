@@ -18,7 +18,8 @@ const rooms = [
   'appa.html',
   'letter.html',
   'hug.html',
-  'photobooth.html' // legacy redirect
+  'photobooth.html', // legacy redirect
+  'answers.html'     // answers archive & Excel export
 ];
 
 console.log('=== 1. Verifying HTML Files ===');

@@ -12,8 +12,8 @@ bday/
 ├── index.html          ← 🎪 Room 1: The Party Gate (Opening Tamil blessing + golden key door game)
 ├── lobby.html          ← 🎈 Room 2: Welcome Lobby (Amma's feast menu + 10-balloon pop game)
 ├── memories.html       ← 📸 Room 3: Memory Lane (4 life phases, flip photo cards + memory match game)
-├── questions.html      ← 💬 Room 4: Questions Just For Amma (5 chapters, voice dictation + star jar)
-├── videos.html         ← 🎥 Room 5: Wishes From Family (video cinema modal + "AMMA LOVE" word unscramble)
+├── questions.html      ← 💬 Room 4: Questions Just For Amma (5 chapters, voice dictation, Excel/Sheet sync)
+├── videos.html         ← 🎥 Room 5: Wishes From The Family (single centerpiece family video + "AMMA LOVE" word game)
 ├── cake.html           ← 🎂 Room 6: The Cake Moment (5 candles, mic/tap blow-out, cake slice, gift catch)
 ├── photo-haul.html     ← 📸 Room 7: Photo Haul & Memories Showcase (all 39 photos, category tabs, lightbox, auto showcase)
 ├── party-corner.html   ← 🪔 Room 8: Party Corner (gift boxes, wish jar, vinyl jukebox, "Light the Lamps")
@@ -22,6 +22,7 @@ bday/
 ├── appa.html           ← 💙 Room 11: A Room For Appa (reverent 4-stage room, memories, sacred Q5, wish video)
 ├── letter.html         ← 💌 Room 12: The Final Letter & Keepsake (wax seal envelope, typewriter letter)
 ├── hug.html            ← 🤗 Room 13: A Virtual Hug (glowing heartbeat hug, handwritten love card)
+├── answers.html        ← 📊 Admin/Archive: View all Amma's answers & export to Excel (.csv)
 │
 ├── css/
 │   ├── theme.css       ← Royal Purple & Gold design system, Google Fonts, Noto Sans Tamil, Music panel
@@ -132,11 +133,24 @@ Drop your photos into:
 
 Update the captions in `config.js` under `photos` and `appa.photos`.
 
-### 3. Adding Family Videos & Appa's Birthday Wish Video
-- **Family Videos**: In `config.js` under `videos`, set `src` to local path (e.g. `assets/videos/kavin.mp4`) or `youtube` embed URL.
-- **Appa's Birthday Wish Video**: Place video at `assets/videos/appa-birthday-wish.mp4` or set `CONFIG.appa.wishVideo.src` in `config.js`. If the file is not placed yet, an elegant reverent card is shown with an option to select a file directly on the phone/PC or continue.
+### 3. Google Sheets & Excel Export for Amma's Answers
+- **Real-Time Google Sheets Webhook**:
+  1. Open a new Google Sheet at [sheets.new](https://sheets.new).
+  2. In the top menu, go to **Extensions > Apps Script**.
+  3. Paste the contents of `scripts/google_apps_script.js` and click **Save**.
+  4. Click **Deploy > New deployment > Web app** (set *Who has access* to **Anyone**).
+  5. Copy the Web App URL and paste it into `js/config.js` under `sheetsWebhookUrl`.
+  Every answer Amma types or dictates is now automatically posted as a new row in your Google Sheet in real-time!
+- **Instant Excel (.csv) Export**:
+  - Click the **"📊 Export All Answers to Excel (.csv)"** button in the Keepsake section of `questions.html`.
+  - Or visit `answers.html` anytime to see a live table of all answers and download the `.csv` spreadsheet.
+  - Or press **`Shift + E`** on any page to immediately download all answers as an Excel file!
 
-### 4. Customizing Questions, Dares, Hug & The Final Letter
+### 4. Family Video (Single Video for The Family)
+- Single centerpiece video for the entire family (`assets/videos/video-1.mp4`). No separation into individual relations—addressed from the whole family to Amma.
+- Appa's Birthday Wish Video: placed at `assets/videos/appa-birthday-wish.mp4` or configured in `config.js`.
+
+### 5. Customizing Questions, Dares, Hug & The Final Letter
 - Questions for Amma (5 Chapters): in `config.js` under `questionsChapters`.
 - Appa's Room Questions: in `config.js` under `appa.questions`.
 - Birthday Dares: in `config.js` under `dares`.
@@ -154,7 +168,7 @@ Update the captions in `config.js` under `photos` and `appa.photos`.
 | 2 | `lobby.html` | Pop 10 Balloons | Gently pop all 10 balloons (zero time pressure; reveals blessings) |
 | 3 | `memories.html` | Photo Memory Match | Match 3 pairs of Amma's photos (6 cards) |
 | 4 | `questions.html` | Questions for Amma | Journey through 5 life chapters; fill the Star Jar with 5 stars |
-| 5 | `videos.html` | Unscramble "AMMA LOVE" | Tap tiles to spell **A M M A &nbsp; L O V E** |
+| 5 | `videos.html` | Family Video & "AMMA LOVE" | Watch the single Family video or unscramble **A M M A &nbsp; L O V E** |
 | 6 | `cake.html` | Candles & Gift Catch | Blow out the 5 candles (mic or tap), slice cake, catch 10 falling gifts |
 | 7 | `photo-haul.html` | Photo Haul Showcase | Explore or love at least 5 cherished memories |
 | 8 | `party-corner.html`| Light the 5 Lamps | Tap each glowing diya/lantern to illuminate the room |
@@ -166,10 +180,12 @@ Update the captions in `config.js` under `photos` and `appa.photos`.
 
 ---
 
-## 🔑 Secret Testing Shortcuts
+## 🔑 Secret Testing & Admin Shortcuts
 
 - **`Shift + S`**: Instantly unlocks the next room.
+- **`Shift + E`**: Instantly exports all of Amma's recorded answers to an Excel (.csv) file.
 - **`Shift + R`**: Resets all room progress and starts over from the Gate.
+- **`answers.html`**: Direct page to view and export all answers.
 
 ---
 

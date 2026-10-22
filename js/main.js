@@ -651,7 +651,93 @@ function celebrate(cb) {
   if (cb) setTimeout(cb, 1800);
 }
 
-// ─── SKIP SHORTCUT (Shift+S) & RESET (Shift+R) ───────────────
+// ─── AMMA'S ANSWERS & EXCEL / GOOGLE SHEETS ENGINE ───────────
+const AnswersSync = {
+  KEY: 'amma_all_responses',
+
+  getAll() {
+    try {
+      return JSON.parse(localStorage.getItem(this.KEY) || '[]');
+    } catch {
+      return [];
+    }
+  },
+
+  record({ room, section, questionId, question, answer }) {
+    if (!answer || !answer.trim()) return;
+    const cleanAnswer = answer.trim();
+    const timestamp = new Date().toLocaleString('en-IN', { timeZoneName: 'short' });
+
+    const all = this.getAll();
+    const existingIdx = all.findIndex(item => item.questionId === questionId);
+    const recordObj = {
+      timestamp,
+      room: room || 'Questions',
+      section: section || 'General',
+      questionId: questionId || 'q_' + Date.now(),
+      question: question || '',
+      answer: cleanAnswer
+    };
+
+    if (existingIdx >= 0) {
+      all[existingIdx] = recordObj;
+    } else {
+      all.push(recordObj);
+    }
+
+    try {
+      localStorage.setItem(this.KEY, JSON.stringify(all));
+    } catch {}
+
+    // Dispatch to Google Sheets Webhook (if configured)
+    const webhookUrl = (typeof CONFIG !== 'undefined' && CONFIG.sheetsWebhookUrl) ? CONFIG.sheetsWebhookUrl : '';
+    if (webhookUrl && webhookUrl.trim()) {
+      try {
+        fetch(webhookUrl.trim(), {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(recordObj)
+        }).catch(err => console.warn('Background sheet sync notice:', err));
+      } catch (e) {
+        console.warn('Background sheet sync notice:', e);
+      }
+    }
+
+    return recordObj;
+  },
+
+  exportToExcel() {
+    const all = this.getAll();
+    if (all.length === 0) {
+      showToast("No answers recorded yet, Amma! 🌸");
+      return;
+    }
+
+    const headers = ['Timestamp', 'Room', 'Chapter / Section', 'Question', "Amma's Answer"];
+    const rows = all.map(item => [
+      `"${(item.timestamp || '').replace(/"/g, '""')}"`,
+      `"${(item.room || '').replace(/"/g, '""')}"`,
+      `"${(item.section || '').replace(/"/g, '""')}"`,
+      `"${(item.question || '').replace(/"/g, '""')}"`,
+      `"${(item.answer || '').replace(/"/g, '""')}"`
+    ]);
+
+    const csvContent = '\uFEFF' + [headers.join(','), ...rows.map(r => r.join(','))].join('\r\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', `Amma_Birthday_Answers_${new Date().toISOString().slice(0,10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    showToast("📊 Amma's answers exported to Excel (.csv) successfully! ✨", 4500);
+  }
+};
+
+// ─── SKIP SHORTCUT (Shift+S), RESET (Shift+R) & EXCEL (Shift+E) ──
 document.addEventListener('keydown', (e) => {
   if (e.shiftKey && e.key === 'S') {
     const current = Progress.get();
@@ -671,6 +757,9 @@ document.addEventListener('keydown', (e) => {
       localStorage.removeItem('bday_music_pos');
       window.location.href = 'index.html';
     }
+  }
+  if (e.shiftKey && (e.key === 'E' || e.key === 'A')) {
+    AnswersSync.exportToExcel();
   }
 });
 

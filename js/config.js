@@ -14,6 +14,11 @@ const CONFIG = {
   time:        "A Lifetime of Love",
   venue:       "In Our Hearts Forever",
 
+  // ─── GOOGLE SHEETS / EXCEL SYNC ────────────────────────────
+  // Paste your Google Apps Script Web App URL or SheetDB endpoint here to receive answers in real-time!
+  // All answers are also saved in local storage and can be exported to Excel (.csv) with one click.
+  sheetsWebhookUrl: "",
+
   // ─── AMMA'S FAVOURITE MENU ─────────────────────────────────
   menu: {
     starters:  [
@@ -253,40 +258,23 @@ const CONFIG = {
     }
   ],
 
-  // ─── FAMILY VIDEOS ─────────────────────────────────────────
+  // ─── FAMILY VIDEO WISH (SINGLE FAMILY VIDEO) ────────────────
+  familyVideo: {
+    title:     "The Family",
+    subtitle:  "All of Us Together With You, Amma 💜",
+    src:       "assets/videos/video-1.mp4",
+    poster:    "assets/photos/appa/photo1.jpeg",
+    message:   "Amma, you are the pillar of our home, our greatest blessing, and the purest love in our lives. Everything we are is shaped by your warmth, your prayers, and your love. Happy Birthday to the Queen of our hearts! Porandhadhuku romba nandri Amma! 💜",
+  },
+
   videos: [
     {
-      name:      "Kavin (Your Gunda)",
-      relation:  "Your Loving Son",
+      name:      "The Family",
+      relation:  "All of Us Together With You, Amma 💜",
       src:       "assets/videos/video-1.mp4",
-      youtube:   null,
-      thumbnail: null,
-      message:   "Amma, you are my first home, my best friend, and my whole heart. Happy birthday, my Queen! 💜",
-    },
-    {
-      name:      "Her Husband",
-      relation:  "Your Partner in Life",
-      src:       null,
-      youtube:   null,
-      thumbnail: null,
-      message:   "To my dear Glory — thank you for walking beside me, filling our home with prayer and happiness. Happy birthday!",
-    },
-    {
-      name:      "The Entire Family",
-      relation:  "All of Us Together",
-      src:       null,
-      youtube:   null,
-      thumbnail: null,
-      message:   "Happy Birthday Amma! We are so grateful to have you. Porandhadhuku romba nandri Amma!",
-    },
-    {
-      name:      "Dear Relatives & Friends",
-      relation:  "Loved Ones",
-      src:       null,
-      youtube:   null,
-      thumbnail: null,
-      message:   "Wishing the most loving, warm-hearted Glory Gnana Selvi a year full of good health, peace, and smiles!",
-    },
+      poster:    "assets/photos/appa/photo1.jpeg",
+      message:   "Amma, you are the pillar of our home, our greatest blessing, and the purest love in our lives. Everything we are is shaped by your warmth, your prayers, and your love. Happy Birthday to the Queen of our hearts! Porandhadhuku romba nandri Amma! 💜",
+    }
   ],
 
   // ─── VIRTUAL SURPRISE GIFTS (FOR PARTY CORNER) ─────────────

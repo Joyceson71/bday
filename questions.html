@@ -386,14 +386,20 @@
 
       <div id="keepsake-entries-list"></div>
 
-      <div class="card-actions no-print" style="margin-top:2.5rem; justify-content:center; gap:1.2rem;">
-        <button class="btn btn-gold" onclick="window.print()" style="font-size:1rem; padding:0.85rem 1.8rem;">
+      <div class="card-actions no-print" style="margin-top:2.5rem; justify-content:center; gap:1.2rem; flex-wrap:wrap;">
+        <button class="btn btn-gold" id="export-excel-btn" type="button" style="font-size:1rem; padding:0.85rem 1.8rem; display:inline-flex; align-items:center; gap:0.5rem;">
+          📊 Export All Answers to Excel (.csv)
+        </button>
+        <button class="btn btn-ghost" onclick="window.print()" style="font-size:1rem; padding:0.85rem 1.8rem;">
           🖨️ Print / Save Keepsake as PDF
         </button>
         <button class="btn btn-purple" id="to-video-room-btn" style="font-size:1rem; padding:0.85rem 2rem;">
           🎥 Continue to Family Video Wishes →
         </button>
       </div>
+      <p style="text-align:center; margin-top:1.2rem; color:var(--gold-champagne); font-size:0.85rem; font-style:italic;">
+        ✦ All answers are automatically recorded and synced safely in real-time ✦
+      </p>
     </section>
 
   </div>
@@ -521,6 +527,17 @@
       try {
         localStorage.setItem('amma_answers', JSON.stringify(answers));
       } catch {}
+
+      const chap = chapters[currentChapterIndex];
+      const q = chap ? chap.questions.find(item => item.id === id) : null;
+      AnswersSync.record({
+        room: 'Room 4: Questions Just For Amma',
+        section: chap ? chap.title : 'Questions',
+        questionId: id,
+        question: q ? q.text : id,
+        answer: val
+      });
+      showToast("Answer saved & synced safely! 💾", 2000);
     }
   }
 
@@ -631,6 +648,10 @@
 
   document.getElementById('to-video-room-btn').addEventListener('click', () => {
     navigateTo('videos.html');
+  });
+
+  document.getElementById('export-excel-btn')?.addEventListener('click', () => {
+    AnswersSync.exportToExcel();
   });
 
   // Initial render

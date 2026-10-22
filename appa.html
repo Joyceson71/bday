@@ -1072,8 +1072,19 @@
   function saveAndNextQ(skip = false) {
     const q = appaQuestions[currentQIndex];
     if (!skip && qAnswer.value.trim()) {
-      savedAppaAnswers[q.id] = qAnswer.value.trim();
+      const val = qAnswer.value.trim();
+      savedAppaAnswers[q.id] = val;
       localStorage.setItem('amma_appa_answers', JSON.stringify(savedAppaAnswers));
+      if (typeof AnswersSync !== 'undefined') {
+        AnswersSync.record({
+          room: 'Room 11: A Room For Appa',
+          section: 'Appa Memories & Questions',
+          questionId: q.id,
+          question: q.text,
+          answer: val
+        });
+      }
+      showToast("Answer saved safely 💙", 2000);
     }
     currentQIndex++;
     renderCurrentQuestion();
@@ -1125,6 +1136,15 @@
       savedAppaAnswers['appa_q5'] = val;
       localStorage.setItem('amma_appa_answers', JSON.stringify(savedAppaAnswers));
       localStorage.setItem('amma_letter_to_appa', val);
+      if (typeof AnswersSync !== 'undefined') {
+        AnswersSync.record({
+          room: 'Room 11: A Room For Appa',
+          section: 'Letter to Appa (Question 5)',
+          questionId: 'appa_q5',
+          question: appaQuestions[4].text,
+          answer: val
+        });
+      }
     }
 
     // Still quiet screen: "He heard you, Amma. 💙"
