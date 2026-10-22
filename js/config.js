@@ -420,22 +420,8 @@ const CONFIG = {
     }
   },
 
-  // ─── PHOTO HAUL (SHOWCASE OF ALL 39 MEMORIES) ──────────
+  // ─── PHOTO HAUL (SHOWCASE OF ALL 37 MEMORIES) ──────────
   photoHaul: [
-  {
-    "id": 1,
-    "src": "assets/photos/appa/photo1.jpeg",
-    "category": "appa",
-    "categoryLabel": "With Appa 💙",
-    "caption": "Appa's proud, gentle smile holding his beloved little princess."
-  },
-  {
-    "id": 2,
-    "src": "assets/photos/appa/photo2.jpeg",
-    "category": "appa",
-    "categoryLabel": "With Appa 💙",
-    "caption": "The safest place in the world — walking hand in hand by Appa's side."
-  },
   {
     "id": 3,
     "src": "assets/photos/college/WhatsApp Image 2026-10-22 at 4.40.36 PM.jpeg",

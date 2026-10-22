@@ -15,7 +15,7 @@ bday/
 ├── questions.html      ← 💬 Room 4: Questions Just For Amma (5 chapters, voice dictation, Excel/Sheet sync)
 ├── videos.html         ← 🎥 Room 5: Wishes From The Family (single centerpiece family video + "AMMA LOVE" word game)
 ├── cake.html           ← 🎂 Room 6: The Cake Moment (5 candles, mic/tap blow-out, cake slice, gift catch)
-├── photo-haul.html     ← 📸 Room 7: Photo Haul & Memories Showcase (all 39 photos, category tabs, lightbox, auto showcase)
+├── photo-haul.html     ← 📸 Room 7: Photo Haul & Memories Showcase (all 37 photos, category tabs, lightbox, auto showcase)
 ├── party-corner.html   ← 🪔 Room 8: Party Corner (gift boxes, wish jar, vinyl jukebox, "Light the Lamps")
 ├── dares.html          ← 🎯 Room 9: Birthday Dares (golden spin-the-wheel for 5 loving dares)
 ├── kids-challenge.html ← 🧸 Room 10: The Kids' Love Challenge (tender hugs & kisses checklist)

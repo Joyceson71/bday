@@ -8,16 +8,7 @@ const appa = fs.readdirSync('assets/photos/appa').map(f => 'assets/photos/appa/'
 const haul = [];
 let id = 1;
 
-// Appa
-appa.forEach((f, idx) => {
-  haul.push({
-    id: id++,
-    src: f,
-    category: 'appa',
-    categoryLabel: 'With Appa 💙',
-    caption: idx === 0 ? "Appa's proud, gentle smile holding his beloved little princess." : "The safest place in the world — walking hand in hand by Appa's side."
-  });
-});
+// Appa photos are kept exclusively in Room 11 (appa.html)
 
 // College
 college.forEach((f, idx) => {
