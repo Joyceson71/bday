@@ -461,8 +461,8 @@
   guardPage(6);
   sharedInit(6);
 
-  // Load all 39 photos from manifest / config
-  const allPhotos = CONFIG.photoHaul || [];
+  // Load photos from config, strictly excluding any Appa photos (Appa media is exclusively in Room 11)
+  const allPhotos = (CONFIG.photoHaul || []).filter(p => p.category !== 'appa' && !p.src.includes('/appa/'));
   document.getElementById('total-photos-count').textContent = allPhotos.length;
 
   let activeCategory = 'all';
