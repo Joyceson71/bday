@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Amma's Wish Sky — Night Sky of Stars 🌌</title>
+  <meta name="description" content="Every birthday wish Amma typed in the Wish Jar becomes a twinkling golden star in the peaceful night sky."/>
+  <link rel="stylesheet" href="css/theme.css"/>
+  <link rel="stylesheet" href="css/animations.css"/>
+  <style>
+    .sky-page {
+      min-height: 100vh;
+      background: radial-gradient(ellipse at 50% 30%, #1A0332 0%, #0C0117 65%, #05000A 100%);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sky-hero {
+      padding: 2.2rem 1rem 1rem;
+      max-width: 820px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    .room-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(179,136,235,0.18);
+      border: 1px solid rgba(212,175,55,0.4);
+      border-radius: 50px;
+      padding: 0.4rem 1.2rem;
+      font-size: 0.85rem;
+      color: var(--gold-champagne);
+      font-family: var(--font-heading);
+      margin-bottom: 0.8rem;
+    }
+
+    /* Night Sky Canvas & Stars Area */
+    .sky-stage {
+      flex: 1;
+      position: relative;
+      width: 100%;
+      min-height: 60vh;
+      overflow: hidden;
+    }
+
+    .sky-star-btn {
+      position: absolute;
+      background: none;
+      border: none;
+      font-size: clamp(2rem, 4vw, 3rem);
+      cursor: pointer;
+      padding: 0.5rem;
+      transition: transform 0.3s;
+      animation: twinkleStar 3s ease-in-out infinite alternate;
+      filter: drop-shadow(0 0 16px rgba(255,215,0,0.9));
+      user-select: none;
+      z-index: 12;
+    }
+
+    .sky-star-btn:hover {
+      transform: scale(1.35) rotate(15deg);
+      filter: drop-shadow(0 0 25px rgba(255,235,59,1));
+    }
+
+    @keyframes twinkleStar {
+      0%   { opacity: 0.55; transform: scale(0.9); }
+      50%  { opacity: 1;    transform: scale(1.15) rotate(5deg); }
+      100% { opacity: 0.7;  transform: scale(1); }
+    }
+
+    /* Wish Reading Modal Card */
+    .wish-dialog-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 1, 20, 0.75);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1.5rem;
+    }
+
+    .wish-dialog-overlay.active {
+      display: flex;
+    }
+
+    .wish-dialog-card {
+      background: linear-gradient(145deg, rgba(62,11,108,0.95) 0%, rgba(28,4,52,0.98) 100%);
+      border: 2px solid var(--gold-metallic);
+      border-radius: 24px;
+      padding: clamp(2rem, 5vw, 3rem);
+      max-width: 540px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.8), var(--glow-gold);
+      animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+      position: relative;
+    }
+
+    .wish-text-content {
+      font-family: 'Georgia', serif;
+      font-size: clamp(1.15rem, 2.8vw, 1.35rem);
+      line-height: 1.8;
+      color: #FFF9E6;
+      font-style: italic;
+      margin: 1.5rem 0 2rem;
+      padding: 1.2rem;
+      background: rgba(20, 2, 40, 0.5);
+      border-radius: 14px;
+      border-left: 3px solid var(--gold-bright);
+      white-space: pre-wrap;
+    }
+
+    .empty-sky-box {
+      background: rgba(46,8,84,0.65);
+      border: 1px dashed rgba(212,175,55,0.45);
+      border-radius: 18px;
+      padding: 2rem;
+      max-width: 520px;
+      margin: 3rem auto;
+      text-align: center;
+    }
+  </style>
+</head>
+<body class="sky-page">
+
+<div class="bokeh bokeh-1"></div>
+<div class="bokeh bokeh-2"></div>
+<div class="bokeh bokeh-3"></div>
+<canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+<!-- Progress Bar -->
+<div id="progress-bar" role="navigation" aria-label="Amma's party rooms progress"></div>
+
+<!-- Music Toggle -->
+<button id="music-toggle" aria-label="Toggle background music">🎵</button>
+
+<!-- Page Transition Overlay -->
+<div id="page-transition" aria-hidden="true" style="opacity:0;pointer-events:none;">
+  <div class="curtain-left"></div>
+  <div class="curtain-right"></div>
+</div>
+
+<main class="page-wrapper" role="main" style="display:flex; flex-direction:column; min-height:100vh;">
+  <div class="sky-hero">
+    <span class="room-badge">Bonus Room ✦ Starry Night</span>
+    <h1 class="invite-title" style="font-size:clamp(1.8rem, 4.5vw, 2.8rem); margin-bottom:0.4rem;">
+      Amma's Wish Sky 🌌
+    </h1>
+    <p style="color:var(--purple-lavender); font-style:italic;">
+      "Every birthday prayer and wish you whispered into the jar shines here as a star. Tap any star to read it."
+    </p>
+
+    <div style="margin-top:1rem; display:flex; gap:0.8rem; justify-content:center; flex-wrap:wrap;">
+      <a href="party-corner.html#tab-wish" class="btn btn-gold" style="text-decoration:none; padding:0.5rem 1.4rem; font-size:0.85rem;">
+        🏺 Add a Wish to the Jar
+      </a>
+      <a href="then-now.html" class="btn btn-glass" style="text-decoration:none; padding:0.5rem 1.4rem; font-size:0.85rem;">
+        ✨ Then &amp; Now Slider →
+      </a>
+    </div>
+  </div>
+
+  <!-- Interactive Night Sky -->
+  <div class="sky-stage" id="sky-stage">
+    <!-- Empty state fallback if no wishes yet -->
+    <div class="empty-sky-box" id="empty-sky" style="display:none;">
+      <div style="font-size:3rem; margin-bottom:0.5rem;">🏺✨</div>
+      <h3 style="font-family:var(--font-heading); color:var(--gold-bright); margin-bottom:0.6rem;">
+        The Sky is Waiting For Your Star!
+      </h3>
+      <p style="color:var(--purple-lavender); font-style:italic; font-size:0.95rem; margin-bottom:1.2rem;">
+        Type your very first birthday wish in Amma's Wish Jar, and it will illuminate this starry sky.
+      </p>
+      <a href="party-corner.html" class="btn btn-gold" style="text-decoration:none;">
+        🏺 Step into the Wish Jar Room
+      </a>
+    </div>
+  </div>
+</main>
+
+<!-- Star Reading Modal -->
+<div class="wish-dialog-overlay" id="wish-modal">
+  <div class="wish-dialog-card">
+    <div style="font-size:3rem; margin-bottom:0.4rem;">⭐</div>
+    <h2 style="font-family:var(--font-heading); color:var(--gold-bright); font-size:1.45rem;">
+      Amma's Starry Wish ✨
+    </h2>
+    <div class="wish-text-content" id="modal-wish-text"></div>
+    <div style="display:flex; justify-content:center; gap:1rem;">
+      <button class="btn btn-gold" id="close-modal-btn" style="padding:0.6rem 2rem;">
+        ✨ Keep Shining in the Sky
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+<script>
+  sharedInit(7);
+  Music.setVolume(0.20);
+
+  const skyStage   = document.getElementById('sky-stage');
+  const emptyState = document.getElementById('empty-sky');
+  const modal      = document.getElementById('wish-modal');
+  const modalText  = document.getElementById('modal-wish-text');
+
+  // Load wishes: saved array in localStorage, or fallback wishes so the sky is always beautiful
+  let wishes = [];
+  try {
+    wishes = JSON.parse(localStorage.getItem('bday_wishes') || '[]');
+  } catch {}
+
+  // If Amma hasn't typed custom wishes yet, seed with gentle loving blessings so she can tap and experience the starry sky
+  if (wishes.length === 0) {
+    wishes = [
+      { text: "May peace, good health, and joyful mornings fill every corner of our home.", seeded: true },
+      { text: "May God keep our children safe, faithful, and walking with loving hearts.", seeded: true },
+      { text: "May our family stay bound together in laughter, prayer, and unconditional warmth.", seeded: true },
+      { text: "Thank you for the gift of another blessed year surrounded by so much love.", seeded: true },
+    ];
+  }
+
+  // Scatter stars across the sky
+  const starIcons = ['⭐', '🌟', '✨', '💫'];
+
+  wishes.forEach((w, idx) => {
+    const starBtn = document.createElement('button');
+    starBtn.className = 'sky-star-btn';
+    starBtn.textContent = starIcons[idx % starIcons.length];
+    starBtn.setAttribute('aria-label', `Amma's star ${idx + 1}`);
+
+    // Randomize positioning within sky stage
+    const leftPercent = 8 + (idx * 21 + Math.random() * 12) % 80;
+    const topPercent  = 10 + (idx * 16 + Math.random() * 14) % 65;
+    const dur         = 2.2 + (idx * 0.4 % 2.5);
+
+    starBtn.style.left = `${leftPercent}%`;
+    starBtn.style.top  = `${topPercent}%`;
+    starBtn.style.animationDuration = `${dur}s`;
+    starBtn.style.animationDelay    = `${(idx * 0.3) % 2}s`;
+
+    starBtn.addEventListener('click', () => {
+      modalText.textContent = `"${w.text}"`;
+      modal.classList.add('active');
+      playSound('chime');
+      celebrate();
+    });
+
+    skyStage.appendChild(starBtn);
+  });
+
+  document.getElementById('close-modal-btn').addEventListener('click', () => {
+    modal.classList.remove('active');
+  });
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) modal.classList.remove('active');
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>A Wish From JD — Amma's Birthday 💜</title>
+  <meta name="description" content="One more person has a heartfelt wish for you, Amma."/>
+  <link rel="stylesheet" href="css/theme.css"/>
+  <link rel="stylesheet" href="css/animations.css"/>
+  <style>
+    .jd-hero {
+      padding: 2.2rem 1rem 6rem;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .room-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(179,136,235,0.18);
+      border: 1px solid rgba(212,175,55,0.4);
+      border-radius: 50px;
+      padding: 0.4rem 1.2rem;
+      font-size: 0.85rem;
+      color: var(--gold-champagne);
+      font-family: var(--font-heading);
+      margin-bottom: 0.8rem;
+    }
+
+    /* Opening Card with Gold-Script Signature */
+    .opening-card {
+      background: linear-gradient(135deg, rgba(62,11,108,0.85) 0%, rgba(28,4,52,0.95) 100%);
+      border: 2px solid var(--gold-metallic);
+      border-radius: var(--radius-lg, 24px);
+      padding: clamp(1.8rem, 4vw, 2.5rem);
+      text-align: center;
+      box-shadow: 0 14px 45px rgba(0,0,0,0.6), var(--glow-gold);
+      margin-bottom: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .opening-line {
+      font-family: var(--font-heading, serif);
+      font-size: clamp(1.35rem, 3.5vw, 1.9rem);
+      color: var(--gold-bright);
+      line-height: 1.45;
+      margin-bottom: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .signature-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: rgba(212, 175, 55, 0.12);
+      border: 1.5px solid rgba(255, 215, 0, 0.45);
+      border-radius: 50px;
+      padding: 0.55rem 1.6rem;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.3);
+    }
+
+    .signature-card span.from-text {
+      font-size: 0.85rem;
+      color: var(--purple-lavender);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .signature-card span.gold-script {
+      font-family: 'Great Vibes', 'Brush Script MT', cursive, serif;
+      font-size: 1.8rem;
+      color: var(--gold-bright);
+      filter: drop-shadow(0 0 8px rgba(255,215,0,0.6));
+    }
+
+    /* Parchment Card with Typewriter Message */
+    .parchment-card {
+      background: radial-gradient(ellipse at 50% 20%, #FFF9E6 0%, #F5E6C4 70%, #E9D5A6 100%);
+      color: #2D1400;
+      border-radius: 20px;
+      padding: clamp(2rem, 5vw, 3.2rem);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.65), 0 0 0 3px rgba(212,175,55,0.7), inset 0 0 50px rgba(180,120,40,0.15);
+      margin-bottom: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      font-family: 'Georgia', serif;
+    }
+
+    .parchment-card::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(180, 130, 60, 0.35);
+      border-radius: 14px;
+      pointer-events: none;
+    }
+
+    .typewriter-content {
+      font-size: clamp(1.05rem, 2.6vw, 1.25rem);
+      line-height: 2.0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      color: #381A05;
+      min-height: 200px;
+    }
+
+    .typewriter-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.2em;
+      background: #7B1FA2;
+      vertical-align: -0.15em;
+      margin-left: 2px;
+      animation: blink 0.75s step-end infinite;
+    }
+
+    @keyframes blink {
+      from, to { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Optional Media Slots */
+    .jd-media-section {
+      margin-top: 1.8rem;
+      text-align: center;
+    }
+
+    .jd-photo-wrap {
+      max-width: 320px;
+      margin: 0 auto 1.5rem;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 3px solid var(--gold-metallic);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+
+    .jd-photo-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .jd-video-wrap {
+      max-width: 520px;
+      margin: 0 auto 1.5rem;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 3px solid var(--gold-metallic);
+      box-shadow: 0 10px 35px rgba(0,0,0,0.6);
+      background: #000;
+    }
+
+    .jd-video-wrap video {
+      width: 100%;
+      display: block;
+    }
+
+    .jd-voice-card {
+      background: rgba(46,8,84,0.6);
+      border: 1.5px solid var(--gold-metallic);
+      border-radius: 16px;
+      padding: 1.2rem;
+      max-width: 440px;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    /* Behind the scenes mini-card */
+    .bts-card {
+      background: rgba(30, 4, 55, 0.75);
+      border: 1px dashed rgba(212, 175, 55, 0.55);
+      border-radius: 16px;
+      padding: 1.2rem 1.6rem;
+      text-align: center;
+      margin: 2rem auto 2.5rem;
+      max-width: 500px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .bts-card:hover {
+      background: rgba(46, 8, 84, 0.9);
+      border-color: var(--gold-bright);
+      transform: translateY(-2px);
+      box-shadow: var(--glow-gold);
+    }
+
+    .bts-title {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      color: var(--gold-bright);
+      margin-bottom: 0.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .bts-sub {
+      font-size: 0.85rem;
+      color: var(--purple-lavender);
+      font-style: italic;
+    }
+
+    /* Actions */
+    .jd-actions {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<div class="bokeh bokeh-1"></div>
+<div class="bokeh bokeh-2"></div>
+<div class="bokeh bokeh-3"></div>
+<canvas id="particles-canvas" aria-hidden="true"></canvas>
+<div class="fairy-lights" aria-hidden="true"></div>
+
+<!-- Progress Bar -->
+<div id="progress-bar" role="navigation" aria-label="Amma's party rooms progress"></div>
+
+<!-- Music Toggle -->
+<button id="music-toggle" aria-label="Toggle background music">🎵</button>
+
+<!-- Page Transition Overlay -->
+<div id="page-transition" aria-hidden="true" style="opacity:0;pointer-events:none;">
+  <div class="curtain-left"></div>
+  <div class="curtain-right"></div>
+</div>
+
+<main class="page-wrapper" role="main">
+  <div class="jd-hero">
+
+    <div class="text-center" style="margin-bottom:1.8rem;">
+      <span class="room-badge">Room 14 ✦ A Special Note</span>
+    </div>
+
+    <!-- Opening Line Card -->
+    <div class="opening-card">
+      <h1 class="opening-line">
+        "One more person has a wish for you, Amma…"
+      </h1>
+      <div class="signature-card">
+        <span class="from-text">From</span>
+        <span class="gold-script">JD ✦</span>
+      </div>
+    </div>
+
+    <!-- Parchment Typewriter Message -->
+    <div class="parchment-card" id="parchment-card">
+      <div class="typewriter-content" id="typewriter-content"></div>
+      <span class="typewriter-cursor" id="typewriter-cursor"></span>
+    </div>
+
+    <!-- Optional Media Slots (Photo, Video, Voice Note) -->
+    <div class="jd-media-section" id="jd-media-section" style="display:none;">
+      <!-- Photo Slot -->
+      <div class="jd-photo-wrap" id="jd-photo-box" style="display:none;">
+        <img id="jd-photo" src="" alt="JD" loading="lazy"/>
+      </div>
+
+      <!-- Video Slot (Never autoplayed) -->
+      <div class="jd-video-wrap" id="jd-video-box" style="display:none;">
+        <video id="jd-video" controls playsinline preload="metadata"></video>
+      </div>
+
+      <!-- Voice Note Slot -->
+      <div class="jd-voice-card" id="jd-voice-box" style="display:none;">
+        <span style="font-size:1.5rem;">🎙️ A Voice Note from JD</span>
+        <audio id="jd-voice" controls style="width:100%; accent-color:#FFD700;"></audio>
+      </div>
+    </div>
+
+    <!-- Behind The Scenes Mini Card -->
+    <div class="bts-card" id="bts-card" role="button" tabindex="0" title="Tap for gentle confetti">
+      <div class="bts-title">
+        <span>🛠️ Behind the scenes</span>
+      </div>
+      <div class="bts-sub">
+        "Made with HTML, CSS and a lot of love" ✦ (Tap me!)
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="jd-actions">
+      <button class="btn btn-gold" id="replay-msg-btn" style="padding:0.85rem 2rem; font-size:1rem;">
+        ↺ Replay Message
+      </button>
+      <button class="btn btn-purple" id="to-keepsake-btn" style="padding:0.85rem 2.4rem; font-size:1rem; box-shadow:0 0 25px rgba(212,175,55,0.5);">
+        📖 Open Amma's Memory Keepsake →
+      </button>
+      <button class="btn btn-ghost" id="to-party-btn" style="padding:0.85rem 1.8rem; font-size:0.95rem;">
+        🎉 Replay the Whole Party
+      </button>
+    </div>
+
+  </div>
+</main>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // Page guard & shared init (Page 13: Room 14 — A Wish From JD)
+  guardPage(13);
+  sharedInit(13);
+
+  // Soft piano volume
+  Music.setVolume(0.18);
+
+  const defaultMsg = "Dear Amma,\nHappy Birthday! 🎉\nI'm JD. I spent many late nights turning your family's love into this little party, and every minute of it was worth it, because I got to see how much you are loved.\nThank you for raising the people who trusted me to build this for you. May this year bring you good health, peaceful mornings, and more laughter than ever.\nWith respect and warm wishes,\nJD 💜";
+
+  const jdConfig = CONFIG.jd || {};
+  const messageText = (jdConfig.message || defaultMsg).trim();
+
+  const typewriterEl = document.getElementById('typewriter-content');
+  const cursorEl     = document.getElementById('typewriter-cursor');
+  let typeTimer      = null;
+  let isTyping       = false;
+
+  function runTypewriter() {
+    if (typeTimer) clearInterval(typeTimer);
+    typewriterEl.textContent = '';
+    cursorEl.style.display = 'inline-block';
+    isTyping = true;
+
+    let index = 0;
+    const speed = 28; // gentle typing speed
+
+    typeTimer = setInterval(() => {
+      if (index < messageText.length) {
+        typewriterEl.textContent += messageText.charAt(index);
+        index++;
+      } else {
+        clearInterval(typeTimer);
+        typeTimer = null;
+        isTyping = false;
+        cursorEl.style.display = 'none';
+
+        // Gentle confetti burst at the end
+        if (typeof launchConfetti === 'function') {
+          launchConfetti(45);
+        }
+        playSound('success');
+        showToast("With respect and warm wishes, JD 💜", 4000);
+      }
+    }, speed);
+  }
+
+  // Start typing after short settle delay
+  setTimeout(runTypewriter, 600);
+
+  // Replay message button
+  document.getElementById('replay-msg-btn').addEventListener('click', () => {
+    runTypewriter();
+  });
+
+  // Behind the scenes mini-card click: gentle confetti
+  const btsCard = document.getElementById('bts-card');
+  btsCard.addEventListener('click', () => {
+    if (typeof launchConfetti === 'function') launchConfetti(35);
+    playSound('chime');
+    showToast("Crafted with care, passion, and lots of late-night tea ☕✨");
+  });
+  btsCard.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') btsCard.click();
+  });
+
+  // Setup optional media slots from config
+  const mediaSec = document.getElementById('jd-media-section');
+  let hasMedia = false;
+
+  if (jdConfig.photo) {
+    const photoBox = document.getElementById('jd-photo-box');
+    const photoEl  = document.getElementById('jd-photo');
+    photoEl.src = jdConfig.photo;
+    photoBox.style.display = 'block';
+    hasMedia = true;
+  }
+
+  if (jdConfig.video) {
+    const videoBox = document.getElementById('jd-video-box');
+    const videoEl  = document.getElementById('jd-video');
+    videoEl.src = jdConfig.video;
+    videoBox.style.display = 'block';
+    hasMedia = true;
+
+    // Music fades out when JD's video plays
+    videoEl.addEventListener('play', () => {
+      Music.pauseForVideo();
+    });
+    videoEl.addEventListener('pause', () => {
+      if (!videoEl.seeking) Music.resumeAfterVideo();
+    });
+    videoEl.addEventListener('ended', () => {
+      Music.resumeAfterVideo();
+    });
+  }
+
+  if (jdConfig.voiceNote) {
+    const voiceBox = document.getElementById('jd-voice-box');
+    const voiceEl  = document.getElementById('jd-voice');
+    voiceEl.src = jdConfig.voiceNote;
+    voiceBox.style.display = 'flex';
+    hasMedia = true;
+
+    voiceEl.addEventListener('play', () => Music.pauseForVideo());
+    voiceEl.addEventListener('pause', () => {
+      if (!voiceEl.seeking) Music.resumeAfterVideo();
+    });
+    voiceEl.addEventListener('ended', () => Music.resumeAfterVideo());
+  }
+
+  if (hasMedia) {
+    mediaSec.style.display = 'block';
+  }
+
+  // Navigation handlers
+  document.getElementById('to-keepsake-btn').addEventListener('click', () => {
+    navigateTo('letter.html');
+  });
+
+  document.getElementById('to-party-btn').addEventListener('click', () => {
+    Music.fadeTo(0.01, 800);
+    setTimeout(() => {
+      navigateTo('index.html', 800);
+    }, 200);
+  });
+</script>
+</body>
+</html>

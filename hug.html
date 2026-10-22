@@ -352,10 +352,13 @@
       </p>
 
       <div style="display:flex; gap:1.2rem; justify-content:center; flex-wrap:wrap;">
-        <button class="btn btn-gold" id="view-keepsake-btn" style="font-size:1.1rem; padding:0.9rem 2.6rem;" aria-label="Open Amma's Keepsake">
+        <button class="btn btn-gold" id="to-jd-btn" style="font-size:1.15rem; padding:0.95rem 2.8rem; box-shadow:0 0 25px rgba(255,215,0,0.6);" aria-label="A wish from JD">
+          💜 One More Special Wish for Amma →
+        </button>
+        <button class="btn btn-glass" id="view-keepsake-btn" style="font-size:1.05rem; padding:0.9rem 2.2rem;" aria-label="Open Amma's Keepsake">
           📖 See My Memory Keepsake
         </button>
-        <button class="btn btn-glass" id="replay-party-btn" style="font-size:1.1rem; padding:0.9rem 2.4rem;" aria-label="Replay celebration from Gate">
+        <button class="btn btn-ghost" id="replay-party-btn" style="font-size:1rem; padding:0.85rem 2rem;" aria-label="Replay celebration from Gate">
           🎉 Replay the Party
         </button>
       </div>
@@ -424,10 +427,12 @@
       showToast("A warm embrace from your Gunda 💜");
     }, 1600);
 
-    // After 3.5s, reveal final conclusion buttons
+    // After 3.5s, reveal final conclusion buttons and unlock Room 14
     setTimeout(() => {
       conclusion.style.display = 'block';
       conclusion.scrollIntoView({ behavior: 'smooth' });
+      Progress.unlock(13); // Unlocks Room 14 (jd.html)
+      renderProgressBar(12);
     }, 3500);
   }
 
@@ -496,7 +501,12 @@
     showToast("Recorded in our hearts forever 💜");
   });
 
-  // ─── ACTIONS: KEEPSAKE & REPLAY ──────────────────────────────
+  // ─── ACTIONS: JD WISH, KEEPSAKE & REPLAY ────────────────────
+  document.getElementById('to-jd-btn')?.addEventListener('click', () => {
+    Progress.unlock(13); // Unlocks Room 14: jd.html
+    navigateTo('jd.html');
+  });
+
   document.getElementById('view-keepsake-btn').addEventListener('click', () => {
     navigateTo('letter.html');
   });

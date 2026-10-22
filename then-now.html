@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Then & Now — Amma's Timeless Grace ✨</title>
+  <meta name="description" content="A before and after interactive comparison slider showcasing Amma's timeless beauty across the years."/>
+  <link rel="stylesheet" href="css/theme.css"/>
+  <link rel="stylesheet" href="css/animations.css"/>
+  <style>
+    .then-hero {
+      padding: 2.2rem 1rem 6rem;
+      max-width: 820px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .room-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(179,136,235,0.18);
+      border: 1px solid rgba(212,175,55,0.4);
+      border-radius: 50px;
+      padding: 0.4rem 1.2rem;
+      font-size: 0.85rem;
+      color: var(--gold-champagne);
+      font-family: var(--font-heading);
+      margin-bottom: 0.8rem;
+    }
+
+    /* Comparison Slider Stage */
+    .slider-stage-card {
+      background: linear-gradient(145deg, rgba(38,6,68,0.92) 0%, rgba(18,2,36,0.98) 100%);
+      border: 2px solid var(--gold-metallic);
+      border-radius: 24px;
+      padding: clamp(1.2rem, 3.5vw, 2.2rem);
+      box-shadow: 0 16px 50px rgba(0,0,0,0.65), var(--glow-gold);
+      margin-bottom: 2rem;
+    }
+
+    .comparison-container {
+      position: relative;
+      width: 100%;
+      max-width: 580px;
+      aspect-ratio: 4/5;
+      margin: 1.5rem auto;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 3px solid var(--gold-metallic);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.7);
+      user-select: none;
+      touch-action: none;
+    }
+
+    .comparison-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* The "Then" image is placed underneath; the "Now" image is in a clipped wrapper on top */
+    .now-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%; /* driven by slider */
+      height: 100%;
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    .now-wrapper img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: auto;
+      min-width: 580px; /* matches container max width */
+      object-fit: cover;
+    }
+
+    /* Vertical Divider Bar */
+    .slider-divider {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 3px;
+      background: linear-gradient(180deg, #FFE79A, #FFD700, #FFE79A);
+      box-shadow: 0 0 12px rgba(255,215,0,0.9);
+      z-index: 10;
+      transform: translateX(-50%);
+      cursor: ew-resize;
+    }
+
+    .slider-handle-knob {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--grad-gold);
+      border: 2px solid #FFF;
+      box-shadow: 0 0 20px rgba(255,215,0,0.9), 0 4px 12px rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--purple-deep);
+      font-size: 1.1rem;
+      font-weight: 800;
+    }
+
+    /* Floating Badges */
+    .badge-then, .badge-now {
+      position: absolute;
+      bottom: 15px;
+      padding: 0.45rem 1.1rem;
+      border-radius: 50px;
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      color: #FFF;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      z-index: 15;
+      pointer-events: none;
+    }
+
+    .badge-then {
+      right: 15px;
+      background: rgba(20, 2, 40, 0.75);
+      border: 1px solid rgba(212,175,55,0.6);
+      color: var(--gold-bright);
+    }
+
+    .badge-now {
+      left: 15px;
+      background: rgba(74, 14, 128, 0.85);
+      border: 1px solid rgba(255,215,0,0.8);
+      color: #FFE79A;
+    }
+
+    .slider-hint {
+      color: var(--purple-lavender);
+      font-size: 0.95rem;
+      font-style: italic;
+      margin-top: 1rem;
+    }
+
+    .quote-box {
+      background: rgba(20, 2, 40, 0.5);
+      border-left: 3px solid var(--gold-bright);
+      padding: 1.2rem 1.5rem;
+      border-radius: 0 14px 14px 0;
+      color: var(--gold-champagne);
+      font-style: italic;
+      line-height: 1.7;
+      max-width: 620px;
+      margin: 1.8rem auto 1rem;
+      font-size: 1.05rem;
+    }
+  </style>
+</head>
+<body>
+
+<div class="bokeh bokeh-1"></div>
+<div class="bokeh bokeh-2"></div>
+<div class="bokeh bokeh-3"></div>
+<canvas id="particles-canvas" aria-hidden="true"></canvas>
+<div class="fairy-lights" aria-hidden="true"></div>
+
+<!-- Progress Bar -->
+<div id="progress-bar" role="navigation" aria-label="Amma's party rooms progress"></div>
+
+<!-- Music Toggle -->
+<button id="music-toggle" aria-label="Toggle background music">🎵</button>
+
+<!-- Page Transition Overlay -->
+<div id="page-transition" aria-hidden="true" style="opacity:0;pointer-events:none;">
+  <div class="curtain-left"></div>
+  <div class="curtain-right"></div>
+</div>
+
+<main class="page-wrapper" role="main">
+  <div class="then-hero">
+
+    <span class="room-badge">Bonus Room ✦ Timeless Grace</span>
+    <h1 class="invite-title" style="font-size:clamp(1.8rem, 4.5vw, 2.8rem); margin-bottom:0.4rem;">
+      Then &amp; Now, Amma ✨
+    </h1>
+    <p style="color:var(--purple-lavender); font-style:italic; max-width:620px; margin:0 auto 1.5rem;">
+      "Decades change, seasons turn, but your pure smile and gentle heart remain the light of our family."
+    </p>
+
+    <div class="slider-stage-card">
+      <!-- Interactive Before / After Split Slider -->
+      <div class="comparison-container" id="compare-box">
+        <!-- Underneath: Then photo -->
+        <img id="then-img" src="" alt="Young Amma" class="comparison-img" loading="lazy"/>
+        <span class="badge-then" id="then-tag">Youth Days ✨</span>
+
+        <!-- On top: Now photo in clipped box -->
+        <div class="now-wrapper" id="now-wrap">
+          <img id="now-img" src="" alt="Amma Today" loading="lazy"/>
+        </div>
+        <span class="badge-now" id="now-tag">Queen Today 👑</span>
+
+        <!-- Draggable Handle Bar -->
+        <div class="slider-divider" id="slider-bar">
+          <div class="slider-handle-knob">‹ ›</div>
+        </div>
+      </div>
+
+      <p class="slider-hint">
+        👆 Drag the gold slider left and right to compare then and now!
+      </p>
+
+      <div class="quote-box" id="quote-text">
+        "Decades have passed, but your radiant smile, gentle grace, and unconditional warmth remain timeless, Amma 💜"
+      </div>
+    </div>
+
+    <!-- Quick Navigation -->
+    <div style="margin-top:1.5rem; display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+      <a href="party-corner.html" class="btn btn-glass" style="text-decoration:none;">
+        ← Back to Party Corner
+      </a>
+      <a href="share-card.html" class="btn btn-gold" style="text-decoration:none; padding:0.75rem 2rem;">
+        💌 Make My Birthday Card →
+      </a>
+    </div>
+
+  </div>
+</main>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+<script>
+  sharedInit(2);
+  Music.setVolume(0.22);
+
+  const cfg = CONFIG.thenAndNow || {};
+  const thenImg = document.getElementById('then-img');
+  const nowImg  = document.getElementById('now-img');
+  const nowWrap = document.getElementById('now-wrap');
+  const sliderBar = document.getElementById('slider-bar');
+  const container = document.getElementById('compare-box');
+
+  // Load photos from config
+  const thenSrc = cfg.thenPhoto || (CONFIG.photos?.school?.[0]?.src) || (CONFIG.photos?.college?.[0]?.src) || 'assets/photos/college/WhatsApp Image 2026-10-22 at 4.40.36 PM.jpeg';
+  const nowSrc  = cfg.nowPhoto  || (CONFIG.photos?.current?.[0]?.src) || 'assets/photos/current/WhatsApp Image 2026-10-22 at 4.42.07 PM.jpeg';
+
+  thenImg.src = thenSrc;
+  nowImg.src  = nowSrc;
+
+  if (cfg.thenLabel) document.getElementById('then-tag').textContent = cfg.thenLabel;
+  if (cfg.nowLabel)  document.getElementById('now-tag').textContent  = cfg.nowLabel;
+  if (cfg.caption)   document.getElementById('quote-text').textContent = `"${cfg.caption}"`;
+
+  // Align the nested "Now" image width to exactly match container width
+  function updateImageSize() {
+    nowImg.style.width = container.offsetWidth + 'px';
+  }
+  window.addEventListener('resize', updateImageSize);
+  updateImageSize();
+
+  let isSliding = false;
+
+  function setSliderPosition(clientX) {
+    const rect = container.getBoundingClientRect();
+    let x = clientX - rect.left;
+    x = Math.max(0, Math.min(x, rect.width));
+    const percent = (x / rect.width) * 100;
+
+    nowWrap.style.width   = percent + '%';
+    sliderBar.style.left  = percent + '%';
+  }
+
+  // Pointer events (handles touch + mouse cleanly)
+  container.addEventListener('pointerdown', (e) => {
+    isSliding = true;
+    container.setPointerCapture(e.pointerId);
+    setSliderPosition(e.clientX);
+  });
+
+  container.addEventListener('pointermove', (e) => {
+    if (!isSliding) return;
+    setSliderPosition(e.clientX);
+  });
+
+  window.addEventListener('pointerup', () => {
+    isSliding = false;
+  });
+
+  // Start at 50%
+  setTimeout(() => {
+    updateImageSize();
+    const rect = container.getBoundingClientRect();
+    setSliderPosition(rect.left + rect.width / 2);
+  }, 200);
+</script>
+</body>
+</html>

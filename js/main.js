@@ -3,7 +3,7 @@
    Ambient FX, Toast, Confetti, 13 Rooms Architecture
    ============================================================ */
 
-// ─── PAGE DEFINITIONS (13 ROOMS) ─────────────────────────────
+// ─── PAGE DEFINITIONS (14 ROOMS) ─────────────────────────────
 const PAGES = [
   { id: 0,  file: 'index.html',          icon: '🎪', label: 'Gate' },
   { id: 1,  file: 'lobby.html',          icon: '🎈', label: 'Lobby' },
@@ -18,6 +18,7 @@ const PAGES = [
   { id: 10, file: 'appa.html',           icon: '💙', label: 'Appa' },
   { id: 11, file: 'letter.html',         icon: '💌', label: 'Letter' },
   { id: 12, file: 'hug.html',            icon: '🤗', label: 'Hug' },
+  { id: 13, file: 'jd.html',             icon: '💜', label: 'Wish from JD' },
 ];
 
 // ─── PROGRESS HELPERS ────────────────────────────────────────
@@ -106,7 +107,7 @@ const Music = {
 
     // Determine track and recommended volume for this page
     const pageCfg = (CONFIG.music && CONFIG.music.pages && CONFIG.music.pages[currentFile]) || {};
-    const trackSrc = pageCfg.src || 'assets/audio/background/gate-lobby.wav';
+    const trackSrc = pageCfg.src || 'assets/audio/background/gate-lobby.mp3';
     const pageVol  = typeof pageCfg.volume === 'number' ? pageCfg.volume : 0.25;
     this.trackLabel = pageCfg.label || 'Soft Instrumental';
     this.targetVol = this.currentVol !== 0.25 ? this.currentVol : pageVol;
@@ -247,13 +248,13 @@ const Music = {
 
   nextTrack() {
     const tracks = [
-      { src: 'assets/audio/background/gate-lobby.wav', label: 'Warm Welcome' },
-      { src: 'assets/audio/background/memories-piano.wav', label: 'Memory Piano' },
-      { src: 'assets/audio/background/questions-acoustic.wav', label: 'Calm Acoustic' },
-      { src: 'assets/audio/background/cake-festive.wav', label: 'Festive Joy' },
-      { src: 'assets/audio/background/playful-corner.wav', label: 'Playful Melody' },
-      { src: 'assets/audio/background/lullaby-kids.wav', label: 'Tender Lullaby' },
-      { src: 'assets/audio/background/letter-hug.wav', label: 'Gunda Love' },
+      { src: 'assets/audio/background/gate-lobby.mp3', label: 'Warm Welcome' },
+      { src: 'assets/audio/background/memories-piano.mp3', label: 'Memory Piano' },
+      { src: 'assets/audio/background/questions-acoustic.mp3', label: 'Calm Acoustic' },
+      { src: 'assets/audio/background/cake-festive.mp3', label: 'Festive Joy' },
+      { src: 'assets/audio/background/playful-corner.mp3', label: 'Playful Melody' },
+      { src: 'assets/audio/background/lullaby-kids.mp3', label: 'Tender Lullaby' },
+      { src: 'assets/audio/background/letter-hug.mp3', label: 'Gunda Love' },
     ];
     let nextIdx = 0;
     const current = tracks.findIndex(t => t.src === this.currentTrack);
@@ -405,11 +406,11 @@ const Music = {
 const Sounds = {};
 function loadSounds() {
   const SFX = {
-    pop:       'assets/audio/effects/pop.wav',
-    chime:     'assets/audio/effects/chime.wav',
-    bell:      'assets/audio/effects/bell.wav',
-    heartbeat: 'assets/audio/effects/heartbeat.wav',
-    success:   'assets/audio/effects/success.wav',
+    pop:       'assets/audio/effects/pop.mp3',
+    chime:     'assets/audio/effects/chime.mp3',
+    bell:      'assets/audio/effects/bell.mp3',
+    heartbeat: 'assets/audio/effects/heartbeat.mp3',
+    success:   'assets/audio/effects/success.mp3',
   };
   Object.entries(SFX).forEach(([k, v]) => {
     const a = new Audio(v);
@@ -803,6 +804,30 @@ function sharedInit(currentPageIndex) {
   }
 
   loadSounds();
+  injectFooterCredit();
+}
+
+// ─── FOOTER CREDIT (ON EVERY PAGE) ───────────────────────────
+function injectFooterCredit() {
+  if (document.getElementById('jd-footer-credit')) return;
+  const footer = document.createElement('footer');
+  footer.id = 'jd-footer-credit';
+  footer.className = 'not-print';
+  footer.style.cssText = `
+    text-align: center;
+    padding: 1.8rem 1rem 3.5rem;
+    font-size: 0.8rem;
+    font-family: var(--font-heading, serif);
+    color: var(--purple-lavender, #D1C4E9);
+    opacity: 0.65;
+    letter-spacing: 0.08em;
+    user-select: none;
+    transition: opacity 0.3s;
+  `;
+  footer.innerHTML = `Built with love by JD ✦ for Amma 💜`;
+  footer.addEventListener('mouseenter', () => footer.style.opacity = '1');
+  footer.addEventListener('mouseleave', () => footer.style.opacity = '0.65');
+  document.body.appendChild(footer);
 }
 
 // ─── SERVICE WORKER REGISTRATION ─────────────────────────────

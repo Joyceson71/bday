@@ -36,7 +36,7 @@ const CONFIG = {
     ],
   },
 
-  // ─── AMMA'S CELEBRATION SCHEDULE (13 ROOMS) ────────────────
+  // ─── AMMA'S CELEBRATION SCHEDULE (14 ROOMS) ────────────────
   schedule: [
     { time: "Room 1",  event: "The Grand Gate — A royal entrance for Amma 🎪" },
     { time: "Room 2",  event: "Welcome Lobby — Balloons, blessings & feast menu 🎈" },
@@ -51,6 +51,7 @@ const CONFIG = {
     { time: "Room 11", event: "A Room For Appa — Sacred memories, words & his blessing video 💙" },
     { time: "Room 12", event: "The Final Letter — From your Gunda's deepest heart 💌" },
     { time: "Room 13", event: "A Virtual Hug — A warm embrace from your Gunda 🤗" },
+    { time: "Room 14", event: "A Wish From JD — One more person who turned love into code 💜" },
   ],
 
   // ─── 10 SWEET BALLOON BLESSINGS (FOR LOBBY POPPING) ────────
@@ -395,20 +396,27 @@ const CONFIG = {
     defaultVolume: 0.25,
     crossfadeSeconds: 2.0,
     pages: {
-      "index.html":          { src: "assets/audio/background/gate-lobby.wav", volume: 0.25, label: "Warm Welcome" },
-      "lobby.html":          { src: "assets/audio/background/gate-lobby.wav", volume: 0.25, label: "Warm Welcome" },
-      "memories.html":       { src: "assets/audio/background/memories-piano.wav", volume: 0.24, label: "Memory Piano" },
-      "questions.html":      { src: "assets/audio/background/questions-acoustic.wav", volume: 0.20, label: "Calm Acoustic" },
-      "videos.html":         { src: "assets/audio/background/gate-lobby.wav", volume: 0.20, label: "Family Warmth" },
-      "cake.html":           { src: "assets/audio/background/cake-festive.wav", volume: 0.30, label: "Festive Joy" },
-      "photo-haul.html":      { src: "assets/audio/background/playful-corner.wav", volume: 0.24, label: "Memory Haul" },
-      "photobooth.html":     { src: "assets/audio/background/playful-corner.wav", volume: 0.24, label: "Memory Haul" },
-      "party-corner.html":   { src: "assets/audio/background/playful-corner.wav", volume: 0.24, label: "Party Chimes" },
-      "dares.html":          { src: "assets/audio/background/playful-corner.wav", volume: 0.24, label: "Playful Melody" },
-      "kids-challenge.html": { src: "assets/audio/background/lullaby-kids.wav", volume: 0.22, label: "Tender Lullaby" },
-      "appa.html":           { src: "assets/audio/background/appa-reverence.wav", volume: 0.10, label: "Appa Reverence" },
-      "letter.html":         { src: "assets/audio/background/letter-hug.wav", volume: 0.18, label: "Gunda's Letter" },
-      "hug.html":            { src: "assets/audio/background/letter-hug.wav", volume: 0.18, label: "Warm Embrace" }
+      "index.html":          { src: "assets/audio/background/gate-lobby.mp3", volume: 0.25, label: "Warm Welcome" },
+      "lobby.html":          { src: "assets/audio/background/gate-lobby.mp3", volume: 0.25, label: "Warm Welcome" },
+      "memories.html":       { src: "assets/audio/background/memories-piano.mp3", volume: 0.24, label: "Memory Piano" },
+      "questions.html":      { src: "assets/audio/background/questions-acoustic.mp3", volume: 0.20, label: "Calm Acoustic" },
+      "videos.html":         { src: "assets/audio/background/gate-lobby.mp3", volume: 0.20, label: "Family Warmth" },
+      "cake.html":           { src: "assets/audio/background/cake-festive.mp3", volume: 0.30, label: "Festive Joy" },
+      "photo-haul.html":      { src: "assets/audio/background/playful-corner.mp3", volume: 0.24, label: "Memory Haul" },
+      "photobooth.html":     { src: "assets/audio/background/playful-corner.mp3", volume: 0.24, label: "Memory Haul" },
+      "party-corner.html":   { src: "assets/audio/background/playful-corner.mp3", volume: 0.24, label: "Party Chimes" },
+      "dares.html":          { src: "assets/audio/background/playful-corner.mp3", volume: 0.24, label: "Playful Melody" },
+      "kids-challenge.html": { src: "assets/audio/background/lullaby-kids.mp3", volume: 0.22, label: "Tender Lullaby" },
+      "appa.html":           { src: "assets/audio/background/appa-reverence.mp3", volume: 0.10, label: "Appa Reverence" },
+      "letter.html":         { src: "assets/audio/background/letter-hug.mp3", volume: 0.18, label: "Gunda's Letter" },
+      "hug.html":            { src: "assets/audio/background/letter-hug.mp3", volume: 0.18, label: "Warm Embrace" },
+      "jd.html":             { src: "assets/audio/background/memories-piano.mp3", volume: 0.18, label: "Soft Piano" },
+      "kolam.html":          { src: "assets/audio/background/questions-acoustic.mp3", volume: 0.20, label: "Calm Acoustic" },
+      "garland.html":        { src: "assets/audio/background/lullaby-kids.mp3", volume: 0.20, label: "Tender Lullaby" },
+      "time-capsule.html":   { src: "assets/audio/background/letter-hug.mp3", volume: 0.18, label: "Gunda Love" },
+      "wish-sky.html":       { src: "assets/audio/background/memories-piano.mp3", volume: 0.20, label: "Starry Night" },
+      "then-now.html":       { src: "assets/audio/background/memories-piano.mp3", volume: 0.22, label: "Then & Now" },
+      "share-card.html":     { src: "assets/audio/background/cake-festive.mp3", volume: 0.24, label: "Celebration Card" }
     }
   },
 
@@ -694,28 +702,28 @@ const CONFIG = {
     {
       title: "Amma Endru Azhaikadha",
       artist: "K.J. Yesudas",
-      file: "assets/audio/jukebox/amma-endru.wav",
+      file: "assets/audio/jukebox/amma-endru.mp3",
       dedication: "Amma's all-time favourite classical melody 💜",
       youtubeId: "81O6qGgN8n0"
     },
     {
       title: "Kannana Kanne",
       artist: "Sid Sriram",
-      file: "assets/audio/jukebox/kannana-kanne.wav",
+      file: "assets/audio/jukebox/kannana-kanne.mp3",
       dedication: "For the purest eyes that watched over our family 🕊️",
       youtubeId: "n03q2u1qVvM"
     },
     {
       title: "En Thaaye En Thaaye",
       artist: "Vandana",
-      file: "assets/audio/jukebox/en-thaaye.wav",
+      file: "assets/audio/jukebox/en-thaaye.mp3",
       dedication: "A song of boundless gratitude for our Queen 🌸",
       youtubeId: "JmD8F1f2Y8A"
     },
     {
       title: "Roja Jaaneman (Instrumental)",
       artist: "A.R. Rahman",
-      file: "assets/audio/jukebox/roja-instrumental.wav",
+      file: "assets/audio/jukebox/roja-instrumental.mp3",
       dedication: "Timeless Rahman melody for Amma's peaceful smile ✨",
       youtubeId: "Y39g_6wT2yA"
     },
@@ -748,7 +756,24 @@ const CONFIG = {
     tamilLine: "நினைக்கும்போதெல்லாம் உன்னை கட்டிப்பிடிக்க முடியாம இருக்கலாம் அம்மா… ஆனா இந்த அணைப்பு உனக்காக.",
     englishLine: "Maybe I can't hug you whenever I want to, Ma… so here is one for right now.",
     hugMessage: "Even if I can't be the son who gets to hug you whenever he wants, I'll always be your loving son, and you'll always be my lovely Amma. ❤️🥹",
-    heartbeatSound: "assets/audio/effects/heartbeat.wav"
+    heartbeatSound: "assets/audio/effects/heartbeat.mp3"
+  },
+
+  // ─── A WISH FROM JD (ROOM 14) ──────────────────────────────
+  jd: {
+    photo: null, // e.g. "assets/photos/jd.jpg"
+    video: null, // e.g. "assets/videos/jd-wish.mp4" (not autoplayed)
+    voiceNote: null, // e.g. "assets/audio/jd-voicenote.mp3"
+    message: "Dear Amma,\nHappy Birthday! 🎉\nI'm JD. I spent many late nights turning your family's love into this little party, and every minute of it was worth it, because I got to see how much you are loved.\nThank you for raising the people who trusted me to build this for you. May this year bring you good health, peaceful mornings, and more laughter than ever.\nWith respect and warm wishes,\nJD 💜"
+  },
+
+  // ─── THEN AND NOW PHOTO COMPARISON ─────────────────────────
+  thenAndNow: {
+    thenPhoto: "assets/photos/college/WhatsApp Image 2026-10-22 at 4.40.36 PM.jpeg",
+    thenLabel: "Youth & College Days ✨",
+    nowPhoto: "assets/photos/current/WhatsApp Image 2026-10-22 at 4.42.07 PM.jpeg",
+    nowLabel: "Queen Glory Today 👑",
+    caption: "Decades have passed, but your radiant smile, gentle grace, and unconditional warmth remain timeless, Amma 💜"
   }
 
 };

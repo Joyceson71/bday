@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Amma's Kolam Canvas — Birthday Celebration 🪷</title>
+  <meta name="description" content="A calm, traditional dot-grid kolam drawing board for Amma to finger-draw with gold and white sacred powders."/>
+  <link rel="stylesheet" href="css/theme.css"/>
+  <link rel="stylesheet" href="css/animations.css"/>
+  <style>
+    .kolam-hero {
+      padding: 2.2rem 1rem 6rem;
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .room-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(179,136,235,0.18);
+      border: 1px solid rgba(212,175,55,0.4);
+      border-radius: 50px;
+      padding: 0.4rem 1.2rem;
+      font-size: 0.85rem;
+      color: var(--gold-champagne);
+      font-family: var(--font-heading);
+      margin-bottom: 0.8rem;
+    }
+
+    .canvas-card {
+      background: linear-gradient(145deg, rgba(38,6,68,0.92) 0%, rgba(18,2,36,0.98) 100%);
+      border: 2px solid var(--gold-metallic);
+      border-radius: 24px;
+      padding: clamp(1.2rem, 3.5vw, 2rem);
+      box-shadow: 0 16px 50px rgba(0,0,0,0.65), var(--glow-gold);
+      margin-bottom: 2rem;
+    }
+
+    .canvas-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 580px;
+      aspect-ratio: 1/1;
+      margin: 1.2rem auto;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 2px solid rgba(212,175,55,0.45);
+      background: radial-gradient(circle at center, #2C064C 0%, #150226 80%, #0A0014 100%);
+      box-shadow: inset 0 0 40px rgba(0,0,0,0.85);
+      touch-action: none;
+    }
+
+    #kolam-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: crosshair;
+    }
+
+    .kolam-controls {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+    }
+
+    .palette-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2.5px solid rgba(255,255,255,0.3);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: all 0.25s;
+    }
+
+    .palette-btn.active {
+      transform: scale(1.18);
+      border-color: #FFD700;
+      box-shadow: 0 0 15px rgba(255,215,0,0.7);
+    }
+
+    .palette-white {
+      background: #FFFFFF;
+      color: #333;
+    }
+
+    .palette-gold {
+      background: linear-gradient(135deg, #FFE79A, #FFD700);
+      color: #333;
+    }
+
+    .brush-size-btn {
+      background: rgba(212,175,55,0.15);
+      border: 1px solid rgba(212,175,55,0.4);
+      color: var(--gold-champagne);
+      font-family: var(--font-heading);
+      border-radius: 50px;
+      padding: 0.45rem 1rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .brush-size-btn.active {
+      background: var(--gold-bright);
+      color: var(--purple-deep);
+      border-color: var(--gold-bright);
+      font-weight: 700;
+    }
+
+    .grid-toggle-btn {
+      background: rgba(74,14,128,0.6);
+      border: 1px solid rgba(179,136,235,0.4);
+      color: var(--purple-orchid);
+      font-family: var(--font-heading);
+      border-radius: 50px;
+      padding: 0.45rem 1rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .grid-toggle-btn.active {
+      background: rgba(179,136,235,0.35);
+      color: var(--gold-bright);
+      border-color: var(--gold-bright);
+    }
+  </style>
+</head>
+<body>
+
+<div class="bokeh bokeh-1"></div>
+<div class="bokeh bokeh-2"></div>
+<div class="bokeh bokeh-3"></div>
+<canvas id="particles-canvas" aria-hidden="true"></canvas>
+<div class="fairy-lights" aria-hidden="true"></div>
+
+<!-- Progress Bar -->
+<div id="progress-bar" role="navigation" aria-label="Amma's party rooms progress"></div>
+
+<!-- Music Toggle -->
+<button id="music-toggle" aria-label="Toggle background music">🎵</button>
+
+<!-- Page Transition Overlay -->
+<div id="page-transition" aria-hidden="true" style="opacity:0;pointer-events:none;">
+  <div class="curtain-left"></div>
+  <div class="curtain-right"></div>
+</div>
+
+<main class="page-wrapper" role="main">
+  <div class="kolam-hero">
+
+    <span class="room-badge">Bonus Room ✦ Amma's Sacred Kolam</span>
+    <h1 class="invite-title" style="font-size:clamp(1.8rem, 4.5vw, 2.8rem); margin-bottom:0.4rem;">
+      Draw Your Sacred Kolam, Amma 🪷
+    </h1>
+    <p style="color:var(--purple-lavender); font-style:italic; max-width:620px; margin:0 auto 1.8rem;">
+      "No rush, no timer. Touch the dots and weave a peaceful prayer in gold and white."
+    </p>
+
+    <div class="canvas-card">
+      <!-- Tools / Palette Bar -->
+      <div class="kolam-controls">
+        <span style="font-family:var(--font-heading); color:var(--gold-champagne); font-size:0.85rem; margin-right:0.3rem;">Colour:</span>
+        <button class="palette-btn palette-gold active" id="btn-gold" aria-label="Gold powder" title="Sacred Gold"></button>
+        <button class="palette-btn palette-white" id="btn-white" aria-label="White rice flour" title="White Rice Flour"></button>
+
+        <span style="font-family:var(--font-heading); color:var(--gold-champagne); font-size:0.85rem; margin-left:0.8rem; margin-right:0.3rem;">Line:</span>
+        <button class="brush-size-btn" data-size="3">Fine</button>
+        <button class="brush-size-btn active" data-size="6">Medium</button>
+        <button class="brush-size-btn" data-size="10">Bold</button>
+
+        <button class="grid-toggle-btn active" id="btn-grid-density" style="margin-left:0.5rem;">5×5 Grid</button>
+      </div>
+
+      <!-- Canvas Wrap -->
+      <div class="canvas-wrap" id="canvas-container">
+        <canvas id="kolam-canvas" width="600" height="600"></canvas>
+      </div>
+
+      <!-- Actions -->
+      <div class="kolam-controls" style="margin-top:1.2rem;">
+        <button class="btn btn-ghost" id="undo-btn" style="padding:0.6rem 1.4rem; font-size:0.9rem;">
+          ↺ Undo Stroke
+        </button>
+        <button class="btn btn-ghost" id="clear-btn" style="padding:0.6rem 1.4rem; font-size:0.9rem;">
+          🧹 Clear Board
+        </button>
+        <button class="btn btn-gold" id="save-btn" style="padding:0.65rem 2rem; font-size:0.95rem;">
+          📥 Save My Kolam (PNG)
+        </button>
+      </div>
+    </div>
+
+    <!-- Navigation Back -->
+    <div style="margin-top:1.5rem; display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+      <a href="party-corner.html" class="btn btn-glass" style="text-decoration:none;">
+        ← Back to Party Corner
+      </a>
+      <a href="garland.html" class="btn btn-purple" style="text-decoration:none;">
+        🌼 String Jasmine Garland →
+      </a>
+    </div>
+
+  </div>
+</main>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // Soft background acoustic
+  sharedInit(7);
+  Music.setVolume(0.20);
+
+  const canvas = document.getElementById('kolam-canvas');
+  const ctx    = canvas.getContext('2d');
+
+  let strokeColor = '#FFD700';
+  let strokeWidth = 6;
+  let isDrawing   = false;
+  let lastPos     = { x: 0, y: 0 };
+  let gridPoints  = [];
+  let gridDensity = 5; // 5x5 or 7x7
+
+  // History stack for Undo
+  let strokes = []; // array of stroke paths: { color, width, points: [{x,y}] }
+  let currentStroke = null;
+
+  function initGrid() {
+    gridPoints = [];
+    const size = canvas.width;
+    const step = size / (gridDensity + 1);
+    for (let r = 1; r <= gridDensity; r++) {
+      for (let c = 1; c <= gridDensity; c++) {
+        gridPoints.push({ x: c * step, y: r * step });
+      }
+    }
+  }
+
+  function redrawAll() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw peaceful dots
+    gridPoints.forEach(p => {
+      // Outer subtle glow
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 7, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255, 215, 0, 0.2)';
+      ctx.fill();
+
+      // Dot center
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = '#FFE79A';
+      ctx.fill();
+    });
+
+    // Draw all strokes
+    strokes.forEach(s => {
+      if (s.points.length < 2) return;
+      ctx.beginPath();
+      ctx.strokeStyle = s.color;
+      ctx.lineWidth   = s.width;
+      ctx.lineCap     = 'round';
+      ctx.lineJoin    = 'round';
+      ctx.shadowColor = s.color === '#FFFFFF' ? 'rgba(255,255,255,0.7)' : 'rgba(255,215,0,0.8)';
+      ctx.shadowBlur  = 6;
+
+      ctx.moveTo(s.points[0].x, s.points[0].y);
+      for (let i = 1; i < s.points.length; i++) {
+        ctx.lineTo(s.points[i].x, s.points[i].y);
+      }
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+    });
+  }
+
+  initGrid();
+  redrawAll();
+
+  // Pointer events for touch & mouse
+  function getCanvasPos(e) {
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    return {
+      x: (e.clientX - rect.left) * scaleX,
+      y: (e.clientY - rect.top)  * scaleY
+    };
+  }
+
+  canvas.addEventListener('pointerdown', (e) => {
+    isDrawing = true;
+    lastPos = getCanvasPos(e);
+    currentStroke = {
+      color: strokeColor,
+      width: strokeWidth,
+      points: [lastPos]
+    };
+    strokes.push(currentStroke);
+  });
+
+  canvas.addEventListener('pointermove', (e) => {
+    if (!isDrawing || !currentStroke) return;
+    const pos = getCanvasPos(e);
+    currentStroke.points.push(pos);
+
+    // Live segment draw for buttery smoothness
+    ctx.beginPath();
+    ctx.strokeStyle = currentStroke.color;
+    ctx.lineWidth   = currentStroke.width;
+    ctx.lineCap     = 'round';
+    ctx.lineJoin    = 'round';
+    ctx.shadowColor = currentStroke.color === '#FFFFFF' ? 'rgba(255,255,255,0.7)' : 'rgba(255,215,0,0.8)';
+    ctx.shadowBlur  = 6;
+
+    ctx.moveTo(lastPos.x, lastPos.y);
+    ctx.lineTo(pos.x, pos.y);
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    lastPos = pos;
+  });
+
+  window.addEventListener('pointerup', () => {
+    if (isDrawing) {
+      isDrawing = false;
+      redrawAll();
+    }
+  });
+
+  // Palette buttons
+  document.getElementById('btn-gold').addEventListener('click', function() {
+    strokeColor = '#FFD700';
+    document.querySelectorAll('.palette-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+  });
+
+  document.getElementById('btn-white').addEventListener('click', function() {
+    strokeColor = '#FFFFFF';
+    document.querySelectorAll('.palette-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+  });
+
+  // Brush size buttons
+  document.querySelectorAll('.brush-size-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      strokeWidth = parseInt(this.dataset.size, 10);
+      document.querySelectorAll('.brush-size-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // Grid density toggle
+  const gridBtn = document.getElementById('btn-grid-density');
+  gridBtn.addEventListener('click', function() {
+    gridDensity = gridDensity === 5 ? 7 : 5;
+    this.textContent = `${gridDensity}×${gridDensity} Grid`;
+    initGrid();
+    redrawAll();
+    playSound('pop');
+  });
+
+  // Undo button
+  document.getElementById('undo-btn').addEventListener('click', () => {
+    if (strokes.length > 0) {
+      strokes.pop();
+      redrawAll();
+      playSound('pop');
+    }
+  });
+
+  // Clear button
+  document.getElementById('clear-btn').addEventListener('click', () => {
+    if (confirm("Clear your kolam drawing board, Amma?")) {
+      strokes = [];
+      redrawAll();
+      playSound('chime');
+    }
+  });
+
+  // Save Kolam as PNG
+  document.getElementById('save-btn').addEventListener('click', () => {
+    // Render on exported canvas with background
+    const exp = document.createElement('canvas');
+    exp.width = canvas.width;
+    exp.height = canvas.height + 60;
+    const eCtx = exp.getContext('2d');
+
+    // Traditional dark silk background
+    eCtx.fillStyle = '#18032E';
+    eCtx.fillRect(0, 0, exp.width, exp.height);
+
+    // Draw border
+    eCtx.strokeStyle = '#D4AF37';
+    eCtx.lineWidth = 4;
+    eCtx.strokeRect(8, 8, exp.width - 16, exp.height - 16);
+
+    // Copy drawing
+    eCtx.drawImage(canvas, 0, 0);
+
+    // Footer signature
+    eCtx.font = 'bold 22px serif';
+    eCtx.fillStyle = '#FFD700';
+    eCtx.textAlign = 'center';
+    eCtx.fillText("Amma's Sacred Kolam ✦ Glory Gnana Selvi 💜", exp.width / 2, exp.height - 20);
+
+    const a = document.createElement('a');
+    a.href = exp.toDataURL('image/png');
+    a.download = `ammas-kolam-${Date.now()}.png`;
+    a.click();
+    celebrate();
+    showToast("Kolam saved safely to your photos, Amma! 🪷");
+  });
+</script>
+</body>
+</html>
