@@ -256,7 +256,7 @@ const CONFIG = {
     title:     "The Family",
     subtitle:  "All of Us Together With You, Amma 💜",
     src:       "assets/videos/video-1.mp4",
-    poster:    "assets/photos/appa/photo1.jpeg",
+    poster:    "assets/photos/current/WhatsApp Image 2026-10-22 at 4.42.07 PM.jpeg",
     message:   "Amma, you are the pillar of our home, our greatest blessing, and the purest love in our lives. Everything we are is shaped by your warmth, your prayers, and your love. Happy Birthday to the Queen of our hearts! Porandhadhuku romba nandri Amma! 💜",
   },
 
@@ -265,7 +265,7 @@ const CONFIG = {
       name:      "The Family",
       relation:  "All of Us Together With You, Amma 💜",
       src:       "assets/videos/video-1.mp4",
-      poster:    "assets/photos/appa/photo1.jpeg",
+      poster:    "assets/photos/current/WhatsApp Image 2026-10-22 at 4.42.07 PM.jpeg",
       message:   "Amma, you are the pillar of our home, our greatest blessing, and the purest love in our lives. Everything we are is shaped by your warmth, your prayers, and your love. Happy Birthday to the Queen of our hearts! Porandhadhuku romba nandri Amma! 💜",
     }
   ],
@@ -384,7 +384,7 @@ const CONFIG = {
       { src: "assets/photos/appa/photo2.jpeg", caption: "The safest place in the world — walking hand in hand by Appa's side." }
     ],
     wishVideo: {
-      src: "assets/videos/video-1.mp4",
+      src: "assets/videos/appa-birthday-wish.mp4",
       youtube: null,
       poster: "assets/photos/appa/photo1.jpeg",
       message: "Happy Birthday, Amma. Appa's blessings are always with you. 💙"

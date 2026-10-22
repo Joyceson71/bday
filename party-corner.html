@@ -1,689 +1,993 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Party Corner — Made With Love For Amma 🎡</title>
-  <meta name="description" content="Surprise gifts, Amma's wish jar, Tamil jukebox, party favours, and a spin-the-wheel prize game."/>
-  <link rel="stylesheet" href="css/theme.css"/>
-  <link rel="stylesheet" href="css/animations.css"/>
-  <style>
-    .party-hero {
-      padding: 2rem 1rem 5rem;
-      max-width: 1040px;
-      margin: 0 auto;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Party Corner — Made With Love For Amma 🎡</title>
+    <meta
+      name="description"
+      content="Surprise gifts, Amma's wish jar, Tamil jukebox, party favours, and a spin-the-wheel prize game."
+    />
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <style>
+      .party-hero {
+        padding: 2rem 1rem 5rem;
+        max-width: 1040px;
+        margin: 0 auto;
+      }
 
-    .room-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(179,136,235,0.18);
-      border: 1px solid rgba(212,175,55,0.4);
-      border-radius: 50px;
-      padding: 0.4rem 1.2rem;
-      font-size: 0.85rem;
-      color: var(--gold-champagne);
-      font-family: var(--font-heading);
-      margin-bottom: 0.8rem;
-    }
+      .room-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(179, 136, 235, 0.18);
+        border: 1px solid rgba(212, 175, 55, 0.4);
+        border-radius: 50px;
+        padding: 0.4rem 1.2rem;
+        font-size: 0.85rem;
+        color: var(--gold-champagne);
+        font-family: var(--font-heading);
+        margin-bottom: 0.8rem;
+      }
 
-    /* Tab Navigation */
-    .tab-nav {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin: 2rem 0;
-    }
+      /* Tab Navigation */
+      .tab-nav {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 2rem 0;
+      }
 
-    .tab-btn {
-      padding: 0.6rem 1.2rem;
-      border-radius: 50px;
-      border: 1px solid rgba(212,175,55,0.3);
-      background: rgba(46, 8, 84, 0.6);
-      color: var(--gold-champagne);
-      font-family: var(--font-heading);
-      font-size: 0.85rem;
-      cursor: pointer;
-      transition: all 0.25s;
-    }
+      .tab-btn {
+        padding: 0.6rem 1.2rem;
+        border-radius: 50px;
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        background: rgba(46, 8, 84, 0.6);
+        color: var(--gold-champagne);
+        font-family: var(--font-heading);
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all 0.25s;
+      }
 
-    .tab-btn:hover {
-      background: rgba(106, 27, 154, 0.5);
-      border-color: var(--gold-metallic);
-    }
+      .tab-btn:hover {
+        background: rgba(106, 27, 154, 0.5);
+        border-color: var(--gold-metallic);
+      }
 
-    .tab-btn.active {
-      background: var(--grad-gold);
-      color: var(--purple-deep);
-      font-weight: 700;
-      border-color: var(--gold-bright);
-      box-shadow: 0 4px 15px rgba(255,215,0,0.4);
-    }
+      .tab-btn.active {
+        background: var(--grad-gold);
+        color: var(--purple-deep);
+        font-weight: 700;
+        border-color: var(--gold-bright);
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+      }
 
-    .tab-pane {
-      display: none;
-      animation: fadeInUp 0.5s ease both;
-    }
+      .tab-pane {
+        display: none;
+        animation: fadeInUp 0.5s ease both;
+      }
 
-    .tab-pane.active {
-      display: block;
-    }
+      .tab-pane.active {
+        display: block;
+      }
 
-    /* ─── 1. SURPRISE GIFT TABLE ──────────────────────────────── */
-    .gifts-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
+      /* ─── 1. SURPRISE GIFT TABLE ──────────────────────────────── */
+      .gifts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
 
-    .gift-box-card {
-      background: linear-gradient(135deg, rgba(62,11,108,0.7) 0%, rgba(28,4,52,0.9) 100%);
-      border: 2px solid var(--gold-metallic);
-      border-radius: 16px;
-      padding: 1.5rem;
-      text-align: center;
-      cursor: pointer;
-      transition: transform 0.3s, box-shadow 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
+      .gift-box-card {
+        background: linear-gradient(
+          135deg,
+          rgba(62, 11, 108, 0.7) 0%,
+          rgba(28, 4, 52, 0.9) 100%
+        );
+        border: 2px solid var(--gold-metallic);
+        border-radius: 16px;
+        padding: 1.5rem;
+        text-align: center;
+        cursor: pointer;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
 
-    .gift-box-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.5), var(--glow-gold);
-    }
+      .gift-box-card:hover {
+        transform: translateY(-5px);
+        box-shadow:
+          0 8px 30px rgba(0, 0, 0, 0.5),
+          var(--glow-gold);
+      }
 
-    .gift-box-icon {
-      font-size: 3.5rem;
-      margin-bottom: 0.8rem;
-      display: inline-block;
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
+      .gift-box-icon {
+        font-size: 3.5rem;
+        margin-bottom: 0.8rem;
+        display: inline-block;
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
 
-    .gift-box-card:hover .gift-box-icon {
-      transform: scale(1.18) rotate(5deg);
-    }
+      .gift-box-card:hover .gift-box-icon {
+        transform: scale(1.18) rotate(5deg);
+      }
 
-    .gift-box-title {
-      font-family: var(--font-heading);
-      color: var(--gold-champagne);
-      font-size: 1.05rem;
-      margin-bottom: 0.4rem;
-    }
+      .gift-box-title {
+        font-family: var(--font-heading);
+        color: var(--gold-champagne);
+        font-size: 1.05rem;
+        margin-bottom: 0.4rem;
+      }
 
-    .gift-box-tag {
-      font-size: 0.75rem;
-      color: var(--purple-orchid);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.8rem;
-    }
+      .gift-box-tag {
+        font-size: 0.75rem;
+        color: var(--purple-orchid);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 0.8rem;
+      }
 
-    .gift-secret-content {
-      display: none;
-      background: rgba(20, 2, 40, 0.7);
-      border: 1px dashed rgba(212,175,55,0.4);
-      border-radius: 12px;
-      padding: 1rem;
-      margin-top: 1rem;
-      color: var(--gold-bright);
-      font-size: 0.92rem;
-      font-style: italic;
-      line-height: 1.5;
-      animation: fadeIn 0.4s ease;
-    }
+      .gift-secret-content {
+        display: none;
+        background: rgba(20, 2, 40, 0.7);
+        border: 1px dashed rgba(212, 175, 55, 0.4);
+        border-radius: 12px;
+        padding: 1rem;
+        margin-top: 1rem;
+        color: var(--gold-bright);
+        font-size: 0.92rem;
+        font-style: italic;
+        line-height: 1.5;
+        animation: fadeIn 0.4s ease;
+      }
 
-    .tap-to-open-hint {
-      font-size: 0.8rem;
-      color: var(--text-dim);
-    }
+      .tap-to-open-hint {
+        font-size: 0.8rem;
+        color: var(--text-dim);
+      }
 
-    /* ─── 2. AMMA'S WISH JAR ──────────────────────────────────── */
-    .wish-jar-card {
-      max-width: 600px;
-      margin: 0 auto;
-      background: linear-gradient(135deg, rgba(62,11,108,0.8) 0%, rgba(28,4,52,0.95) 100%);
-      border: 2px solid var(--gold-metallic);
-      border-radius: var(--radius-lg);
-      padding: 2.5rem 2rem;
-      text-align: center;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-    }
+      /* ─── 2. AMMA'S WISH JAR ──────────────────────────────────── */
+      .wish-jar-card {
+        max-width: 600px;
+        margin: 0 auto;
+        background: linear-gradient(
+          135deg,
+          rgba(62, 11, 108, 0.8) 0%,
+          rgba(28, 4, 52, 0.95) 100%
+        );
+        border: 2px solid var(--gold-metallic);
+        border-radius: var(--radius-lg);
+        padding: 2.5rem 2rem;
+        text-align: center;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      }
 
-    .wish-jar-icon {
-      font-size: 4rem;
-      margin-bottom: 0.8rem;
-      filter: drop-shadow(0 0 15px rgba(255,215,0,0.6));
-    }
+      .wish-jar-icon {
+        font-size: 4rem;
+        margin-bottom: 0.8rem;
+        filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6));
+      }
 
-    .wish-input-textarea {
-      width: 100%;
-      min-height: 100px;
-      background: rgba(20, 2, 40, 0.7);
-      border: 1.5px solid rgba(212,175,55,0.4);
-      border-radius: 12px;
-      padding: 1rem;
-      color: #fff;
-      font-family: var(--font-body);
-      font-size: 1rem;
-      margin: 1.2rem 0;
-      outline: none;
-    }
+      .wish-input-textarea {
+        width: 100%;
+        min-height: 100px;
+        background: rgba(20, 2, 40, 0.7);
+        border: 1.5px solid rgba(212, 175, 55, 0.4);
+        border-radius: 12px;
+        padding: 1rem;
+        color: #fff;
+        font-family: var(--font-body);
+        font-size: 1rem;
+        margin: 1.2rem 0;
+        outline: none;
+      }
 
-    .wish-input-textarea:focus {
-      border-color: var(--gold-bright);
-    }
+      .wish-input-textarea:focus {
+        border-color: var(--gold-bright);
+      }
 
-    .bonus-link-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: rgba(212,175,55,0.14);
-      border: 1px solid rgba(212,175,55,0.45);
-      border-radius: 50px;
-      padding: 0.55rem 1.25rem;
-      color: var(--gold-champagne);
-      font-family: var(--font-heading);
-      font-size: 0.88rem;
-      text-decoration: none;
-      transition: all 0.25s;
-    }
-    .bonus-link-pill:hover {
-      background: rgba(212,175,55,0.28);
-      border-color: var(--gold-bright);
-      color: #fff;
-      transform: translateY(-2px);
-      box-shadow: var(--glow-gold);
-    }
+      .bonus-link-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: rgba(212, 175, 55, 0.14);
+        border: 1px solid rgba(212, 175, 55, 0.45);
+        border-radius: 50px;
+        padding: 0.55rem 1.25rem;
+        color: var(--gold-champagne);
+        font-family: var(--font-heading);
+        font-size: 0.88rem;
+        text-decoration: none;
+        transition: all 0.25s;
+      }
+      .bonus-link-pill:hover {
+        background: rgba(212, 175, 55, 0.28);
+        border-color: var(--gold-bright);
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: var(--glow-gold);
+      }
 
-    .flying-star {
-      position: fixed;
-      font-size: 2.5rem;
-      pointer-events: none;
-      z-index: 99999;
-      transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
-    }
+      .flying-star {
+        position: fixed;
+        font-size: 2.5rem;
+        pointer-events: none;
+        z-index: 99999;
+        transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+      }
 
-    /* ─── 3. JUKEBOX VINYL PLAYER ─────────────────────────────── */
-    .vinyl-player-box {
-      background: linear-gradient(145deg, rgba(30, 4, 55, 0.9), rgba(15, 2, 30, 0.95));
-      border: 2px solid var(--gold-metallic);
-      border-radius: var(--radius-lg);
-      padding: clamp(1.5rem, 4vw, 2.5rem);
-      margin-bottom: 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.5rem;
-      text-align: center;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 25px rgba(212,175,55,0.2);
-    }
+      /* ─── 3. JUKEBOX VINYL PLAYER ─────────────────────────────── */
+      .vinyl-player-box {
+        background: linear-gradient(
+          145deg,
+          rgba(30, 4, 55, 0.9),
+          rgba(15, 2, 30, 0.95)
+        );
+        border: 2px solid var(--gold-metallic);
+        border-radius: var(--radius-lg);
+        padding: clamp(1.5rem, 4vw, 2.5rem);
+        margin-bottom: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        text-align: center;
+        box-shadow:
+          0 12px 40px rgba(0, 0, 0, 0.6),
+          0 0 25px rgba(212, 175, 55, 0.2);
+      }
 
-    .vinyl-disc {
-      width: clamp(140px, 32vw, 190px);
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background: radial-gradient(circle at 50% 50%, #D4AF37 0%, #B8960C 16%, #111 17%, #1a1a1a 22%, #111 25%, #222 35%, #111 40%, #1c1c1c 55%, #111 65%, #222 80%, #0d0d0d 100%);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 20px rgba(212,175,55,0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      animation: spinVinyl 6s linear infinite;
-      animation-play-state: paused;
-    }
+      .vinyl-disc {
+        width: clamp(140px, 32vw, 190px);
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at 50% 50%,
+          #d4af37 0%,
+          #b8960c 16%,
+          #111 17%,
+          #1a1a1a 22%,
+          #111 25%,
+          #222 35%,
+          #111 40%,
+          #1c1c1c 55%,
+          #111 65%,
+          #222 80%,
+          #0d0d0d 100%
+        );
+        box-shadow:
+          0 10px 30px rgba(0, 0, 0, 0.8),
+          0 0 20px rgba(212, 175, 55, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        animation: spinVinyl 6s linear infinite;
+        animation-play-state: paused;
+      }
 
-    .vinyl-disc.playing {
-      animation-play-state: running;
-    }
+      .vinyl-disc.playing {
+        animation-play-state: running;
+      }
 
-    @keyframes spinVinyl {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
-    }
+      @keyframes spinVinyl {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
 
-    .vinyl-center-hole {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #5A1282 0%, #2E0854 80%, #D4AF37 100%);
-      border: 2px solid #FFD700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #FFD700;
-      font-size: 1.1rem;
-    }
+      .vinyl-center-hole {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          #5a1282 0%,
+          #2e0854 80%,
+          #d4af37 100%
+        );
+        border: 2px solid #ffd700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffd700;
+        font-size: 1.1rem;
+      }
 
-    .jukebox-now-playing {
-      max-width: 500px;
-    }
+      .jukebox-now-playing {
+        max-width: 500px;
+      }
 
-    .jukebox-now-title {
-      font-family: var(--font-heading);
-      font-size: clamp(1.2rem, 3.5vw, 1.6rem);
-      color: var(--gold-bright);
-      margin-bottom: 0.3rem;
-    }
+      .jukebox-now-title {
+        font-family: var(--font-heading);
+        font-size: clamp(1.2rem, 3.5vw, 1.6rem);
+        color: var(--gold-bright);
+        margin-bottom: 0.3rem;
+      }
 
-    .jukebox-now-artist {
-      color: var(--purple-lavender);
-      font-size: 1rem;
-      margin-bottom: 0.4rem;
-    }
+      .jukebox-now-artist {
+        color: var(--purple-lavender);
+        font-size: 1rem;
+        margin-bottom: 0.4rem;
+      }
 
-    .jukebox-now-dedication {
-      font-family: var(--font-display);
-      font-style: italic;
-      color: var(--gold-champagne);
-      font-size: 0.95rem;
-    }
+      .jukebox-now-dedication {
+        font-family: var(--font-display);
+        font-style: italic;
+        color: var(--gold-champagne);
+        font-size: 0.95rem;
+      }
 
-    .jukebox-ctrl-bar {
-      display: flex;
-      align-items: center;
-      gap: 1.2rem;
-    }
+      .jukebox-ctrl-bar {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+      }
 
-    .jukebox-btn {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: rgba(106, 27, 154, 0.45);
-      border: 1.5px solid var(--gold-metallic);
-      color: var(--gold-bright);
-      font-size: 1.15rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
+      .jukebox-btn {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(106, 27, 154, 0.45);
+        border: 1.5px solid var(--gold-metallic);
+        color: var(--gold-bright);
+        font-size: 1.15rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
 
-    .jukebox-btn:hover {
-      background: rgba(212, 175, 55, 0.3);
-      transform: scale(1.1);
-    }
+      .jukebox-btn:hover {
+        background: rgba(212, 175, 55, 0.3);
+        transform: scale(1.1);
+      }
 
-    .jukebox-btn.play-main {
-      width: 56px;
-      height: 56px;
-      background: var(--grad-gold);
-      color: #2E0854;
-      font-size: 1.5rem;
-      box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
-    }
+      .jukebox-btn.play-main {
+        width: 56px;
+        height: 56px;
+        background: var(--grad-gold);
+        color: #2e0854;
+        font-size: 1.5rem;
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+      }
 
-    .jukebox-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.2rem;
-      margin-top: 1.5rem;
-    }
+      .jukebox-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.2rem;
+        margin-top: 1.5rem;
+      }
 
-    .jukebox-card {
-      background: rgba(46, 8, 84, 0.6);
-      border: 1px solid var(--gold-metallic);
-      border-radius: 14px;
-      padding: 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      transition: transform 0.2s;
-      cursor: pointer;
-    }
+      .jukebox-card {
+        background: rgba(46, 8, 84, 0.6);
+        border: 1px solid var(--gold-metallic);
+        border-radius: 14px;
+        padding: 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        transition: transform 0.2s;
+        cursor: pointer;
+      }
 
-    .jukebox-card:hover {
-      transform: translateX(5px);
-      border-color: var(--gold-bright);
-    }
+      .jukebox-card:hover {
+        transform: translateX(5px);
+        border-color: var(--gold-bright);
+      }
 
-    .jukebox-card.active {
-      border-color: var(--gold-bright);
-      background: rgba(106, 27, 154, 0.45);
-      box-shadow: 0 0 15px rgba(212, 175, 55, 0.35);
-    }
+      .jukebox-card.active {
+        border-color: var(--gold-bright);
+        background: rgba(106, 27, 154, 0.45);
+        box-shadow: 0 0 15px rgba(212, 175, 55, 0.35);
+      }
 
-    .jukebox-play-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: var(--grad-gold);
-      color: var(--purple-deep);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      flex-shrink: 0;
-    }
+      .jukebox-play-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--grad-gold);
+        color: var(--purple-deep);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+      }
 
-    /* ─── 4. PARTY FAVOURS & CLOCK ────────────────────────────── */
-    .clock-card {
-      text-align: center;
-      background: rgba(46, 8, 84, 0.6);
-      border: var(--border-gold);
-      border-radius: var(--radius-card);
-      padding: 2rem;
-      margin-bottom: 2rem;
-    }
+      /* ─── 4. PARTY FAVOURS & CLOCK ────────────────────────────── */
+      .clock-card {
+        text-align: center;
+        background: rgba(46, 8, 84, 0.6);
+        border: var(--border-gold);
+        border-radius: var(--radius-card);
+        padding: 2rem;
+        margin-bottom: 2rem;
+      }
 
-    .clock-display {
-      font-family: var(--font-heading);
-      font-size: clamp(2rem, 5vw, 3rem);
-      color: var(--gold-bright);
-      margin: 0.5rem 0;
-      letter-spacing: 0.05em;
-    }
+      .clock-display {
+        font-family: var(--font-heading);
+        font-size: clamp(2rem, 5vw, 3rem);
+        color: var(--gold-bright);
+        margin: 0.5rem 0;
+        letter-spacing: 0.05em;
+      }
 
-    /* ─── 5. SPIN THE WHEEL GAME (SWEET PRIZES FOR AMMA) ──────── */
-    .wheel-game-section {
-      text-align: center;
-      background: linear-gradient(135deg, rgba(74,14,128,0.7) 0%, rgba(35,6,66,0.95) 100%);
-      border: 2px solid var(--gold-metallic);
-      border-radius: var(--radius-lg);
-      padding: clamp(2rem, 5vw, 3rem);
-      margin-top: 2.5rem;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.5), var(--glow-gold);
-    }
+      /* ─── 5. SPIN THE WHEEL GAME (SWEET PRIZES FOR AMMA) ──────── */
+      .wheel-game-section {
+        text-align: center;
+        background: linear-gradient(
+          135deg,
+          rgba(74, 14, 128, 0.7) 0%,
+          rgba(35, 6, 66, 0.95) 100%
+        );
+        border: 2px solid var(--gold-metallic);
+        border-radius: var(--radius-lg);
+        padding: clamp(2rem, 5vw, 3rem);
+        margin-top: 2.5rem;
+        box-shadow:
+          0 10px 40px rgba(0, 0, 0, 0.5),
+          var(--glow-gold);
+      }
 
-    .wheel-stage {
-      position: relative;
-      width: 320px;
-      height: 320px;
-      margin: 1.5rem auto;
-    }
+      .wheel-stage {
+        position: relative;
+        width: 320px;
+        height: 320px;
+        margin: 1.5rem auto;
+      }
 
-    #wheel-canvas {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      box-shadow: 0 0 25px rgba(255,215,0,0.5), 0 0 50px rgba(106,27,154,0.6);
-      border: 4px solid var(--gold-metallic);
-    }
+      #wheel-canvas {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        box-shadow:
+          0 0 25px rgba(255, 215, 0, 0.5),
+          0 0 50px rgba(106, 27, 154, 0.6);
+        border: 4px solid var(--gold-metallic);
+      }
 
-    .wheel-pointer {
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 2.2rem;
-      z-index: 10;
-      filter: drop-shadow(0 2px 5px rgba(0,0,0,0.6));
-    }
+      .wheel-pointer {
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 2.2rem;
+        z-index: 10;
+        filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.6));
+      }
 
-    .spin-btn {
-      background: var(--grad-gold);
-      color: var(--purple-deep);
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 1.15rem;
-      padding: 0.9rem 2.5rem;
-      border-radius: var(--radius-btn);
-      border: none;
-      cursor: pointer;
-      box-shadow: var(--shadow-btn), var(--glow-gold);
-      transition: transform 0.2s;
-    }
+      .spin-btn {
+        background: var(--grad-gold);
+        color: var(--purple-deep);
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: 1.15rem;
+        padding: 0.9rem 2.5rem;
+        border-radius: var(--radius-btn);
+        border: none;
+        cursor: pointer;
+        box-shadow: var(--shadow-btn), var(--glow-gold);
+        transition: transform 0.2s;
+      }
 
-    .spin-btn:hover {
-      transform: scale(1.05);
-    }
+      .spin-btn:hover {
+        transform: scale(1.05);
+      }
 
-    .continue-btn {
-      background: var(--grad-gold);
-      color: var(--purple-deep);
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 1.05rem;
-      padding: 0.9rem 2.4rem;
-      border-radius: var(--radius-btn);
-      border: none;
-      cursor: pointer;
-      box-shadow: var(--shadow-btn), var(--glow-gold);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      transition: transform 0.25s;
-    }
+      .continue-btn {
+        background: var(--grad-gold);
+        color: var(--purple-deep);
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: 1.05rem;
+        padding: 0.9rem 2.4rem;
+        border-radius: var(--radius-btn);
+        border: none;
+        cursor: pointer;
+        box-shadow: var(--shadow-btn), var(--glow-gold);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        transition: transform 0.25s;
+      }
 
-    .continue-btn:hover {
-      transform: translateY(-2px) scale(1.03);
-    }
-  </style>
-</head>
-<body>
+      .continue-btn:hover {
+        transform: translateY(-2px) scale(1.03);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bokeh bokeh-1"></div>
+    <div class="bokeh bokeh-2"></div>
+    <div class="bokeh bokeh-3"></div>
+    <canvas id="particles-canvas" aria-hidden="true"></canvas>
+    <div class="fairy-lights" aria-hidden="true"></div>
 
-<div class="bokeh bokeh-1"></div>
-<div class="bokeh bokeh-2"></div>
-<div class="bokeh bokeh-3"></div>
-<canvas id="particles-canvas" aria-hidden="true"></canvas>
-<div class="fairy-lights" aria-hidden="true"></div>
+    <!-- Progress Bar -->
+    <div
+      id="progress-bar"
+      role="navigation"
+      aria-label="Amma's party rooms progress"
+    ></div>
 
-<!-- Progress Bar -->
-<div id="progress-bar" role="navigation" aria-label="Amma's party rooms progress"></div>
+    <!-- Music Toggle -->
+    <button id="music-toggle" aria-label="Toggle background music">🎵</button>
 
-<!-- Music Toggle -->
-<button id="music-toggle" aria-label="Toggle background music">🎵</button>
-
-<!-- Page Transition Overlay -->
-<div id="page-transition" aria-hidden="true" style="opacity:0;pointer-events:none;">
-  <div class="curtain-left"></div>
-  <div class="curtain-right"></div>
-</div>
-
-<main class="page-wrapper" role="main">
-  <div class="party-hero">
-
-    <div class="text-center">
-      <span class="room-badge">Room 8 ✦ Party Corner</span>
-      <h1 class="invite-title" style="font-size:clamp(1.8rem, 5vw, 3rem); margin-bottom: 0.4rem;">
-        More Party Fun — All For Amma! 🎡
-      </h1>
-      <p style="color:var(--purple-lavender); font-style:italic;">
-        "Unbox your surprise vouchers, make a wish in the jar, and spin the royal wheel of treats!"
-      </p>
+    <!-- Page Transition Overlay -->
+    <div
+      id="page-transition"
+      aria-hidden="true"
+      style="opacity: 0; pointer-events: none"
+    >
+      <div class="curtain-left"></div>
+      <div class="curtain-right"></div>
     </div>
 
-    <!-- Tab Navigation -->
-    <nav class="tab-nav" aria-label="Party corner sections">
-      <button class="tab-btn active" data-tab="gifts">🎁 Surprise Gift Table</button>
-      <button class="tab-btn" data-tab="wish">🏺 Amma's Wish Jar</button>
-      <button class="tab-btn" data-tab="voice">🎙️ Voice Wish</button>
-      <button class="tab-btn" data-tab="jukebox">🎵 Tamil Jukebox</button>
-      <button class="tab-btn" data-tab="favours">🍰 Party Favours &amp; Clock</button>
-    </nav>
-
-    <!-- Tab 1: Gifts Table (Tap to Open) -->
-    <div class="tab-pane active" id="tab-gifts">
-      <div class="text-center" style="margin-bottom:1.2rem;">
-        <h2 style="font-family:var(--font-heading); color:var(--gold-champagne); font-size:1.4rem;">
-          Tap Any Gift Box to Unbox Your Surprises, Amma! 🎁
-        </h2>
-      </div>
-      <div class="gifts-grid" id="gifts-grid"></div>
-    </div>
-
-    <!-- Tab 2: Wish Jar -->
-    <div class="tab-pane" id="tab-wish">
-      <div class="wish-jar-card">
-        <div class="wish-jar-icon">🏺✨</div>
-        <h2 style="font-family:var(--font-heading); color:var(--gold-bright); font-size:1.5rem; margin-bottom:0.4rem;">
-          Amma's Birthday Wish Jar
-        </h2>
-        <p style="color:var(--purple-lavender); font-style:italic; font-size:0.95rem;">
-          Type your personal wish for this year. When you press Send, watch your golden star fly safely into the jar!
-        </p>
-
-        <textarea
-          class="wish-input-textarea"
-          id="wish-text"
-          placeholder="I wish for good health, peace, and smiles for our whole family..."
-          aria-label="Amma's birthday wish"
-        ></textarea>
-
-        <button class="btn btn-gold" id="send-wish-btn" style="padding:0.8rem 2rem; font-size:1rem;">
-          ⭐ Send My Wish Into the Jar!
-        </button>
-      </div>
-    </div>
-
-    <!-- Tab 3: Tamil Jukebox (Amma's Favourites) -->
-    <div class="tab-pane" id="tab-jukebox">
-      <div class="text-center" style="margin-bottom:1.2rem;">
-        <h2 style="font-family:var(--font-heading); color:var(--gold-champagne); font-size:1.4rem;">
-          Amma's Vinyl Jukebox 🎵
-        </h2>
-        <p style="color:var(--purple-lavender); font-style:italic; font-size:0.95rem;">
-          "Your favourite melodies, playing just for you. Background music softly rests while your song plays."
-        </p>
-      </div>
-
-      <!-- Vinyl Player Box -->
-      <div class="vinyl-player-box">
-        <div class="vinyl-disc" id="vinyl-disc">
-          <div class="vinyl-center-hole">👑</div>
+    <main class="page-wrapper" role="main">
+      <div class="party-hero">
+        <div class="text-center">
+          <span class="room-badge">Room 8 ✦ Party Corner</span>
+          <h1
+            class="invite-title"
+            style="font-size: clamp(1.8rem, 5vw, 3rem); margin-bottom: 0.4rem"
+          >
+            More Party Fun — All For Amma! 🎡
+          </h1>
+          <p style="color: var(--purple-lavender); font-style: italic">
+            "Unbox your surprise vouchers, make a wish in the jar, and spin the
+            royal wheel of treats!"
+          </p>
         </div>
 
-        <div class="jukebox-now-playing">
-          <h3 class="jukebox-now-title" id="jukebox-title">Amma Endru Azhaikadha</h3>
-          <p class="jukebox-now-artist" id="jukebox-artist">K.J. Yesudas</p>
-          <p class="jukebox-now-dedication" id="jukebox-dedication">"Amma's all-time favourite classical melody 💜"</p>
-        </div>
-
-        <div class="jukebox-ctrl-bar">
-          <button class="jukebox-btn" id="juke-prev-btn" aria-label="Previous track">⏮</button>
-          <button class="jukebox-btn play-main" id="juke-play-btn" aria-label="Play or pause track">▶</button>
-          <button class="jukebox-btn" id="juke-next-btn" aria-label="Next track">⏭</button>
-        </div>
-      </div>
-
-      <div class="jukebox-grid" id="jukebox-grid"></div>
-    </div>
-
-    <!-- Tab: Voice Wish -->
-    <div class="tab-pane" id="tab-voice">
-      <div class="wish-jar-card" style="text-align:center;">
-        <div style="font-size:3rem; margin-bottom:0.5rem;">🎙️</div>
-        <h2 style="font-family:var(--font-heading); color:var(--gold-bright); font-size:1.5rem; margin-bottom:0.4rem;">Record a Birthday Wish, Amma!</h2>
-        <p style="color:var(--purple-lavender); font-style:italic; font-size:0.95rem; margin-bottom:1.6rem;">
-          Speak your heart — record a voice wish for your Gunda to keep forever. 💜
-        </p>
-
-        <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-bottom:1.2rem;">
-          <button id="voice-record-btn" class="btn btn-gold" style="padding:0.8rem 1.8rem; font-size:1rem; gap:0.5rem; display:inline-flex; align-items:center;">
-            🔴 Start Recording
+        <!-- Tab Navigation -->
+        <nav class="tab-nav" aria-label="Party corner sections">
+          <button class="tab-btn active" data-tab="gifts">
+            🎁 Surprise Gift Table
           </button>
-          <button id="voice-stop-btn" class="btn btn-ghost" style="padding:0.8rem 1.6rem; font-size:1rem;" disabled>⏹ Stop</button>
+          <button class="tab-btn" data-tab="wish">🏺 Amma's Wish Jar</button>
+          <button class="tab-btn" data-tab="voice">🎙️ Voice Wish</button>
+          <button class="tab-btn" data-tab="jukebox">🎵 Tamil Jukebox</button>
+          <button class="tab-btn" data-tab="favours">
+            🍰 Party Favours &amp; Clock
+          </button>
+        </nav>
+
+        <!-- Tab 1: Gifts Table (Tap to Open) -->
+        <div class="tab-pane active" id="tab-gifts">
+          <div class="text-center" style="margin-bottom: 1.2rem">
+            <h2
+              style="
+                font-family: var(--font-heading);
+                color: var(--gold-champagne);
+                font-size: 1.4rem;
+              "
+            >
+              Tap Any Gift Box to Unbox Your Surprises, Amma! 🎁
+            </h2>
+          </div>
+          <div class="gifts-grid" id="gifts-grid"></div>
         </div>
 
-        <div id="voice-status" style="font-family:var(--font-heading); font-size:0.9rem; color:var(--gold-champagne); margin-bottom:1rem; min-height:1.5rem;"></div>
+        <!-- Tab 2: Wish Jar -->
+        <div class="tab-pane" id="tab-wish">
+          <div class="wish-jar-card">
+            <div class="wish-jar-icon">🏺✨</div>
+            <h2
+              style="
+                font-family: var(--font-heading);
+                color: var(--gold-bright);
+                font-size: 1.5rem;
+                margin-bottom: 0.4rem;
+              "
+            >
+              Amma's Birthday Wish Jar
+            </h2>
+            <p
+              style="
+                color: var(--purple-lavender);
+                font-style: italic;
+                font-size: 0.95rem;
+              "
+            >
+              Type your personal wish for this year. When you press Send, watch
+              your golden star fly safely into the jar!
+            </p>
 
-        <!-- Recording timer -->
-        <div id="voice-timer" style="display:none; font-family:var(--font-heading); font-size:2rem; color:var(--gold-bright); filter:drop-shadow(0 0 10px rgba(255,215,0,0.6)); margin-bottom:1rem;">00:00</div>
+            <textarea
+              class="wish-input-textarea"
+              id="wish-text"
+              placeholder="I wish for good health, peace, and smiles for our whole family..."
+              aria-label="Amma's birthday wish"
+            ></textarea>
 
-        <!-- Playback list -->
-        <div id="voice-recordings" style="margin-top:1rem;"></div>
-      </div>
-    </div>
-
-    <!-- Tab 4: Party Favours & Clock -->
-    <div class="tab-pane" id="tab-favours">
-      <div class="clock-card">
-        <h3 style="color:var(--purple-orchid); font-family:var(--font-heading); text-transform:uppercase; font-size:0.85rem; letter-spacing:0.15em;">
-          ⏰ Amma's Birthday Party Time
-        </h3>
-        <div class="clock-display" id="party-clock">--:--:-- --</div>
-        <p style="color:var(--purple-lavender); font-style:italic;">
-          Celebrating the Queen of our hearts today and always!
-        </p>
-      </div>
-
-      <div style="background:rgba(46,8,84,0.6); border:var(--border-gold); border-radius:var(--radius-card); padding:2rem; text-align:center;">
-        <h3 style="font-family:var(--font-heading); color:var(--gold-bright); margin-bottom:1rem;">
-          🍰 Today's Royal Party Favours
-        </h3>
-        <p style="color:var(--gold-champagne); font-size:1rem; line-height:1.7; max-width:650px; margin:0 auto;">
-          ✦ Unlimited cuddles & warm hugs from Gunda<br/>
-          ✦ Steaming fresh Filter Kaapi served with love<br/>
-          ✦ Everlasting prayers, joy, and peace in your home
-        </p>
-      </div>
-
-      <!-- Bonus Activities for Amma -->
-      <div style="margin-top:2rem;">
-        <h4 style="font-family:var(--font-heading); color:var(--gold-bright); font-size:1.1rem; margin-bottom:1rem;">
-          ✨ Special Bonus Activities Made for You, Amma
-        </h4>
-        <div style="display:flex; flex-wrap:wrap; gap:0.8rem; justify-content:center;">
-          <a href="numbers.html" class="bonus-link-pill">💜 Life in Numbers</a>
-          <a href="kolam.html" class="bonus-link-pill">🌸 Kolam Canvas</a>
-          <a href="garland.html" class="bonus-link-pill">🌼 Jasmine Garland</a>
-          <a href="time-capsule.html" class="bonus-link-pill">⏳ Time Capsule</a>
-          <a href="wish-sky.html" class="bonus-link-pill">🌌 Wish Sky</a>
-          <a href="then-now.html" class="bonus-link-pill">✨ Then &amp; Now</a>
-          <a href="share-card.html" class="bonus-link-pill">💌 Birthday Card</a>
+            <button
+              class="btn btn-gold"
+              id="send-wish-btn"
+              style="padding: 0.8rem 2rem; font-size: 1rem"
+            >
+              ⭐ Send My Wish Into the Jar!
+            </button>
+          </div>
         </div>
+
+        <!-- Tab 3: Tamil Jukebox (Amma's Favourites) -->
+        <div class="tab-pane" id="tab-jukebox">
+          <div class="text-center" style="margin-bottom: 1.2rem">
+            <h2
+              style="
+                font-family: var(--font-heading);
+                color: var(--gold-champagne);
+                font-size: 1.4rem;
+              "
+            >
+              Amma's Vinyl Jukebox 🎵
+            </h2>
+            <p
+              style="
+                color: var(--purple-lavender);
+                font-style: italic;
+                font-size: 0.95rem;
+              "
+            >
+              "Your favourite melodies, playing just for you. Background music
+              softly rests while your song plays."
+            </p>
+          </div>
+
+          <!-- Vinyl Player Box -->
+          <div class="vinyl-player-box">
+            <div class="vinyl-disc" id="vinyl-disc">
+              <div class="vinyl-center-hole">👑</div>
+            </div>
+
+            <div class="jukebox-now-playing">
+              <h3 class="jukebox-now-title" id="jukebox-title">
+                Amma Endru Azhaikadha
+              </h3>
+              <p class="jukebox-now-artist" id="jukebox-artist">K.J. Yesudas</p>
+              <p class="jukebox-now-dedication" id="jukebox-dedication">
+                "Amma's all-time favourite classical melody 💜"
+              </p>
+            </div>
+
+            <div class="jukebox-ctrl-bar">
+              <button
+                class="jukebox-btn"
+                id="juke-prev-btn"
+                aria-label="Previous track"
+              >
+                ⏮
+              </button>
+              <button
+                class="jukebox-btn play-main"
+                id="juke-play-btn"
+                aria-label="Play or pause track"
+              >
+                ▶
+              </button>
+              <button
+                class="jukebox-btn"
+                id="juke-next-btn"
+                aria-label="Next track"
+              >
+                ⏭
+              </button>
+            </div>
+          </div>
+
+          <div class="jukebox-grid" id="jukebox-grid"></div>
+        </div>
+
+        <!-- Tab: Voice Wish -->
+        <div class="tab-pane" id="tab-voice">
+          <div class="wish-jar-card" style="text-align: center">
+            <div style="font-size: 3rem; margin-bottom: 0.5rem">🎙️</div>
+            <h2
+              style="
+                font-family: var(--font-heading);
+                color: var(--gold-bright);
+                font-size: 1.5rem;
+                margin-bottom: 0.4rem;
+              "
+            >
+              Record a Birthday Wish, Amma!
+            </h2>
+            <p
+              style="
+                color: var(--purple-lavender);
+                font-style: italic;
+                font-size: 0.95rem;
+                margin-bottom: 1.6rem;
+              "
+            >
+              Speak your heart — record a voice wish for your Gunda to keep
+              forever. 💜
+            </p>
+
+            <div
+              style="
+                display: flex;
+                gap: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+                margin-bottom: 1.2rem;
+              "
+            >
+              <button
+                id="voice-record-btn"
+                class="btn btn-gold"
+                style="
+                  padding: 0.8rem 1.8rem;
+                  font-size: 1rem;
+                  gap: 0.5rem;
+                  display: inline-flex;
+                  align-items: center;
+                "
+              >
+                🔴 Start Recording
+              </button>
+              <button
+                id="voice-stop-btn"
+                class="btn btn-ghost"
+                style="padding: 0.8rem 1.6rem; font-size: 1rem"
+                disabled
+              >
+                ⏹ Stop
+              </button>
+            </div>
+
+            <div
+              id="voice-status"
+              style="
+                font-family: var(--font-heading);
+                font-size: 0.9rem;
+                color: var(--gold-champagne);
+                margin-bottom: 1rem;
+                min-height: 1.5rem;
+              "
+            ></div>
+
+            <!-- Recording timer -->
+            <div
+              id="voice-timer"
+              style="
+                display: none;
+                font-family: var(--font-heading);
+                font-size: 2rem;
+                color: var(--gold-bright);
+                filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6));
+                margin-bottom: 1rem;
+              "
+            >
+              00:00
+            </div>
+
+            <!-- Playback list -->
+            <div id="voice-recordings" style="margin-top: 1rem"></div>
+          </div>
+        </div>
+
+        <!-- Tab 4: Party Favours & Clock -->
+        <div class="tab-pane" id="tab-favours">
+          <div class="clock-card">
+            <h3
+              style="
+                color: var(--purple-orchid);
+                font-family: var(--font-heading);
+                text-transform: uppercase;
+                font-size: 0.85rem;
+                letter-spacing: 0.15em;
+              "
+            >
+              ⏰ Amma's Birthday Party Time
+            </h3>
+            <div class="clock-display" id="party-clock">--:--:-- --</div>
+            <p style="color: var(--purple-lavender); font-style: italic">
+              Celebrating the Queen of our hearts today and always!
+            </p>
+          </div>
+
+          <div
+            style="
+              background: rgba(46, 8, 84, 0.6);
+              border: var(--border-gold);
+              border-radius: var(--radius-card);
+              padding: 2rem;
+              text-align: center;
+            "
+          >
+            <h3
+              style="
+                font-family: var(--font-heading);
+                color: var(--gold-bright);
+                margin-bottom: 1rem;
+              "
+            >
+              🍰 Today's Royal Party Favours
+            </h3>
+            <p
+              style="
+                color: var(--gold-champagne);
+                font-size: 1rem;
+                line-height: 1.7;
+                max-width: 650px;
+                margin: 0 auto;
+              "
+            >
+              ✦ Unlimited cuddles & warm hugs from Gunda<br />
+              ✦ Steaming fresh Filter Kaapi served with love<br />
+              ✦ Everlasting prayers, joy, and peace in your home
+            </p>
+          </div>
+
+          <!-- Bonus Activities for Amma -->
+          <div style="margin-top: 2rem">
+            <h4
+              style="
+                font-family: var(--font-heading);
+                color: var(--gold-bright);
+                font-size: 1.1rem;
+                margin-bottom: 1rem;
+              "
+            >
+              ✨ Special Bonus Activities Made for You, Amma
+            </h4>
+            <div
+              style="
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.8rem;
+                justify-content: center;
+              "
+            >
+              <a href="numbers.html" class="bonus-link-pill"
+                >💜 Life in Numbers</a
+              >
+              <a href="kolam.html" class="bonus-link-pill">🌸 Kolam Canvas</a>
+              <a href="garland.html" class="bonus-link-pill"
+                >🌼 Jasmine Garland</a
+              >
+              <a href="time-capsule.html" class="bonus-link-pill"
+                >⏳ Time Capsule</a
+              >
+              <a href="wish-sky.html" class="bonus-link-pill">🌌 Wish Sky</a>
+              <a href="then-now.html" class="bonus-link-pill"
+                >✨ Then &amp; Now</a
+              >
+              <a href="share-card.html" class="bonus-link-pill"
+                >💌 Birthday Card</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Light the Lamps Game -->
+        <section
+          class="lamps-game-section"
+          aria-label="Light the 5 golden lamps game"
+          style="
+            text-align: center;
+            background: linear-gradient(
+              135deg,
+              rgba(74, 14, 128, 0.7) 0%,
+              rgba(35, 6, 66, 0.95) 100%
+            );
+            border: 2px solid var(--gold-metallic);
+            border-radius: var(--radius-lg);
+            padding: clamp(2rem, 5vw, 3rem);
+            margin-top: 2.5rem;
+            box-shadow:
+              0 10px 40px rgba(0, 0, 0, 0.5),
+              var(--glow-gold);
+          "
+        >
+          <h2
+            style="
+              font-family: var(--font-heading);
+              color: var(--gold-bright);
+              font-size: 1.8rem;
+              margin-bottom: 0.4rem;
+            "
+          >
+            🪔 Light the Lamps, Amma!
+          </h2>
+          <p
+            style="
+              color: var(--purple-lavender);
+              font-style: italic;
+              margin-bottom: 1.8rem;
+            "
+          >
+            Tap the 5 golden diyas one by one to illuminate your birthday room
+            with blessings of health, joy, and peace!
+          </p>
+
+          <!-- 5 Diyas / Lanterns Row -->
+          <div
+            id="diyas-row"
+            style="
+              display: flex;
+              justify-content: center;
+              gap: 1.2rem;
+              flex-wrap: wrap;
+              margin-bottom: 1.5rem;
+            "
+          >
+            <!-- Filled by JS -->
+          </div>
+
+          <div
+            id="lamp-quote-box"
+            style="
+              min-height: 55px;
+              background: rgba(20, 2, 40, 0.7);
+              border: 1px solid var(--gold-metallic);
+              border-radius: 12px;
+              padding: 1rem;
+              max-width: 600px;
+              margin: 0 auto 1.5rem;
+              color: var(--gold-champagne);
+              font-style: italic;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 1.05rem;
+            "
+          >
+            ✦ Tap any diya above to light its flame, Amma ✦
+          </div>
+
+          <div id="unlocked-action" style="display: none">
+            <button class="continue-btn" id="to-dares-btn">
+              <span>🎯</span> Step into Birthday Dares, Amma! →
+            </button>
+          </div>
+        </section>
       </div>
-    </div>
+    </main>
 
-    <!-- Light the Lamps Game -->
-    <section class="lamps-game-section" aria-label="Light the 5 golden lamps game" style="text-align:center; background:linear-gradient(135deg, rgba(74,14,128,0.7) 0%, rgba(35,6,66,0.95) 100%); border:2px solid var(--gold-metallic); border-radius:var(--radius-lg); padding:clamp(2rem, 5vw, 3rem); margin-top:2.5rem; box-shadow:0 10px 40px rgba(0,0,0,0.5), var(--glow-gold);">
-      <h2 style="font-family:var(--font-heading); color:var(--gold-bright); font-size:1.8rem; margin-bottom:0.4rem;">
-        🪔 Light the Lamps, Amma!
-      </h2>
-      <p style="color:var(--purple-lavender); font-style:italic; margin-bottom:1.8rem;">
-        Tap the 5 golden diyas one by one to illuminate your birthday room with blessings of health, joy, and peace!
-      </p>
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      // Page guard & shared init (Page 7: Party Corner)
+      guardPage(7);
+      sharedInit(7);
 
-      <!-- 5 Diyas / Lanterns Row -->
-      <div id="diyas-row" style="display:flex; justify-content:center; gap:1.2rem; flex-wrap:wrap; margin-bottom:1.5rem;">
-        <!-- Filled by JS -->
-      </div>
+      // ── 1. TABS ────────────────────────────────────────────────
+      document.querySelectorAll(".tab-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".tab-btn")
+            .forEach((b) => b.classList.remove("active"));
+          document
+            .querySelectorAll(".tab-pane")
+            .forEach((p) => p.classList.remove("active"));
 
-      <div id="lamp-quote-box" style="min-height:55px; background:rgba(20,2,40,0.7); border:1px solid var(--gold-metallic); border-radius:12px; padding:1rem; max-width:600px; margin:0 auto 1.5rem; color:var(--gold-champagne); font-style:italic; display:flex; align-items:center; justify-content:center; font-size:1.05rem;">
-        ✦ Tap any diya above to light its flame, Amma ✦
-      </div>
+          btn.classList.add("active");
+          const target = document.getElementById(`tab-${btn.dataset.tab}`);
+          if (target) target.classList.add("active");
+        });
+      });
 
-      <div id="unlocked-action" style="display:none;">
-        <button class="continue-btn" id="to-dares-btn">
-          <span>🎯</span> Step into Birthday Dares, Amma! →
-        </button>
-      </div>
-    </section>
+      // ── 2. SURPRISE GIFTS TABLE ────────────────────────────────
+      const giftsGrid = document.getElementById("gifts-grid");
+      const gifts = CONFIG.familyGifts || [];
 
-  </div>
-</main>
-
-<script src="js/config.js"></script>
-<script src="js/main.js"></script>
-<script>
-  // Page guard & shared init (Page 7: Party Corner)
-  guardPage(7);
-  sharedInit(7);
-
-  // ── 1. TABS ────────────────────────────────────────────────
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-
-      btn.classList.add('active');
-      const target = document.getElementById(`tab-${btn.dataset.tab}`);
-      if (target) target.classList.add('active');
-    });
-  });
-
-  // ── 2. SURPRISE GIFTS TABLE ────────────────────────────────
-  const giftsGrid = document.getElementById('gifts-grid');
-  const gifts = CONFIG.familyGifts || [];
-
-  gifts.forEach((g) => {
-    const card = document.createElement('div');
-    card.className = 'gift-box-card';
-    card.innerHTML = `
+      gifts.forEach((g) => {
+        const card = document.createElement("div");
+        card.className = "gift-box-card";
+        card.innerHTML = `
       <div class="gift-box-icon">${g.icon}</div>
       <h3 class="gift-box-title">${g.title}</h3>
       <div class="gift-box-tag">${g.tag}</div>
@@ -691,283 +995,320 @@
       <div class="gift-secret-content">${g.content}</div>
     `;
 
-    card.addEventListener('click', () => {
-      const content = card.querySelector('.gift-secret-content');
-      const hint = card.querySelector('.tap-to-open-hint');
-      if (content.style.display === 'block') {
-        content.style.display = 'none';
-        hint.textContent = '✦ Tap to open surprise ✦';
-      } else {
-        content.style.display = 'block';
-        hint.textContent = '✦ Tap to fold ✦';
-        playSound('pop');
-        launchConfetti(20);
-      }
-    });
+        card.addEventListener("click", () => {
+          const content = card.querySelector(".gift-secret-content");
+          const hint = card.querySelector(".tap-to-open-hint");
+          if (content.style.display === "block") {
+            content.style.display = "none";
+            hint.textContent = "✦ Tap to open surprise ✦";
+          } else {
+            content.style.display = "block";
+            hint.textContent = "✦ Tap to fold ✦";
+            playSound("pop");
+            launchConfetti(20);
+          }
+        });
 
-    giftsGrid.appendChild(card);
-  });
-
-  // ── 3. WISH JAR INTERACTION ────────────────────────────────
-  document.getElementById('send-wish-btn').addEventListener('click', () => {
-    const text = document.getElementById('wish-text').value.trim();
-    if (!text) {
-      showToast("Write a little wish first, Amma! 🌸");
-      return;
-    }
-
-    const star = document.createElement('div');
-    star.className = 'flying-star';
-    star.textContent = '⭐';
-    star.style.left = '50vw';
-    star.style.top = '60vh';
-    document.body.appendChild(star);
-
-    setTimeout(() => {
-      star.style.left = '50vw';
-      star.style.top = '30vh';
-      star.style.transform = 'scale(0.3) rotate(360deg)';
-      star.style.opacity = '0';
-    }, 50);
-
-    // Save wish to bday_wishes array in localStorage for the Wish Sky
-    try {
-      const wishes = JSON.parse(localStorage.getItem('bday_wishes') || '[]');
-      wishes.push({
-        text: text,
-        date: new Date().toISOString()
+        giftsGrid.appendChild(card);
       });
-      localStorage.setItem('bday_wishes', JSON.stringify(wishes));
-    } catch {}
 
-    if (typeof AnswersSync !== 'undefined') {
-      AnswersSync.record({
-        room: 'Room 8: Party Corner',
-        section: "Amma's Wish Jar",
-        questionId: 'wish_jar',
-        question: "Amma's Birthday Wish in the Jar",
-        answer: text
+      // ── 3. WISH JAR INTERACTION ────────────────────────────────
+      document.getElementById("send-wish-btn").addEventListener("click", () => {
+        const text = document.getElementById("wish-text").value.trim();
+        if (!text) {
+          showToast("Write a little wish first, Amma! 🌸");
+          return;
+        }
+
+        const star = document.createElement("div");
+        star.className = "flying-star";
+        star.textContent = "⭐";
+        star.style.left = "50vw";
+        star.style.top = "60vh";
+        document.body.appendChild(star);
+
+        setTimeout(() => {
+          star.style.left = "50vw";
+          star.style.top = "30vh";
+          star.style.transform = "scale(0.3) rotate(360deg)";
+          star.style.opacity = "0";
+        }, 50);
+
+        // Save wish to bday_wishes array in localStorage for the Wish Sky
+        try {
+          const wishes = JSON.parse(
+            localStorage.getItem("bday_wishes") || "[]",
+          );
+          wishes.push({
+            text: text,
+            date: new Date().toISOString(),
+          });
+          localStorage.setItem("bday_wishes", JSON.stringify(wishes));
+        } catch {}
+
+        if (typeof AnswersSync !== "undefined") {
+          AnswersSync.record({
+            room: "Room 8: Party Corner",
+            section: "Amma's Wish Jar",
+            questionId: "wish_jar",
+            question: "Amma's Birthday Wish in the Jar",
+            answer: text,
+          });
+        }
+
+        setTimeout(() => {
+          star.remove();
+          celebrate();
+          showToast(
+            "Your wish is safe in the jar, Amma! May it come true! ✨",
+            4000,
+          );
+          document.getElementById("wish-text").value = "";
+        }, 1200);
       });
-    }
 
-    setTimeout(() => {
-      star.remove();
-      celebrate();
-      showToast("Your wish is safe in the jar, Amma! May it come true! ✨", 4000);
-      document.getElementById('wish-text').value = '';
-    }, 1200);
-  });
+      // ── 4. VINYL JUKEBOX LOGIC ─────────────────────────────────
+      const jukeboxGrid = document.getElementById("jukebox-grid");
+      const jukeTitle = document.getElementById("jukebox-title");
+      const jukeArtist = document.getElementById("jukebox-artist");
+      const jukeDedication = document.getElementById("jukebox-dedication");
+      const jukePlayBtn = document.getElementById("juke-play-btn");
+      const jukePrevBtn = document.getElementById("juke-prev-btn");
+      const jukeNextBtn = document.getElementById("juke-next-btn");
+      const vinylDisc = document.getElementById("vinyl-disc");
 
-  // ── 4. VINYL JUKEBOX LOGIC ─────────────────────────────────
-  const jukeboxGrid   = document.getElementById('jukebox-grid');
-  const jukeTitle     = document.getElementById('jukebox-title');
-  const jukeArtist    = document.getElementById('jukebox-artist');
-  const jukeDedication= document.getElementById('jukebox-dedication');
-  const jukePlayBtn   = document.getElementById('juke-play-btn');
-  const jukePrevBtn   = document.getElementById('juke-prev-btn');
-  const jukeNextBtn   = document.getElementById('juke-next-btn');
-  const vinylDisc     = document.getElementById('vinyl-disc');
+      const jukeTracks = CONFIG.jukebox || [];
+      let currentJukeIdx = 0;
+      let isJukePlaying = false;
+      const jukeAudio = new Audio();
+      jukeAudio.volume = 0.45;
 
-  const jukeTracks = CONFIG.jukebox || [];
-  let currentJukeIdx = 0;
-  let isJukePlaying = false;
-  const jukeAudio = new Audio();
-  jukeAudio.volume = 0.45;
+      function loadJukeTrack(idx) {
+        if (!jukeTracks.length) return;
+        currentJukeIdx = (idx + jukeTracks.length) % jukeTracks.length;
+        const t = jukeTracks[currentJukeIdx];
+        jukeTitle.textContent = t.title;
+        jukeArtist.textContent = t.artist;
+        jukeDedication.textContent =
+          t.dedication || '"Dedicated with all our love 💜"';
+        jukeAudio.src = t.file || "";
 
-  function loadJukeTrack(idx) {
-    if (!jukeTracks.length) return;
-    currentJukeIdx = (idx + jukeTracks.length) % jukeTracks.length;
-    const t = jukeTracks[currentJukeIdx];
-    jukeTitle.textContent = t.title;
-    jukeArtist.textContent = t.artist;
-    jukeDedication.textContent = t.dedication || '"Dedicated with all our love 💜"';
-    jukeAudio.src = t.file || '';
-
-    // Update active state in grid
-    document.querySelectorAll('.jukebox-card').forEach((c, i) => {
-      c.classList.toggle('active', i === currentJukeIdx);
-      const icon = c.querySelector('.jukebox-play-icon');
-      if (icon) icon.textContent = (i === currentJukeIdx && isJukePlaying) ? '⏸' : '▶';
-    });
-  }
-
-  function playJukeTrack(idx) {
-    if (idx !== undefined && idx !== currentJukeIdx) {
-      loadJukeTrack(idx);
-    }
-    Music.pauseForJukebox();
-    jukeAudio.play().then(() => {
-      isJukePlaying = true;
-      vinylDisc.classList.add('playing');
-      jukePlayBtn.textContent = '⏸';
-      showToast(`🎵 Playing: ${jukeTracks[currentJukeIdx].title}`);
-      loadJukeTrack(currentJukeIdx);
-    }).catch(() => {
-      // If audio file doesn't play directly, open YouTube fallback if available
-      const t = jukeTracks[currentJukeIdx];
-      if (t.youtubeId) {
-        window.open(`https://www.youtube.com/watch?v=${t.youtubeId}`, '_blank');
+        // Update active state in grid
+        document.querySelectorAll(".jukebox-card").forEach((c, i) => {
+          c.classList.toggle("active", i === currentJukeIdx);
+          const icon = c.querySelector(".jukebox-play-icon");
+          if (icon)
+            icon.textContent =
+              i === currentJukeIdx && isJukePlaying ? "⏸" : "▶";
+        });
       }
-    });
-  }
 
-  function pauseJukeTrack() {
-    jukeAudio.pause();
-    isJukePlaying = false;
-    vinylDisc.classList.remove('playing');
-    jukePlayBtn.textContent = '▶';
-    Music.resumeAfterJukebox();
-    loadJukeTrack(currentJukeIdx);
-  }
+      function playJukeTrack(idx) {
+        if (idx !== undefined && idx !== currentJukeIdx) {
+          loadJukeTrack(idx);
+        }
+        Music.pauseForJukebox();
+        jukeAudio
+          .play()
+          .then(() => {
+            isJukePlaying = true;
+            vinylDisc.classList.add("playing");
+            jukePlayBtn.textContent = "⏸";
+            showToast(`🎵 Playing: ${jukeTracks[currentJukeIdx].title}`);
+            loadJukeTrack(currentJukeIdx);
+          })
+          .catch(() => {
+            // If audio file doesn't play directly, open YouTube fallback if available
+            const t = jukeTracks[currentJukeIdx];
+            if (t.youtubeId) {
+              window.open(
+                `https://www.youtube.com/watch?v=${t.youtubeId}`,
+                "_blank",
+              );
+            }
+          });
+      }
 
-  jukePlayBtn.addEventListener('click', () => {
-    if (isJukePlaying) pauseJukeTrack();
-    else playJukeTrack(currentJukeIdx);
-  });
+      function pauseJukeTrack() {
+        jukeAudio.pause();
+        isJukePlaying = false;
+        vinylDisc.classList.remove("playing");
+        jukePlayBtn.textContent = "▶";
+        Music.resumeAfterJukebox();
+        loadJukeTrack(currentJukeIdx);
+      }
 
-  jukePrevBtn.addEventListener('click', () => {
-    const nextIdx = (currentJukeIdx - 1 + jukeTracks.length) % jukeTracks.length;
-    playJukeTrack(nextIdx);
-  });
+      jukePlayBtn.addEventListener("click", () => {
+        if (isJukePlaying) pauseJukeTrack();
+        else playJukeTrack(currentJukeIdx);
+      });
 
-  jukeNextBtn.addEventListener('click', () => {
-    const nextIdx = (currentJukeIdx + 1) % jukeTracks.length;
-    playJukeTrack(nextIdx);
-  });
+      jukePrevBtn.addEventListener("click", () => {
+        const nextIdx =
+          (currentJukeIdx - 1 + jukeTracks.length) % jukeTracks.length;
+        playJukeTrack(nextIdx);
+      });
 
-  jukeAudio.addEventListener('ended', () => {
-    // Auto advance or stop
-    pauseJukeTrack();
-  });
+      jukeNextBtn.addEventListener("click", () => {
+        const nextIdx = (currentJukeIdx + 1) % jukeTracks.length;
+        playJukeTrack(nextIdx);
+      });
 
-  // Render Track List
-  jukeTracks.forEach((t, idx) => {
-    const card = document.createElement('div');
-    card.className = 'jukebox-card' + (idx === 0 ? ' active' : '');
-    card.innerHTML = `
+      jukeAudio.addEventListener("ended", () => {
+        // Auto advance or stop
+        pauseJukeTrack();
+      });
+
+      // Render Track List
+      jukeTracks.forEach((t, idx) => {
+        const card = document.createElement("div");
+        card.className = "jukebox-card" + (idx === 0 ? " active" : "");
+        card.innerHTML = `
       <div class="jukebox-play-icon">▶</div>
       <div style="flex:1;">
         <h4 style="color:var(--gold-champagne); font-family:var(--font-heading); margin-bottom:0.2rem;">${t.title}</h4>
         <p style="color:var(--purple-lavender); font-size:0.85rem; font-style:italic;">${t.artist}</p>
-        <p style="font-size:0.75rem; color:var(--gold-bright); margin-top:0.2rem;">${t.dedication || ''}</p>
+        <p style="font-size:0.75rem; color:var(--gold-bright); margin-top:0.2rem;">${t.dedication || ""}</p>
       </div>
     `;
 
-    card.addEventListener('click', () => {
-      if (currentJukeIdx === idx && isJukePlaying) {
-        pauseJukeTrack();
-      } else {
-        playJukeTrack(idx);
+        card.addEventListener("click", () => {
+          if (currentJukeIdx === idx && isJukePlaying) {
+            pauseJukeTrack();
+          } else {
+            playJukeTrack(idx);
+          }
+        });
+
+        jukeboxGrid.appendChild(card);
+      });
+
+      // Initialize first track info
+      if (jukeTracks.length > 0) {
+        loadJukeTrack(0);
       }
-    });
 
-    jukeboxGrid.appendChild(card);
-  });
-
-  // Initialize first track info
-  if (jukeTracks.length > 0) {
-    loadJukeTrack(0);
-  }
-
-  // ── 5. PARTY CLOCK ─────────────────────────────────────────
-  function updateClock() {
-    const el = document.getElementById('party-clock');
-    if (el) {
-      const now = new Date();
-      el.textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-    }
-  }
-  setInterval(updateClock, 1000);
-  updateClock();
-
-  // ── 6. VOICE WISH RECORDER ─────────────────────────────────
-  (function setupVoiceRecorder() {
-    const recordBtn   = document.getElementById('voice-record-btn');
-    const stopBtn     = document.getElementById('voice-stop-btn');
-    const statusEl    = document.getElementById('voice-status');
-    const timerEl     = document.getElementById('voice-timer');
-    const listEl      = document.getElementById('voice-recordings');
-
-    if (!recordBtn) return;
-
-    let mediaRecorder = null;
-    let chunks        = [];
-    let timerInterval = null;
-    let elapsed       = 0;
-
-    // Load saved recordings from localStorage
-    let savedRecs = [];
-    try { savedRecs = JSON.parse(localStorage.getItem('amma_voice_wishes') || '[]'); } catch {}
-    savedRecs.forEach(url => addPlaybackCard(url));
-
-    function pad(n) { return String(n).padStart(2, '0'); }
-
-    function startTimer() {
-      elapsed = 0;
-      timerEl.style.display = 'block';
-      timerEl.textContent = '00:00';
-      timerInterval = setInterval(() => {
-        elapsed++;
-        timerEl.textContent = `${pad(Math.floor(elapsed / 60))}:${pad(elapsed % 60)}`;
-      }, 1000);
-    }
-
-    function stopTimer() {
-      clearInterval(timerInterval);
-      timerEl.style.display = 'none';
-    }
-
-    recordBtn.addEventListener('click', async () => {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        chunks = [];
-        mediaRecorder = new MediaRecorder(stream);
-
-        mediaRecorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
-
-        mediaRecorder.onstop = () => {
-          stream.getTracks().forEach(t => t.stop());
-          const blob = new Blob(chunks, { type: 'audio/webm' });
-          const url  = URL.createObjectURL(blob);
-          addPlaybackCard(url, true);
-          statusEl.textContent = '\u2728 Wish recorded and saved, Amma! \ud83d\udc9c';
-          stopTimer();
-          playSound('success');
-          // Save to localStorage as base64 (small recordings only)
-          const reader = new FileReader();
-          reader.onload = ev => {
-            try {
-              const stored = JSON.parse(localStorage.getItem('amma_voice_wishes') || '[]');
-              stored.push(ev.target.result);
-              localStorage.setItem('amma_voice_wishes', JSON.stringify(stored.slice(-5))); // keep last 5
-            } catch {}
-          };
-          reader.readAsDataURL(blob);
-        };
-
-        mediaRecorder.start();
-        recordBtn.disabled = true;
-        stopBtn.disabled   = false;
-        statusEl.textContent = '\ud83d\udd34 Recording... speak your wish, Amma!';
-        recordBtn.style.background = 'linear-gradient(135deg,#c00,#ff4444)';
-        startTimer();
-      } catch (e) {
-        statusEl.textContent = '\u26a0\ufe0f Microphone not available. Please allow microphone access.';
+      // ── 5. PARTY CLOCK ─────────────────────────────────────────
+      function updateClock() {
+        const el = document.getElementById("party-clock");
+        if (el) {
+          const now = new Date();
+          el.textContent = now.toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+          });
+        }
       }
-    });
+      setInterval(updateClock, 1000);
+      updateClock();
 
-    stopBtn.addEventListener('click', () => {
-      if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-        mediaRecorder.stop();
-        recordBtn.disabled = false;
-        stopBtn.disabled   = true;
-        recordBtn.style.background = '';
-      }
-    });
+      // ── 6. VOICE WISH RECORDER ─────────────────────────────────
+      (function setupVoiceRecorder() {
+        const recordBtn = document.getElementById("voice-record-btn");
+        const stopBtn = document.getElementById("voice-stop-btn");
+        const statusEl = document.getElementById("voice-status");
+        const timerEl = document.getElementById("voice-timer");
+        const listEl = document.getElementById("voice-recordings");
 
-    function addPlaybackCard(url, isNew) {
-      const card = document.createElement('div');
-      card.style.cssText = `
+        if (!recordBtn) return;
+
+        let mediaRecorder = null;
+        let chunks = [];
+        let timerInterval = null;
+        let elapsed = 0;
+
+        // Load saved recordings from localStorage
+        let savedRecs = [];
+        try {
+          savedRecs = JSON.parse(
+            localStorage.getItem("amma_voice_wishes") || "[]",
+          );
+        } catch {}
+        savedRecs.forEach((url) => addPlaybackCard(url));
+
+        function pad(n) {
+          return String(n).padStart(2, "0");
+        }
+
+        function startTimer() {
+          elapsed = 0;
+          timerEl.style.display = "block";
+          timerEl.textContent = "00:00";
+          timerInterval = setInterval(() => {
+            elapsed++;
+            timerEl.textContent = `${pad(Math.floor(elapsed / 60))}:${pad(elapsed % 60)}`;
+          }, 1000);
+        }
+
+        function stopTimer() {
+          clearInterval(timerInterval);
+          timerEl.style.display = "none";
+        }
+
+        recordBtn.addEventListener("click", async () => {
+          try {
+            const stream = await navigator.mediaDevices.getUserMedia({
+              audio: true,
+            });
+            chunks = [];
+            mediaRecorder = new MediaRecorder(stream);
+
+            mediaRecorder.ondataavailable = (e) => {
+              if (e.data.size > 0) chunks.push(e.data);
+            };
+
+            mediaRecorder.onstop = () => {
+              stream.getTracks().forEach((t) => t.stop());
+              const blob = new Blob(chunks, { type: "audio/webm" });
+              const url = URL.createObjectURL(blob);
+              addPlaybackCard(url, true);
+              statusEl.textContent =
+                "\u2728 Wish recorded and saved, Amma! \ud83d\udc9c";
+              stopTimer();
+              playSound("success");
+              // Save to localStorage as base64 (small recordings only)
+              const reader = new FileReader();
+              reader.onload = (ev) => {
+                try {
+                  const stored = JSON.parse(
+                    localStorage.getItem("amma_voice_wishes") || "[]",
+                  );
+                  stored.push(ev.target.result);
+                  localStorage.setItem(
+                    "amma_voice_wishes",
+                    JSON.stringify(stored.slice(-5)),
+                  ); // keep last 5
+                } catch {}
+              };
+              reader.readAsDataURL(blob);
+            };
+
+            mediaRecorder.start();
+            recordBtn.disabled = true;
+            stopBtn.disabled = false;
+            statusEl.textContent =
+              "\ud83d\udd34 Recording... speak your wish, Amma!";
+            recordBtn.style.background = "linear-gradient(135deg,#c00,#ff4444)";
+            startTimer();
+          } catch (e) {
+            statusEl.textContent =
+              "\u26a0\ufe0f Microphone not available. Please allow microphone access.";
+          }
+        });
+
+        stopBtn.addEventListener("click", () => {
+          if (mediaRecorder && mediaRecorder.state !== "inactive") {
+            mediaRecorder.stop();
+            recordBtn.disabled = false;
+            stopBtn.disabled = true;
+            recordBtn.style.background = "";
+          }
+        });
+
+        function addPlaybackCard(url, isNew) {
+          const card = document.createElement("div");
+          card.style.cssText = `
         background: rgba(46,8,84,0.6);
         border: 1px solid rgba(212,175,55,0.4);
         border-radius: 16px;
@@ -978,12 +1319,15 @@
         gap: 1rem;
         flex-wrap: wrap;
       `;
-      const dt = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
-      card.innerHTML = `
+          const dt = new Date().toLocaleTimeString("en-IN", {
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+          card.innerHTML = `
         <span style="font-size:1.6rem;">\ud83c\udf99\ufe0f</span>
         <div style="flex:1; min-width:160px;">
           <div style="font-family:var(--font-heading); color:var(--gold-champagne); font-size:0.9rem;">
-            ${isNew ? 'New Wish' : 'Voice Wish'} &middot; ${dt}
+            ${isNew ? "New Wish" : "Voice Wish"} &middot; ${dt}
           </div>
           <audio controls src="${url}" style="margin-top:0.4rem; width:100%; accent-color:#FFD700;"></audio>
         </div>
@@ -992,30 +1336,49 @@
           \u2b07 Save
         </a>
       `;
-      listEl.prepend(card);
-    }
-  })();
+          listEl.prepend(card);
+        }
+      })();
 
+      // ── 6. LIGHT THE LAMPS GAME ────────────────────────────────
+      const diyasRow = document.getElementById("diyas-row");
+      const quoteBox = document.getElementById("lamp-quote-box");
+      const unlockedAction = document.getElementById("unlocked-action");
 
-  // ── 6. LIGHT THE LAMPS GAME ────────────────────────────────
-  const diyasRow = document.getElementById('diyas-row');
-  const quoteBox = document.getElementById('lamp-quote-box');
-  const unlockedAction = document.getElementById('unlocked-action');
+      const lamps = CONFIG.lamps || [
+        {
+          id: 1,
+          name: "Health & Long Life 🪔",
+          quote: "May your health be steadfast and vigorous, Amma.",
+        },
+        {
+          id: 2,
+          name: "Everlasting Peace 🪔",
+          quote: "May calmness and serene quiet grace every morning.",
+        },
+        {
+          id: 3,
+          name: "Boundless Joy 🪔",
+          quote: "May laughter ring through your home every day.",
+        },
+        {
+          id: 4,
+          name: "Protection & Prayer 🪔",
+          quote: "May God's angels encamp around you always.",
+        },
+        {
+          id: 5,
+          name: "Endless Love 🪔",
+          quote: "May you feel cherished by your family beyond all words.",
+        },
+      ];
 
-  const lamps = CONFIG.lamps || [
-    { id: 1, name: "Health & Long Life 🪔", quote: "May your health be steadfast and vigorous, Amma." },
-    { id: 2, name: "Everlasting Peace 🪔", quote: "May calmness and serene quiet grace every morning." },
-    { id: 3, name: "Boundless Joy 🪔", quote: "May laughter ring through your home every day." },
-    { id: 4, name: "Protection & Prayer 🪔", quote: "May God's angels encamp around you always." },
-    { id: 5, name: "Endless Love 🪔", quote: "May you feel cherished by your family beyond all words." }
-  ];
+      let litCount = 0;
 
-  let litCount = 0;
-
-  lamps.forEach((lamp, idx) => {
-    const btn = document.createElement('button');
-    btn.className = 'diya-btn';
-    btn.style.cssText = `
+      lamps.forEach((lamp, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "diya-btn";
+        btn.style.cssText = `
       background: rgba(46,8,84,0.7);
       border: 2px solid var(--gold-metallic);
       border-radius: 16px;
@@ -1028,45 +1391,45 @@
       width: 105px;
       transition: all 0.3s;
     `;
-    btn.innerHTML = `
+        btn.innerHTML = `
       <div class="flame-slot" style="font-size:2rem; opacity:0.3; filter:grayscale(1); transition:all 0.4s;">🪔</div>
       <span style="font-family:var(--font-heading); font-size:0.75rem; color:var(--gold-champagne);">Lamp ${idx + 1}</span>
     `;
 
-    btn.addEventListener('click', () => {
-      if (btn.classList.contains('lit')) return;
-      btn.classList.add('lit');
-      litCount++;
-      playSound('pop');
+        btn.addEventListener("click", () => {
+          if (btn.classList.contains("lit")) return;
+          btn.classList.add("lit");
+          litCount++;
+          playSound("pop");
 
-      const flame = btn.querySelector('.flame-slot');
-      flame.style.opacity = '1';
-      flame.style.filter = 'drop-shadow(0 0 15px #FFD700)';
-      btn.style.borderColor = 'var(--gold-bright)';
-      btn.style.boxShadow = '0 0 20px rgba(255,215,0,0.6)';
+          const flame = btn.querySelector(".flame-slot");
+          flame.style.opacity = "1";
+          flame.style.filter = "drop-shadow(0 0 15px #FFD700)";
+          btn.style.borderColor = "var(--gold-bright)";
+          btn.style.boxShadow = "0 0 20px rgba(255,215,0,0.6)";
 
-      quoteBox.innerHTML = `<strong>✨ "${lamp.quote}"</strong>`;
+          quoteBox.innerHTML = `<strong>✨ "${lamp.quote}"</strong>`;
 
-      if (litCount >= lamps.length) {
-        onAllLampsLit();
+          if (litCount >= lamps.length) {
+            onAllLampsLit();
+          }
+        });
+
+        diyasRow.appendChild(btn);
+      });
+
+      function onAllLampsLit() {
+        celebrate();
+        Progress.unlock(8); // Unlocks Room 8: Birthday Dares (dares.html)
+        renderProgressBar(7);
+        quoteBox.innerHTML = `<strong>🌟 All 5 lamps are glowing! Your room is illuminated with eternal blessings, Amma! 💜</strong>`;
+        unlockedAction.style.display = "block";
+        showToast("Birthday Dares unlocked for Amma! 🎯", 4000);
       }
-    });
 
-    diyasRow.appendChild(btn);
-  });
-
-  function onAllLampsLit() {
-    celebrate();
-    Progress.unlock(8); // Unlocks Room 8: Birthday Dares (dares.html)
-    renderProgressBar(7);
-    quoteBox.innerHTML = `<strong>🌟 All 5 lamps are glowing! Your room is illuminated with eternal blessings, Amma! 💜</strong>`;
-    unlockedAction.style.display = 'block';
-    showToast("Birthday Dares unlocked for Amma! 🎯", 4000);
-  }
-
-  document.getElementById('to-dares-btn').addEventListener('click', () => {
-    navigateTo('dares.html');
-  });
-</script>
-</body>
+      document.getElementById("to-dares-btn").addEventListener("click", () => {
+        navigateTo("dares.html");
+      });
+    </script>
+  </body>
 </html>
