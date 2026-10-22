@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Photo Haul — Grand Showcase of Memories 📸✨</title>
+  <meta name="description" content="A grand showcase of 39 cherished memories celebrating Queen Glory Gnana Selvi."/>
+  <link rel="stylesheet" href="css/theme.css"/>
+  <link rel="stylesheet" href="css/animations.css"/>
+  <style>
+    .haul-hero {
+      min-height: 100vh;
+      padding: 2.5rem 1rem 6rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.8rem;
+    }
+
+    .room-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(179,136,235,0.18);
+      border: 1px solid rgba(212,175,55,0.45);
+      border-radius: 50px;
+      padding: 0.4rem 1.4rem;
+      font-size: 0.85rem;
+      color: var(--gold-champagne);
+      font-family: var(--font-heading);
+    }
+
+    /* ─── STATS & ACTION BAR ──────────────────────────────────── */
+    .haul-toolbar {
+      width: 100%;
+      background: rgba(46, 8, 84, 0.65);
+      border: 1px solid var(--gold-metallic);
+      border-radius: 20px;
+      padding: 1.2rem 1.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.5), inset 0 0 15px rgba(212,175,55,0.15);
+      backdrop-filter: blur(10px);
+    }
+
+    .haul-stats {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      color: var(--gold-bright);
+    }
+
+    .haul-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    /* ─── CATEGORY FILTER TABS ─────────────────────────────────── */
+    .filter-tabs-wrap {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 0.5rem 0;
+    }
+
+    .filter-tab {
+      background: rgba(30, 5, 55, 0.7);
+      border: 1.5px solid rgba(212,175,55,0.35);
+      border-radius: 50px;
+      padding: 0.55rem 1.4rem;
+      color: var(--gold-champagne);
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .filter-tab:hover {
+      background: rgba(106, 27, 154, 0.4);
+      border-color: var(--gold-bright);
+      transform: translateY(-2px);
+    }
+
+    .filter-tab.active {
+      background: var(--grad-gold);
+      color: #2E0854;
+      font-weight: 700;
+      border-color: #FFD700;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+    }
+
+    /* ─── OPULENT MASONRY PHOTO GRID ──────────────────────────── */
+    .haul-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.8rem;
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .haul-card {
+      background: #FFFDF8;
+      border: 2px solid var(--gold-metallic);
+      border-radius: 12px;
+      padding: 12px 12px 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6), 0 0 15px rgba(212,175,55,0.2);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+    }
+
+    .haul-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 18px 45px rgba(0,0,0,0.8), 0 0 30px rgba(255,215,0,0.5);
+      z-index: 5;
+      border-color: var(--gold-bright);
+    }
+
+    .haul-img-wrap {
+      width: 100%;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      border-radius: 6px;
+      background: #111;
+      position: relative;
+    }
+
+    .haul-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+      display: block;
+    }
+
+    .haul-card:hover .haul-img {
+      transform: scale(1.06);
+    }
+
+    .haul-badge-pill {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(46, 8, 84, 0.85);
+      border: 1px solid var(--gold-bright);
+      color: var(--gold-bright);
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 50px;
+      font-family: var(--font-heading);
+      backdrop-filter: blur(5px);
+    }
+
+    .haul-caption-bar {
+      margin-top: 12px;
+      color: #381E05;
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      min-height: 2.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .haul-actions-sub {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .haul-heart-btn {
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+      filter: grayscale(1);
+      opacity: 0.5;
+    }
+
+    .haul-heart-btn.loved {
+      filter: grayscale(0);
+      opacity: 1;
+      animation: heartPulse 0.4s ease;
+    }
+
+    .haul-heart-btn:hover {
+      transform: scale(1.25);
+    }
+
+    @keyframes heartPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.35); }
+      100% { transform: scale(1); }
+    }
+
+    /* ─── FULLSCREEN LIGHTBOX MODAL ───────────────────────────── */
+    .lightbox-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 2, 20, 0.96);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      backdrop-filter: blur(15px);
+    }
+
+    .lightbox-modal.active {
+      display: flex;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      text-align: center;
+    }
+
+    .lightbox-img-frame {
+      max-height: 70vh;
+      border: 3px solid var(--gold-metallic);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 15px 60px rgba(0,0,0,0.9), 0 0 35px rgba(212,175,55,0.4);
+      background: #000;
+    }
+
+    .lightbox-img {
+      max-height: 70vh;
+      max-width: 100%;
+      object-fit: contain;
+      display: block;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox-caption {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      color: var(--gold-champagne);
+      font-style: italic;
+      max-width: 700px;
+      line-height: 1.6;
+    }
+
+    .lightbox-controls {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .lb-nav-btn {
+      background: rgba(46, 8, 84, 0.8);
+      border: 1.5px solid var(--gold-metallic);
+      color: var(--gold-bright);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .lb-nav-btn:hover {
+      background: rgba(212, 175, 55, 0.3);
+      transform: scale(1.1);
+    }
+
+    .lb-close-btn {
+      position: absolute;
+      top: -45px;
+      right: 0;
+      background: none;
+      border: none;
+      color: #FFF;
+      font-size: 2.2rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .lb-close-btn:hover {
+      transform: scale(1.2) rotate(90deg);
+      color: var(--gold-bright);
+    }
+
+    /* ─── EXPLORE MEMORIES UNLOCK BAR ─────────────────────────── */
+    .explore-unlock-card {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(88,18,150,0.85) 0%, rgba(46,8,84,0.95) 100%);
+      border: 2px solid var(--gold-bright);
+      border-radius: 20px;
+      padding: 1.8rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      text-align: center;
+      margin-top: 2rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    }
+
+    .progress-bar-wrap {
+      width: 100%;
+      max-width: 450px;
+      height: 12px;
+      background: rgba(15, 2, 30, 0.7);
+      border: 1px solid rgba(212,175,55,0.4);
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--grad-gold);
+      border-radius: 20px;
+      transition: width 0.4s ease;
+      box-shadow: 0 0 10px rgba(255,215,0,0.7);
+    }
+  </style>
+</head>
+<body>
+
+<div class="bokeh bokeh-1"></div>
+<div class="bokeh bokeh-2"></div>
+<div class="bokeh bokeh-3"></div>
+<canvas id="particles-canvas" aria-hidden="true"></canvas>
+<div class="fairy-lights" aria-hidden="true"></div>
+
+<!-- Progress Bar -->
+<div id="progress-bar" role="navigation" aria-label="Amma's party rooms progress"></div>
+
+<!-- Continuous Music Controls -->
+<button id="music-toggle" style="display:none;" aria-label="Toggle background music">🎵</button>
+
+<!-- Page Transition Overlay -->
+<div id="page-transition" aria-hidden="true" style="opacity:0;pointer-events:none;">
+  <div class="curtain-left"></div>
+  <div class="curtain-right"></div>
+</div>
+
+<main class="page-wrapper" role="main">
+  <div class="haul-hero">
+
+    <div class="text-center">
+      <span class="room-badge">Room 7 ✦ Showcase of Memories</span>
+      <h1 class="invite-title" style="font-size:clamp(1.8rem, 5vw, 3rem); margin-bottom: 0.4rem;">
+        Amma's Grand Photo Haul 📸✨
+      </h1>
+      <p style="color:var(--purple-lavender); font-style:italic; font-size:clamp(1rem, 2.5vw, 1.25rem); max-width:700px;">
+        "39 precious memories captured across a lifetime of grace, laughter, and unconditional love."
+      </p>
+    </div>
+
+    <!-- Toolbar: Stats & Auto Showcase -->
+    <div class="haul-toolbar">
+      <div class="haul-stats">
+        <span class="stat-chip">📸 <strong id="total-photos-count">39</strong> Photographs</span>
+        <span class="stat-chip">💖 <strong id="loved-counter-display">0</strong> Loved Memories</span>
+      </div>
+      <div class="haul-actions">
+        <button class="btn btn-gold" id="start-slideshow-btn" style="padding:0.6rem 1.6rem; font-size:0.9rem;">
+          ▶ Auto Showcase
+        </button>
+        <button class="btn btn-ghost" id="loved-filter-btn" style="padding:0.6rem 1.4rem; font-size:0.9rem;">
+          ❤️ View Loved Only
+        </button>
+      </div>
+    </div>
+
+    <!-- Category Filter Tabs -->
+    <div class="filter-tabs-wrap" role="tablist">
+      <button class="filter-tab active" data-cat="all">🌟 All Memories (39)</button>
+      <button class="filter-tab" data-cat="current">👑 Queen Glory Today (29)</button>
+      <button class="filter-tab" data-cat="marriage">💍 Sacred Marriage (5)</button>
+      <button class="filter-tab" data-cat="college">🎓 College Days (3)</button>
+      <button class="filter-tab" data-cat="appa">💙 With Appa (2)</button>
+    </div>
+
+    <!-- Photo Grid -->
+    <div class="haul-grid" id="haul-grid" role="region" aria-label="Photo Haul Grid">
+      <!-- Generated via JS -->
+    </div>
+
+    <!-- Mini-Game: Explore & Love 5 Memories to unlock Room 8 -->
+    <section class="explore-unlock-card" id="explore-game-section">
+      <h3 style="font-family:var(--font-heading); color:var(--gold-bright); font-size:1.35rem;">
+        ✨ Light the Party Path, Amma!
+      </h3>
+      <p style="color:var(--gold-champagne); font-style:italic; font-size:0.95rem; max-width:550px;">
+        Explore or love at least 5 memories in the showcase to open the Party Corner!
+      </p>
+
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="explore-progress-fill"></div>
+      </div>
+      <p style="font-size:0.85rem; color:var(--purple-lavender);" id="explore-progress-label">
+        0 / 5 memories explored
+      </p>
+
+      <div id="unlocked-action" style="display:none; margin-top:0.8rem; animation:fadeInUp 0.6s ease both;">
+        <button class="btn btn-gold" id="to-party-corner-btn" style="font-size:1.1rem; padding:0.9rem 2.8rem; box-shadow:0 0 25px rgba(255,215,0,0.7);">
+          🪔 Step into Party Corner, Amma →
+        </button>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- Fullscreen Lightbox Modal -->
+<div class="lightbox-modal" id="lightbox-modal" role="dialog" aria-modal="true" aria-label="Photo View">
+  <div class="lightbox-content">
+    <button class="lb-close-btn" id="lb-close" aria-label="Close Lightbox">✕</button>
+    <div class="lightbox-img-frame">
+      <img src="" alt="" class="lightbox-img" id="lb-img"/>
+    </div>
+    <p class="lightbox-caption" id="lb-caption"></p>
+    <div class="lightbox-controls">
+      <button class="lb-nav-btn" id="lb-prev" aria-label="Previous photo">‹</button>
+      <button class="haul-heart-btn" id="lb-heart-btn" aria-label="Love this photo" style="font-size:2rem; opacity:1;">🤍</button>
+      <button class="lb-nav-btn" id="lb-next" aria-label="Next photo">›</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // Page guard & shared init (Page 6: Photo Haul)
+  guardPage(6);
+  sharedInit(6);
+
+  // Load all 39 photos from manifest / config
+  const allPhotos = CONFIG.photoHaul || [];
+  document.getElementById('total-photos-count').textContent = allPhotos.length;
+
+  let activeCategory = 'all';
+  let viewLovedOnly = false;
+  let currentModalIndex = 0;
+  let currentFilteredList = [...allPhotos];
+  let autoShowTimer = null;
+  let isAutoPlaying = false;
+
+  // Persisted loved photos
+  let lovedSet = new Set();
+  try {
+    const savedLoved = JSON.parse(localStorage.getItem('amma_loved_photos') || '[]');
+    lovedSet = new Set(savedLoved);
+  } catch {}
+
+  // Explored count for unlock step
+  let exploredSet = new Set();
+  try {
+    const savedExp = JSON.parse(localStorage.getItem('amma_explored_photos') || '[]');
+    exploredSet = new Set(savedExp);
+  } catch {}
+
+  function updateLovedDisplay() {
+    document.getElementById('loved-counter-display').textContent = lovedSet.size;
+    try {
+      localStorage.setItem('amma_loved_photos', JSON.stringify([...lovedSet]));
+    } catch {}
+  }
+  updateLovedDisplay();
+
+  function updateUnlockProgress() {
+    const count = Math.min(5, exploredSet.size);
+    const fill = document.getElementById('explore-progress-fill');
+    const label = document.getElementById('explore-progress-label');
+    const unlockedAction = document.getElementById('unlocked-action');
+
+    fill.style.width = `${(count / 5) * 100}%`;
+    label.textContent = `${count} / 5 memories explored`;
+
+    try {
+      localStorage.setItem('amma_explored_photos', JSON.stringify([...exploredSet]));
+    } catch {}
+
+    if (count >= 5) {
+      Progress.unlock(7); // Unlocks Room 8: Party Corner
+      renderProgressBar(6);
+      unlockedAction.style.display = 'block';
+      label.textContent = "🎉 5 memories explored! The Party Corner is unlocked!";
+      label.style.color = 'var(--gold-bright)';
+      label.style.fontWeight = 'bold';
+    }
+  }
+  updateUnlockProgress();
+
+  // ─── RENDER GRID ─────────────────────────────────────────────
+  const haulGrid = document.getElementById('haul-grid');
+
+  function renderGrid() {
+    haulGrid.innerHTML = '';
+
+    currentFilteredList = allPhotos.filter(p => {
+      const matchCat = (activeCategory === 'all' || p.category === activeCategory);
+      const matchLoved = (!viewLovedOnly || lovedSet.has(p.id));
+      return matchCat && matchLoved;
+    });
+
+    if (currentFilteredList.length === 0) {
+      haulGrid.innerHTML = `
+        <div style="grid-column: 1/-1; text-align:center; padding: 3rem; color:var(--purple-lavender); font-style:italic;">
+          No photos found for this filter. Tap '🤍' on any memory to add it to your loved collection! 💜
+        </div>
+      `;
+      return;
+    }
+
+    currentFilteredList.forEach((p, idx) => {
+      const isLoved = lovedSet.has(p.id);
+      const card = document.createElement('div');
+      card.className = 'haul-card';
+      card.innerHTML = `
+        <div class="haul-img-wrap">
+          <img src="${p.src}" alt="${p.caption}" class="haul-img" loading="lazy"/>
+          <span class="haul-badge-pill">${p.categoryLabel}</span>
+        </div>
+        <div class="haul-caption-bar">
+          <p style="margin:0; font-size:0.9rem; flex:1;">${p.caption}</p>
+          <div class="haul-actions-sub">
+            <button class="haul-heart-btn ${isLoved ? 'loved' : ''}" data-id="${p.id}" aria-label="Love this photo">
+              ${isLoved ? '💖' : '🤍'}
+            </button>
+          </div>
+        </div>
+      `;
+
+      // Open Lightbox on card click
+      card.querySelector('.haul-img-wrap').addEventListener('click', () => {
+        openLightbox(idx);
+        recordExplored(p.id);
+      });
+
+      // Love reaction toggle
+      const heartBtn = card.querySelector('.haul-heart-btn');
+      heartBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleLove(p.id, heartBtn);
+        recordExplored(p.id);
+      });
+
+      haulGrid.appendChild(card);
+    });
+  }
+
+  function recordExplored(photoId) {
+    if (!exploredSet.has(photoId)) {
+      exploredSet.add(photoId);
+      updateUnlockProgress();
+      if (exploredSet.size === 5) {
+        celebrate();
+        showToast("Party Corner is unlocked for Amma! 🪔", 4000);
+      }
+    }
+  }
+
+  function toggleLove(photoId, btnEl) {
+    if (lovedSet.has(photoId)) {
+      lovedSet.delete(photoId);
+      if (btnEl) {
+        btnEl.textContent = '🤍';
+        btnEl.classList.remove('loved');
+      }
+    } else {
+      lovedSet.add(photoId);
+      playSound('pop');
+      if (btnEl) {
+        btnEl.textContent = '💖';
+        btnEl.classList.add('loved');
+      }
+    }
+    updateLovedDisplay();
+    // Update lightbox heart if open
+    const lbHeart = document.getElementById('lb-heart-btn');
+    if (lbHeart && currentFilteredList[currentModalIndex]?.id === photoId) {
+      lbHeart.textContent = lovedSet.has(photoId) ? '💖' : '🤍';
+    }
+  }
+
+  // ─── FILTER TABS ─────────────────────────────────────────────
+  document.querySelectorAll('.filter-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      activeCategory = tab.dataset.cat;
+      renderGrid();
+    });
+  });
+
+  // Loved only toggle
+  const lovedBtn = document.getElementById('loved-filter-btn');
+  lovedBtn.addEventListener('click', () => {
+    viewLovedOnly = !viewLovedOnly;
+    lovedBtn.classList.toggle('btn-gold', viewLovedOnly);
+    lovedBtn.classList.toggle('btn-ghost', !viewLovedOnly);
+    lovedBtn.textContent = viewLovedOnly ? '💖 Showing Loved Memories' : '❤️ View Loved Only';
+    renderGrid();
+  });
+
+  // ─── LIGHTBOX MODAL ──────────────────────────────────────────
+  const lbModal   = document.getElementById('lightbox-modal');
+  const lbImg     = document.getElementById('lb-img');
+  const lbCaption = document.getElementById('lb-caption');
+  const lbHeart   = document.getElementById('lb-heart-btn');
+  const lbPrev    = document.getElementById('lb-prev');
+  const lbNext    = document.getElementById('lb-next');
+  const lbClose   = document.getElementById('lb-close');
+
+  function openLightbox(index) {
+    if (!currentFilteredList.length) return;
+    currentModalIndex = (index + currentFilteredList.length) % currentFilteredList.length;
+    const p = currentFilteredList[currentModalIndex];
+
+    lbImg.style.opacity = '0';
+    setTimeout(() => {
+      lbImg.src = p.src;
+      lbImg.alt = p.caption;
+      lbCaption.textContent = `"${p.caption}" (${p.categoryLabel})`;
+      lbHeart.textContent = lovedSet.has(p.id) ? '💖' : '🤍';
+      lbImg.style.opacity = '1';
+    }, 150);
+
+    lbModal.classList.add('active');
+  }
+
+  function closeLightbox() {
+    lbModal.classList.remove('active');
+    stopAutoShowcase();
+  }
+
+  lbPrev.addEventListener('click', () => {
+    openLightbox(currentModalIndex - 1);
+  });
+
+  lbNext.addEventListener('click', () => {
+    openLightbox(currentModalIndex + 1);
+  });
+
+  lbClose.addEventListener('click', closeLightbox);
+  lbModal.addEventListener('click', (e) => {
+    if (e.target === lbModal) closeLightbox();
+  });
+
+  lbHeart.addEventListener('click', () => {
+    const p = currentFilteredList[currentModalIndex];
+    if (p) toggleLove(p.id);
+  });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (!lbModal.classList.contains('active')) return;
+    if (e.key === 'ArrowLeft') openLightbox(currentModalIndex - 1);
+    else if (e.key === 'ArrowRight') openLightbox(currentModalIndex + 1);
+    else if (e.key === 'Escape') closeLightbox();
+  });
+
+  // ─── AUTO SHOWCASE ───────────────────────────────────────────
+  const slideshowBtn = document.getElementById('start-slideshow-btn');
+  slideshowBtn.addEventListener('click', () => {
+    if (isAutoPlaying) {
+      stopAutoShowcase();
+    } else {
+      startAutoShowcase();
+    }
+  });
+
+  function startAutoShowcase() {
+    isAutoPlaying = true;
+    slideshowBtn.textContent = '⏸ Pause Showcase';
+    openLightbox(currentModalIndex);
+    if (autoShowTimer) clearInterval(autoShowTimer);
+    autoShowTimer = setInterval(() => {
+      openLightbox(currentModalIndex + 1);
+    }, 4000);
+    showToast("▶ Auto showcase started! Sit back and enjoy the memories, Amma 💜");
+  }
+
+  function stopAutoShowcase() {
+    isAutoPlaying = false;
+    slideshowBtn.textContent = '▶ Auto Showcase';
+    if (autoShowTimer) {
+      clearInterval(autoShowTimer);
+      autoShowTimer = null;
+    }
+  }
+
+  // ─── NAVIGATION TO PARTY CORNER ──────────────────────────────
+  document.getElementById('to-party-corner-btn')?.addEventListener('click', () => {
+    navigateTo('party-corner.html');
+  });
+
+  // Initial grid render
+  renderGrid();
+</script>
+</body>
+</html>

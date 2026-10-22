@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Memory Lane — Walking Through Amma's Beautiful Life 📸</title>
+  <meta name="description" content="A golden journey through Amma's life: School Days, College Days, Marriage, and Today."/>
+  <link rel="stylesheet" href="css/theme.css"/>
+  <link rel="stylesheet" href="css/animations.css"/>
+  <style>
+    .memories-hero {
+      padding: 2rem 1rem 5rem;
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .room-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(179,136,235,0.18);
+      border: 1px solid rgba(212,175,55,0.4);
+      border-radius: 50px;
+      padding: 0.4rem 1.2rem;
+      font-size: 0.85rem;
+      color: var(--gold-champagne);
+      font-family: var(--font-heading);
+      margin-bottom: 0.8rem;
+    }
+
+    /* ─── GOLDEN TIMELINE ─────────────────────────────────────── */
+    .timeline-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 2.2rem auto 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .timeline-step {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .timeline-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      transition: transform 0.25s;
+    }
+
+    .timeline-btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .timeline-btn .dot {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(46, 8, 84, 0.85);
+      border: 2px solid var(--gold-metallic);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      transition: all 0.3s ease;
+    }
+
+    .timeline-btn.active .dot {
+      background: var(--grad-gold);
+      color: var(--purple-deep);
+      border-color: var(--gold-bright);
+      box-shadow: var(--glow-gold);
+      transform: scale(1.12);
+    }
+
+    .timeline-btn span.label {
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--purple-lavender);
+      transition: color 0.3s;
+    }
+
+    .timeline-btn.active span.label {
+      color: var(--gold-bright);
+      font-weight: 700;
+    }
+
+    .timeline-connector {
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold-metallic), rgba(212,175,55,0.2));
+    }
+
+    @media (max-width: 600px) {
+      .timeline-connector { display: none; }
+    }
+
+    /* ─── PHASE SECTIONS ──────────────────────────────────────── */
+    .phase-section {
+      display: none;
+    }
+
+    .phase-section.active {
+      display: block;
+      animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .phase-intro-card {
+      background: rgba(46, 8, 84, 0.6);
+      border: var(--border-gold);
+      border-radius: var(--radius-card);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      margin-bottom: 2.5rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .phase-intro-card h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      background: var(--grad-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.4rem;
+    }
+
+    .phase-intro-card p {
+      color: var(--purple-lavender);
+      font-style: italic;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    /* ─── FLIP PHOTO CARDS ────────────────────────────────────── */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.8rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .flip-card {
+      background-color: transparent;
+      perspective: 1000px;
+      height: 310px;
+      cursor: pointer;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .flip-card:hover .flip-card-inner,
+    .flip-card.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      inset: 0;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 2px solid var(--gold-metallic);
+    }
+
+    /* Front: Gold-framed Polaroid */
+    .flip-card-front {
+      background: linear-gradient(135deg, rgba(74,14,128,0.85), rgba(35,6,66,0.95));
+      padding: 0.8rem 0.8rem 1.8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .flip-photo-wrap {
+      width: 100%;
+      height: 220px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #18032e;
+      position: relative;
+    }
+
+    .flip-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .flip-card:hover .flip-photo-wrap img {
+      transform: scale(1.05);
+    }
+
+    .flip-hint {
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      color: var(--gold-champagne);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 0.5rem;
+    }
+
+    /* Back: Heartfelt Caption & Memory */
+    .flip-card-back {
+      background: linear-gradient(135deg, #32075A 0%, #1A0332 100%);
+      color: white;
+      transform: rotateY(180deg);
+      padding: 2rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .flip-card-back .card-badge {
+      font-size: 1.8rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .flip-card-back p {
+      font-size: 0.95rem;
+      color: var(--gold-champagne);
+      font-style: italic;
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+    }
+
+    .view-full-btn {
+      background: rgba(255,215,0,0.15);
+      border: 1px solid var(--gold-bright);
+      color: var(--gold-bright);
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
+      padding: 0.45rem 1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .view-full-btn:hover {
+      background: var(--gold-bright);
+      color: var(--purple-deep);
+    }
+
+    /* ─── LIGHTBOX MODAL ──────────────────────────────────────── */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(10, 2, 22, 0.94);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .lightbox-content {
+      max-width: 650px;
+      width: 100%;
+      background: linear-gradient(135deg, rgba(60,11,105,0.95), rgba(28,4,52,0.95));
+      border: 2px solid var(--gold-metallic);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.8), var(--glow-gold);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      width: 38px;
+      height: 38px;
+      background: var(--grad-gold);
+      color: var(--purple-deep);
+      border: none;
+      border-radius: 50%;
+      font-weight: bold;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+
+    #lb-img {
+      max-height: 60vh;
+      width: auto;
+      max-width: 100%;
+      border-radius: 8px;
+      margin: 0 auto 1.2rem;
+      border: 1px solid rgba(212,175,55,0.4);
+    }
+
+    #lb-caption {
+      font-size: 1.05rem;
+      color: var(--gold-champagne);
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    /* ─── GENTLE PHOTO MATCH GAME (6-8 CARDS) ─────────────────── */
+    .game-box {
+      background: linear-gradient(135deg, rgba(74,14,128,0.7) 0%, rgba(35,6,66,0.9) 100%);
+      border: 2px solid var(--gold-metallic);
+      border-radius: var(--radius-lg);
+      padding: clamp(1.8rem, 4vw, 2.8rem);
+      text-align: center;
+      margin-top: 2rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5), var(--glow-gold);
+    }
+
+    .game-box h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      background: var(--grad-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.4rem;
+    }
+
+    .game-box p.hint {
+      color: var(--purple-lavender);
+      font-size: 0.95rem;
+      font-style: italic;
+      margin-bottom: 1.8rem;
+    }
+
+    #match-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      max-width: 440px;
+      margin: 0 auto 1.8rem;
+    }
+
+    @media (min-width: 600px) {
+      #match-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .match-card {
+      aspect-ratio: 1;
+      border-radius: 12px;
+      cursor: pointer;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .match-card.revealed,
+    .match-card.matched {
+      transform: rotateY(180deg);
+    }
+
+    .match-card.matched {
+      box-shadow: 0 0 18px rgba(255, 215, 0, 0.85);
+      cursor: default;
+    }
+
+    .match-face {
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--gold-metallic);
+      overflow: hidden;
+    }
+
+    .match-front {
+      background: linear-gradient(135deg, #4A0E80, #2E0854);
+      color: var(--gold-bright);
+      font-size: 2rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .match-front::after {
+      content: '💜';
+      font-size: 1.8rem;
+    }
+
+    .match-back {
+      background: #190330;
+      transform: rotateY(180deg);
+    }
+
+    .match-back img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .continue-btn {
+      background: var(--grad-gold);
+      color: var(--purple-deep);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 0.9rem 2.4rem;
+      border-radius: var(--radius-btn);
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow-btn), var(--glow-gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: transform 0.25s;
+    }
+
+    .continue-btn:hover {
+      transform: translateY(-2px) scale(1.03);
+    }
+  </style>
+</head>
+<body>
+
+<div class="bokeh bokeh-1"></div>
+<div class="bokeh bokeh-2"></div>
+<div class="bokeh bokeh-3"></div>
+<canvas id="particles-canvas" aria-hidden="true"></canvas>
+<div class="fairy-lights" aria-hidden="true"></div>
+
+<!-- Progress Bar -->
+<div id="progress-bar" role="navigation" aria-label="Amma's party rooms progress"></div>
+
+<!-- Music Toggle -->
+<button id="music-toggle" aria-label="Toggle background music">🎵</button>
+
+<!-- Page Transition Overlay -->
+<div id="page-transition" aria-hidden="true" style="opacity:0;pointer-events:none;">
+  <div class="curtain-left"></div>
+  <div class="curtain-right"></div>
+</div>
+
+<main class="page-wrapper" role="main">
+  <div class="memories-hero">
+
+    <div class="text-center">
+      <span class="room-badge">Room 3 ✦ Memory Lane</span>
+      <h1 class="invite-title" style="font-size:clamp(1.8rem, 5vw, 3rem); margin-bottom: 0.4rem;">
+        Amma's House of Memories 📸
+      </h1>
+      <p style="color:var(--purple-lavender); font-style:italic;">
+        "Every single chapter of your life has brought light, warmth, and grace into our world."
+      </p>
+    </div>
+
+    <!-- Golden Timeline Navigation -->
+    <nav class="timeline-nav" aria-label="Life phases timeline">
+      <div class="timeline-step">
+        <button class="timeline-btn active" data-phase="school" aria-pressed="true">
+          <div class="dot">🏫</div>
+          <span class="label">School Days</span>
+        </button>
+      </div>
+      <div class="timeline-connector"></div>
+
+      <div class="timeline-step">
+        <button class="timeline-btn" data-phase="college" aria-pressed="false">
+          <div class="dot">🎓</div>
+          <span class="label">College Days</span>
+        </button>
+      </div>
+      <div class="timeline-connector"></div>
+
+      <div class="timeline-step">
+        <button class="timeline-btn" data-phase="marriage" aria-pressed="false">
+          <div class="dot">💍</div>
+          <span class="label">Marriage</span>
+        </button>
+      </div>
+      <div class="timeline-connector"></div>
+
+      <div class="timeline-step">
+        <button class="timeline-btn" data-phase="current" aria-pressed="false">
+          <div class="dot">👑</div>
+          <span class="label">Today</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Phase Content Sections -->
+    <div id="phases-container"></div>
+
+    <!-- Gentle Photo Memory Match Game (6 cards = 3 pairs) -->
+    <section class="game-box" aria-label="Amma's photo memory match game">
+      <h2>📸 Amma's Memory Match</h2>
+      <p class="hint">
+        Tap to find the 3 matching pairs of your own photos to unlock the next room, Amma!
+      </p>
+
+      <div id="match-grid" role="group" aria-label="Photo cards to match"></div>
+
+      <div id="match-result" style="display:none; color:var(--gold-bright); font-family:var(--font-heading); font-size:1.15rem; margin-bottom:1.5rem;" role="status"></div>
+
+      <div id="unlocked-action" style="display:none;">
+        <button class="continue-btn" id="next-room-btn">
+          <span>💬</span> Continue to Questions for Amma →
+        </button>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- Lightbox Modal -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged photo view">
+  <div class="lightbox-content">
+    <button class="lightbox-close" id="lb-close" aria-label="Close photo view">✕</button>
+    <img id="lb-img" src="" alt="Enlarged memory photo"/>
+    <div id="lb-caption"></div>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // Page guard & shared init (Page 2)
+  guardPage(2);
+  sharedInit(2);
+
+  // ── 1. RENDER 4 PHASES ─────────────────────────────────────
+  const phaseData = {
+    school: {
+      emoji: '🏫',
+      title: 'School Days',
+      intro: CONFIG.memoriesIntro?.school || "Before she was Amma, she was a playful little girl with sparkling eyes, big dreams, and a heart full of mischief."
+    },
+    college: {
+      emoji: '🎓',
+      title: 'College Days',
+      intro: CONFIG.memoriesIntro?.college || "The graceful young woman stepping into college — brilliant, courageous, forging friendships that last a lifetime."
+    },
+    marriage: {
+      emoji: '💍',
+      title: 'The Sacred Wedding',
+      intro: CONFIG.memoriesIntro?.marriage || "The sacred day she tied her destiny with Dad — two hearts united in love, walking together through every season of life."
+    },
+    current: {
+      emoji: '👑',
+      title: 'Our Queen Today',
+      intro: CONFIG.memoriesIntro?.current || "The Queen of our home today. Radiant, timeless, holding every branch of this family with immense warmth and prayer."
+    }
+  };
+
+  const container = document.getElementById('phases-container');
+  Object.keys(phaseData).forEach(phase => {
+    const info   = phaseData[phase];
+    const photos = CONFIG.photos[phase] || [];
+
+    const sec = document.createElement('section');
+    sec.className = 'phase-section' + (phase === 'school' ? ' active' : '');
+    sec.id = 'phase-' + phase;
+    sec.setAttribute('aria-label', `${info.title} photo gallery`);
+
+    sec.innerHTML = `
+      <div class="phase-intro-card">
+        <h2>${info.emoji} ${info.title}</h2>
+        <p>"${info.intro}"</p>
+      </div>
+      <div class="photo-grid"></div>
+    `;
+
+    const grid = sec.querySelector('.photo-grid');
+
+    photos.forEach((p, idx) => {
+      const card = document.createElement('div');
+      card.className = 'flip-card';
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', `${info.title} photo ${idx + 1}. Tap to flip.`);
+
+      card.innerHTML = `
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="flip-photo-wrap">
+              <img src="${p.src}" alt="${p.caption}" loading="lazy"/>
+            </div>
+            <span class="flip-hint">✦ Tap or Hover to Read ✦</span>
+          </div>
+          <div class="flip-card-back">
+            <div class="card-badge">${info.emoji}</div>
+            <p>"${p.caption}"</p>
+            <button class="view-full-btn" type="button">🔍 View Full Size</button>
+          </div>
+        </div>
+      `;
+
+      // Flip on tap for mobile
+      card.addEventListener('click', (e) => {
+        if (e.target.classList.contains('view-full-btn')) {
+          openLightbox(p);
+          return;
+        }
+        card.classList.toggle('flipped');
+      });
+
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          openLightbox(p);
+        }
+      });
+
+      grid.appendChild(card);
+    });
+
+    container.appendChild(sec);
+  });
+
+  // ── 2. TIMELINE NAVIGATION ─────────────────────────────────
+  document.querySelectorAll('.timeline-btn').forEach(btn => {
+    btn.addEventListener('click', () => switchPhase(btn.dataset.phase));
+  });
+
+  function switchPhase(phase) {
+    document.querySelectorAll('.phase-section').forEach(s => s.classList.remove('active'));
+    const target = document.getElementById('phase-' + phase);
+    if (target) target.classList.add('active');
+
+    document.querySelectorAll('.timeline-btn').forEach(b => {
+      const active = b.dataset.phase === phase;
+      b.classList.toggle('active', active);
+      b.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+  }
+
+  // ── 3. LIGHTBOX MODAL ──────────────────────────────────────
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
+  const lbCap = document.getElementById('lb-caption');
+
+  function openLightbox(photo) {
+    lbImg.src = photo.src;
+    lbCap.textContent = photo.caption;
+    lb.style.display = 'flex';
+  }
+
+  document.getElementById('lb-close').addEventListener('click', () => {
+    lb.style.display = 'none';
+  });
+  lb.addEventListener('click', (e) => {
+    if (e.target === lb) lb.style.display = 'none';
+  });
+
+  // ── 4. GENTLE PHOTO MEMORY MATCH (6 CARDS = 3 PAIRS) ────────
+  // Pick 3 photos from config
+  const matchPhotos = [
+    CONFIG.photos.school[0].src,
+    CONFIG.photos.college[0].src,
+    CONFIG.photos.marriage[0].src,
+  ];
+
+  let deck = [...matchPhotos, ...matchPhotos].sort(() => Math.random() - 0.5);
+  let flippedCards = [];
+  let matchedPairs = 0;
+  const matchGrid = document.getElementById('match-grid');
+  const matchResult = document.getElementById('match-result');
+  const unlockedAction = document.getElementById('unlocked-action');
+
+  deck.forEach((imgSrc, i) => {
+    const card = document.createElement('div');
+    card.className = 'match-card';
+    card.dataset.src = imgSrc;
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', `Card ${i + 1}`);
+
+    card.innerHTML = `
+      <div class="match-face match-front"></div>
+      <div class="match-face match-back">
+        <img src="${imgSrc}" alt="Matching photo"/>
+      </div>
+    `;
+
+    card.addEventListener('click', () => handleCardClick(card));
+    matchGrid.appendChild(card);
+  });
+
+  function handleCardClick(card) {
+    if (card.classList.contains('revealed') || card.classList.contains('matched')) return;
+    if (flippedCards.length >= 2) return;
+
+    card.classList.add('revealed');
+    flippedCards.push(card);
+
+    if (flippedCards.length === 2) {
+      const [c1, c2] = flippedCards;
+      if (c1.dataset.src === c2.dataset.src) {
+        setTimeout(() => {
+          c1.classList.add('matched');
+          c2.classList.add('matched');
+          flippedCards = [];
+          matchedPairs++;
+          playSound('success');
+
+          if (matchedPairs === 3) {
+            onMatchComplete();
+          }
+        }, 500);
+      } else {
+        setTimeout(() => {
+          c1.classList.remove('revealed');
+          c2.classList.remove('revealed');
+          flippedCards = [];
+        }, 900);
+      }
+    }
+  }
+
+  function onMatchComplete() {
+    celebrate();
+    Progress.unlock(3);
+    renderProgressBar(2);
+    matchResult.style.display = 'block';
+    matchResult.textContent = "🎉 Beautiful, Amma! You matched all the memories! The Questions Room is now open 💬";
+    unlockedAction.style.display = 'block';
+    showToast("Questions Room unlocked for Amma! 💬", 4000);
+  }
+
+  document.getElementById('next-room-btn').addEventListener('click', () => {
+    navigateTo('questions.html');
+  });
+</script>
+</body>
+</html>

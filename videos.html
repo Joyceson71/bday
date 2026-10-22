@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wishes From Your Family — Amma's Birthday 🎥</title>
+  <meta name="description" content="A warm video wall of love — everyone who loves you has something to say, Amma."/>
+  <link rel="stylesheet" href="css/theme.css"/>
+  <link rel="stylesheet" href="css/animations.css"/>
+  <style>
+    .videos-hero {
+      padding: 2rem 1rem 5rem;
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .room-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(179,136,235,0.18);
+      border: 1px solid rgba(212,175,55,0.4);
+      border-radius: 50px;
+      padding: 0.4rem 1.2rem;
+      font-size: 0.85rem;
+      color: var(--gold-champagne);
+      font-family: var(--font-heading);
+      margin-bottom: 0.8rem;
+    }
+
+    /* Video Wall Grid */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
+      margin: 2.5rem 0 3.5rem;
+    }
+
+    .video-card {
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      background: linear-gradient(145deg, rgba(62,11,108,0.7) 0%, rgba(28,4,52,0.9) 100%);
+      border: 2px solid rgba(212,175,55,0.4);
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s, border-color 0.3s;
+      position: relative;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+    }
+
+    .video-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: var(--gold-bright);
+      box-shadow: var(--glow-gold), var(--shadow-card);
+    }
+
+    .video-card.watched {
+      border-color: rgba(255, 215, 0, 0.85);
+    }
+
+    .video-thumb-wrap {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: radial-gradient(circle at center, #4A0E80 0%, #1A0332 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .video-thumb-icon {
+      font-size: 3.8rem;
+      filter: drop-shadow(0 0 15px rgba(255,215,0,0.5));
+      transition: transform 0.3s;
+    }
+
+    .video-card:hover .video-thumb-icon {
+      transform: scale(1.15);
+    }
+
+    .play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.35);
+      transition: background 0.3s;
+    }
+
+    .video-card:hover .play-overlay {
+      background: rgba(0,0,0,0.55);
+    }
+
+    .play-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--grad-gold);
+      color: var(--purple-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      padding-left: 4px;
+      box-shadow: var(--glow-gold);
+      transition: transform 0.25s;
+    }
+
+    .video-card:hover .play-btn {
+      transform: scale(1.15);
+    }
+
+    .video-info {
+      padding: 1.4rem;
+    }
+
+    .video-name {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      color: var(--gold-champagne);
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+
+    .video-relation {
+      font-size: 0.8rem;
+      color: var(--purple-orchid);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-family: var(--font-heading);
+    }
+
+    .video-message {
+      font-size: 0.92rem;
+      color: var(--purple-lavender);
+      font-style: italic;
+      margin-top: 0.8rem;
+      line-height: 1.5;
+    }
+
+    .video-badges {
+      display: flex;
+      gap: 0.6rem;
+      margin-top: 1rem;
+      align-items: center;
+    }
+
+    .badge-watched {
+      background: rgba(77, 208, 225, 0.18);
+      border: 1px solid var(--teal);
+      color: var(--teal);
+      padding: 0.25rem 0.75rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-family: var(--font-heading);
+    }
+
+    .badge-heart {
+      background: rgba(244, 143, 177, 0.18);
+      border: 1px solid var(--rose);
+      color: var(--rose);
+      padding: 0.25rem 0.85rem;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .badge-heart:hover,
+    .badge-heart.liked {
+      background: var(--rose);
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    /* ─── CINEMA MODAL ────────────────────────────────────────── */
+    #cinema-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(8, 1, 18, 0.96);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      backdrop-filter: blur(12px);
+    }
+
+    #cinema-modal.open {
+      display: flex;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .cinema-box {
+      max-width: 820px;
+      width: 100%;
+      background: linear-gradient(135deg, rgba(62,11,108,0.95), rgba(28,4,52,0.98));
+      border: 2px solid var(--gold-metallic);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: 0 12px 50px rgba(0,0,0,0.85), var(--glow-gold);
+      position: relative;
+    }
+
+    .cinema-close {
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      width: 40px;
+      height: 40px;
+      background: var(--grad-gold);
+      color: var(--purple-deep);
+      border: none;
+      border-radius: 50%;
+      font-weight: bold;
+      font-size: 1.25rem;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+
+    .video-viewport {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #000;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .video-viewport iframe,
+    .video-viewport video {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .cinema-placeholder {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      color: var(--gold-champagne);
+    }
+
+    /* ─── UNSCRAMBLE GAME ("AMMA LOVE") ───────────────────────── */
+    .game-box {
+      background: linear-gradient(135deg, rgba(74,14,128,0.7) 0%, rgba(35,6,66,0.9) 100%);
+      border: 2px solid var(--gold-metallic);
+      border-radius: var(--radius-lg);
+      padding: clamp(1.8rem, 4vw, 2.8rem);
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5), var(--glow-gold);
+    }
+
+    .game-box h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      background: var(--grad-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.4rem;
+    }
+
+    .game-box p.hint {
+      color: var(--purple-lavender);
+      font-size: 0.98rem;
+      font-style: italic;
+      margin-bottom: 1.8rem;
+    }
+
+    .tiles-area {
+      display: flex;
+      gap: 0.6rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .letter-tile {
+      width: 52px;
+      height: 58px;
+      border-radius: 10px;
+      background: var(--grad-gold);
+      color: var(--purple-deep);
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.35);
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .letter-tile:hover {
+      transform: translateY(-4px) scale(1.08);
+    }
+
+    .letter-tile.used {
+      opacity: 0.25;
+      pointer-events: none;
+      transform: scale(0.9);
+    }
+
+    .answer-slots-wrap {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .word-spacer {
+      width: 25px;
+    }
+
+    .slot-box {
+      width: 50px;
+      height: 56px;
+      border-radius: 10px;
+      background: rgba(20, 2, 40, 0.7);
+      border: 2px dashed rgba(212,175,55,0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--gold-bright);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .slot-box.filled {
+      border: 2px solid var(--gold-bright);
+      background: rgba(106, 27, 154, 0.5);
+      box-shadow: 0 0 12px rgba(255,215,0,0.5);
+    }
+
+    .continue-btn {
+      background: var(--grad-gold);
+      color: var(--purple-deep);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 0.9rem 2.4rem;
+      border-radius: var(--radius-btn);
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow-btn), var(--glow-gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: transform 0.25s;
+    }
+
+    .continue-btn:hover {
+      transform: translateY(-2px) scale(1.03);
+    }
+  </style>
+</head>
+<body>
+
+<div class="bokeh bokeh-1"></div>
+<div class="bokeh bokeh-2"></div>
+<div class="bokeh bokeh-3"></div>
+<canvas id="particles-canvas" aria-hidden="true"></canvas>
+<div class="fairy-lights" aria-hidden="true"></div>
+
+<!-- Progress Bar -->
+<div id="progress-bar" role="navigation" aria-label="Amma's party rooms progress"></div>
+
+<!-- Music Toggle -->
+<button id="music-toggle" aria-label="Toggle background music">🎵</button>
+
+<!-- Page Transition Overlay -->
+<div id="page-transition" aria-hidden="true" style="opacity:0;pointer-events:none;">
+  <div class="curtain-left"></div>
+  <div class="curtain-right"></div>
+</div>
+
+<main class="page-wrapper" role="main">
+  <div class="videos-hero">
+
+    <div class="text-center">
+      <span class="room-badge">Room 5 ✦ Family Video Wishes</span>
+      <h1 class="invite-title" style="font-size:clamp(1.8rem, 5vw, 3rem); margin-bottom: 0.4rem;">
+        Everyone Who Loves You Has Something to Say, Amma 🎥
+      </h1>
+      <p style="color:var(--purple-lavender); font-style:italic; max-width:680px; margin:0 auto;">
+        "Hear the voices of those whose lives you have blessed, guided, and filled with unending warmth."
+      </p>
+    </div>
+
+    <!-- Video Grid -->
+    <div class="video-grid" id="video-wall" role="region" aria-label="Family video messages"></div>
+
+    <!-- Unscramble Game: AMMA LOVE -->
+    <section class="game-box" aria-label="Unscramble word game">
+      <h2>🔤 Unscramble the Secret Password, Amma!</h2>
+      <p class="hint">
+        Tap the scrambled letters to spell out what holds our whole family together 💜<br/>
+        (Hint: 8 letters — <strong>A M M A &nbsp; L O V E</strong>)
+      </p>
+
+      <!-- Scrambled Tile Bank -->
+      <div class="tiles-area" id="scramble-tiles" role="group" aria-label="Scrambled letter tiles"></div>
+
+      <!-- Placed Slots -->
+      <div class="answer-slots-wrap" id="answer-slots" role="group" aria-label="Placed letter slots"></div>
+
+      <div style="display:flex; justify-content:center; gap:1rem; margin-bottom: 1.5rem;">
+        <button class="btn btn-ghost" id="clear-btn" style="padding:0.5rem 1.4rem; font-size:0.88rem;">
+          ↺ Reset Letters
+        </button>
+        <button class="btn btn-gold" id="check-btn" style="padding:0.6rem 1.8rem; font-size:0.95rem;">
+          ✨ Check Word
+        </button>
+      </div>
+
+      <div id="game-status" style="display:none; font-family:var(--font-heading); font-size:1.15rem; margin-bottom:1.2rem;"></div>
+
+      <div id="unlocked-action" style="display:none;">
+        <button class="continue-btn" id="next-room-btn">
+          <span>🎂</span> Step into The Cake Moment, Amma →
+        </button>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- Cinema Modal -->
+<div id="cinema-modal" role="dialog" aria-modal="true" aria-label="Watch family video">
+  <div class="cinema-box">
+    <button class="cinema-close" id="cinema-close" aria-label="Close cinema view">✕</button>
+    <div class="video-viewport" id="cinema-viewport"></div>
+    <div style="text-align:center;">
+      <h3 id="cinema-title" style="color:var(--gold-champagne); font-family:var(--font-heading); font-size:1.2rem; margin-bottom:0.4rem;"></h3>
+      <p id="cinema-desc" style="color:var(--purple-lavender); font-style:italic; font-size:0.95rem;"></p>
+    </div>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // Page guard & shared init (Page 4: Videos)
+  guardPage(4);
+  sharedInit(4);
+
+  // ── 1. RENDER VIDEO WALL ───────────────────────────────────
+  const videoWall = document.getElementById('video-wall');
+  const videoData = CONFIG.videos || [];
+
+  let watchedSet = new Set();
+  let lovedSet = new Set();
+  try {
+    const w = localStorage.getItem('amma_watched_videos');
+    if (w) watchedSet = new Set(JSON.parse(w));
+    const l = localStorage.getItem('amma_loved_videos');
+    if (l) lovedSet = new Set(JSON.parse(l));
+  } catch {}
+
+  const emojis = ['🧸', '💍', '🏡', '🌸'];
+
+  videoData.forEach((v, idx) => {
+    const card = document.createElement('div');
+    card.className = 'video-card' + (watchedSet.has(idx) ? ' watched' : '');
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-label', `Watch message from ${v.name}`);
+
+    card.innerHTML = `
+      <div class="video-thumb-wrap">
+        <div class="video-thumb-icon">${emojis[idx % emojis.length]}</div>
+        <div class="play-overlay">
+          <div class="play-btn">▶</div>
+        </div>
+      </div>
+      <div class="video-info">
+        <h3 class="video-name">${v.name}</h3>
+        <p class="video-relation">${v.relation}</p>
+        <p class="video-message">"${v.message}"</p>
+        <div class="video-badges">
+          ${watchedSet.has(idx) ? '<span class="badge-watched">Watched ✓</span>' : ''}
+          <button class="badge-heart ${lovedSet.has(idx) ? 'liked' : ''}" type="button">
+            ${lovedSet.has(idx) ? '❤️ Loved' : '🤍 Love'}
+          </button>
+        </div>
+      </div>
+    `;
+
+    // Play video
+    card.querySelector('.play-overlay').addEventListener('click', () => openCinema(v, idx, card));
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') openCinema(v, idx, card);
+    });
+
+    // Heart reaction
+    const heartBtn = card.querySelector('.badge-heart');
+    heartBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (lovedSet.has(idx)) {
+        lovedSet.delete(idx);
+        heartBtn.classList.remove('liked');
+        heartBtn.textContent = '🤍 Love';
+      } else {
+        lovedSet.add(idx);
+        heartBtn.classList.add('liked');
+        heartBtn.textContent = '❤️ Loved';
+        playSound('pop');
+        launchConfetti(25);
+      }
+      try {
+        localStorage.setItem('amma_loved_videos', JSON.stringify([...lovedSet]));
+      } catch {}
+    });
+
+    videoWall.appendChild(card);
+  });
+
+  // Cinema modal
+  const cinema = document.getElementById('cinema-modal');
+  const viewport = document.getElementById('cinema-viewport');
+  const cinemaTitle = document.getElementById('cinema-title');
+  const cinemaDesc = document.getElementById('cinema-desc');
+
+  function openCinema(v, idx, card) {
+    cinemaTitle.textContent = `${v.name} — ${v.relation}`;
+    cinemaDesc.textContent = `"${v.message}"`;
+
+    if (v.youtube) {
+      viewport.innerHTML = `<iframe src="${v.youtube}?autoplay=1" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+    } else if (v.src) {
+      viewport.innerHTML = `<video src="${v.src}" controls autoplay></video>`;
+    } else {
+      viewport.innerHTML = `
+        <div class="cinema-placeholder">
+          <div style="font-size:3.5rem; margin-bottom:0.8rem;">🎥 💜</div>
+          <p style="font-size:1.1rem; line-height:1.6; max-width:550px; margin:0 auto;">
+            "${v.message}"
+          </p>
+        </div>
+      `;
+    }
+
+    cinema.classList.add('open');
+    Music.pauseForVideo();
+
+    // Mark as watched
+    watchedSet.add(idx);
+    try {
+      localStorage.setItem('amma_watched_videos', JSON.stringify([...watchedSet]));
+    } catch {}
+    card.classList.add('watched');
+    const badgesWrap = card.querySelector('.video-badges');
+    if (!badgesWrap.querySelector('.badge-watched')) {
+      const wSpan = document.createElement('span');
+      wSpan.className = 'badge-watched';
+      wSpan.textContent = 'Watched ✓';
+      badgesWrap.prepend(wSpan);
+    }
+  }
+
+  function closeCinema() {
+    cinema.classList.remove('open');
+    viewport.innerHTML = '';
+    Music.resumeAfterVideo();
+  }
+
+  document.getElementById('cinema-close').addEventListener('click', closeCinema);
+  cinema.addEventListener('click', (e) => {
+    if (e.target === cinema) closeCinema();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeCinema();
+  });
+
+  // ── 2. UNSCRAMBLE GAME ("AMMA LOVE") ───────────────────────
+  const TARGET = "AMMALOVE";
+  // Scramble letters
+  let scrambleLetters = ['M', 'A', 'O', 'M', 'L', 'A', 'E', 'V'];
+  let placedLetters = []; // array of { letter, originalIdx }
+
+  const tilesContainer = document.getElementById('scramble-tiles');
+  const slotsContainer = document.getElementById('answer-slots');
+  const statusEl = document.getElementById('game-status');
+  const unlockedAction = document.getElementById('unlocked-action');
+
+  function renderGame() {
+    // Render Tiles
+    tilesContainer.innerHTML = '';
+    scrambleLetters.forEach((letter, i) => {
+      const tile = document.createElement('div');
+      tile.className = 'letter-tile';
+      const isUsed = placedLetters.some(p => p.originalIdx === i);
+      if (isUsed) tile.classList.add('used');
+      tile.textContent = letter;
+      tile.setAttribute('role', 'button');
+      tile.setAttribute('tabindex', isUsed ? '-1' : '0');
+
+      if (!isUsed) {
+        tile.addEventListener('click', () => {
+          if (placedLetters.length < TARGET.length) {
+            placedLetters.push({ letter, originalIdx: i });
+            playSound('click');
+            renderGame();
+          }
+        });
+      }
+      tilesContainer.appendChild(tile);
+    });
+
+    // Render Slots (4 for AMMA, spacer, 4 for LOVE)
+    slotsContainer.innerHTML = '';
+    for (let i = 0; i < TARGET.length; i++) {
+      if (i === 4) {
+        const spacer = document.createElement('div');
+        spacer.className = 'word-spacer';
+        slotsContainer.appendChild(spacer);
+      }
+      const slot = document.createElement('div');
+      slot.className = 'slot-box';
+      const placed = placedLetters[i];
+      if (placed) {
+        slot.textContent = placed.letter;
+        slot.classList.add('filled');
+        slot.addEventListener('click', () => {
+          placedLetters.splice(i, 1);
+          renderGame();
+        });
+      }
+      slotsContainer.appendChild(slot);
+    }
+  }
+
+  document.getElementById('clear-btn').addEventListener('click', () => {
+    placedLetters = [];
+    statusEl.style.display = 'none';
+    renderGame();
+  });
+
+  document.getElementById('check-btn').addEventListener('click', () => {
+    const currentWord = placedLetters.map(p => p.letter).join('');
+    statusEl.style.display = 'block';
+
+    if (currentWord === TARGET) {
+      statusEl.style.color = 'var(--gold-bright)';
+      statusEl.innerHTML = `<strong>🎉 AMMA LOVE! Exactly right! You are the heart of this family 💜</strong>`;
+      celebrate();
+      Progress.unlock(5);
+      renderProgressBar(4);
+      unlockedAction.style.display = 'block';
+      showToast("The Cake Room is now unlocked for Amma! 🎂", 4000);
+    } else if (currentWord.length < TARGET.length) {
+      statusEl.style.color = 'var(--gold-champagne)';
+      statusEl.textContent = `Tap all 8 letters to complete the words (${currentWord.length}/8)`;
+    } else {
+      statusEl.style.color = 'var(--rose)';
+      statusEl.textContent = "Almost there, Amma! Try spelling: A M M A & L O V E ✨";
+    }
+  });
+
+  document.getElementById('next-room-btn').addEventListener('click', () => {
+    navigateTo('cake.html');
+  });
+
+  renderGame();
+</script>
+</body>
+</html>

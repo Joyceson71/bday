@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Welcome Lobby — Happy Birthday Amma 🎈</title>
+  <meta name="description" content="Step into Amma's Welcome Lobby! Beautifully decorated with balloon arches, Amma's favourite feast menu, and sweet blessings."/>
+  <link rel="stylesheet" href="css/theme.css"/>
+  <link rel="stylesheet" href="css/animations.css"/>
+  <style>
+    .lobby-hero {
+      padding: 2.5rem 1rem 5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.5rem;
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    /* Banner */
+    .birthday-banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    .banner-flag {
+      background: var(--grad-gold);
+      color: var(--purple-deep);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: clamp(1rem, 2.8vw, 1.45rem);
+      letter-spacing: 0.06em;
+      padding: 0.5rem 1.1rem;
+      clip-path: polygon(0 0, 100% 0, 88% 50%, 100% 100%, 0 100%, 12% 50%);
+      animation: fadeInDown 0.6s ease both;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .banner-flag:nth-child(odd)  { animation-delay: 0.1s; background: var(--grad-purple); color: #fff; }
+    .banner-flag:nth-child(even) { animation-delay: 0.2s; }
+
+    .banner-center {
+      font-family: var(--font-script);
+      font-size: clamp(2.8rem, 7vw, 4.8rem);
+      background: var(--grad-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: scaleInBounce 0.8s ease 0.3s both;
+      text-align: center;
+      line-height: 1.15;
+      margin-top: 0.4rem;
+      filter: drop-shadow(0 0 15px rgba(255,215,0,0.4));
+    }
+
+    .balloon-arch {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      font-size: 2.2rem;
+      animation: fadeIn 1s ease 0.5s both;
+    }
+
+    .balloon-arch span {
+      display: inline-block;
+      animation: float var(--dur, 3s) ease-in-out infinite;
+      animation-delay: var(--del, 0s);
+    }
+
+    .amma-personal-welcome {
+      text-align: center;
+      background: rgba(106, 27, 154, 0.25);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: var(--radius-btn);
+      padding: 0.75rem 2rem;
+      max-width: 650px;
+      backdrop-filter: blur(8px);
+    }
+
+    .amma-personal-welcome h2 {
+      font-family: var(--font-heading);
+      color: var(--gold-champagne);
+      font-size: clamp(1.2rem, 3.5vw, 1.7rem);
+      margin-bottom: 0.3rem;
+    }
+
+    .amma-personal-welcome p {
+      color: var(--purple-lavender);
+      font-size: 0.95rem;
+      font-style: italic;
+    }
+
+    /* Welcome Table Grid */
+    .welcome-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.8rem;
+      width: 100%;
+    }
+
+    .info-card {
+      padding: 2.2rem 1.8rem;
+      border-radius: var(--radius-card);
+      background: rgba(46,8,84,0.6);
+      border: var(--border-gold);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    }
+
+    .info-card h3 {
+      font-family: var(--font-heading);
+      background: var(--grad-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.2rem;
+      font-size: 1.2rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .schedule-item {
+      display: flex;
+      gap: 1rem;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid rgba(212,175,55,0.15);
+      font-size: 0.92rem;
+      align-items: baseline;
+    }
+
+    .schedule-item:last-child { border-bottom: none; }
+
+    .schedule-time {
+      color: var(--gold-bright);
+      font-family: var(--font-heading);
+      font-weight: 600;
+      min-width: 90px;
+      font-size: 0.85rem;
+    }
+
+    .menu-category {
+      margin-bottom: 1.2rem;
+    }
+
+    .menu-category:last-child { margin-bottom: 0; }
+
+    .menu-category h4 {
+      color: var(--gold-champagne);
+      font-size: 0.95rem;
+      font-family: var(--font-heading);
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .menu-category ul {
+      list-style: none;
+      padding-left: 0.5rem;
+    }
+
+    .menu-category li {
+      font-size: 0.88rem;
+      color: var(--purple-lavender);
+      padding: 0.25rem 0;
+      position: relative;
+      padding-left: 1.2rem;
+    }
+
+    .menu-category li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: var(--gold-metallic);
+      font-size: 0.75rem;
+    }
+
+    /* ─── BALLOON POPPING GAME (NO TIME PRESSURE) ─────────────── */
+    .game-area {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(74,14,128,0.7) 0%, rgba(35,6,66,0.85) 100%);
+      border: 2px solid var(--gold-metallic);
+      border-radius: var(--radius-lg);
+      padding: clamp(1.8rem, 4vw, 2.8rem);
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5), var(--glow-gold);
+    }
+
+    .game-header h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      background: var(--grad-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.4rem;
+    }
+
+    .game-header p {
+      color: var(--purple-lavender);
+      font-size: 0.98rem;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .game-progress-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(255,215,0,0.15);
+      border: 1px solid rgba(255,215,0,0.4);
+      padding: 0.45rem 1.4rem;
+      border-radius: 50px;
+      font-family: var(--font-heading);
+      color: var(--gold-bright);
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 1.8rem;
+    }
+
+    #balloon-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.2rem;
+      max-width: 580px;
+      margin: 0 auto 1.8rem;
+    }
+
+    @media (max-width: 550px) {
+      #balloon-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.9rem;
+      }
+    }
+
+    .balloon-btn {
+      aspect-ratio: 1;
+      border-radius: 50% 50% 50% 15%;
+      border: 2px solid rgba(255,215,0,0.5);
+      background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.4), rgba(106,27,154,0.9) 70%);
+      color: #fff;
+      font-size: 2.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
+      animation: float var(--dur, 3s) ease-in-out infinite;
+      animation-delay: var(--del, 0s);
+    }
+
+    .balloon-btn:hover {
+      transform: scale(1.15) translateY(-5px);
+      box-shadow: 0 10px 25px rgba(255,215,0,0.6);
+    }
+
+    .balloon-btn.popped {
+      transform: scale(0);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.35s ease, opacity 0.35s ease;
+    }
+
+    /* Blessing message display card */
+    #revealed-blessing-card {
+      background: rgba(30, 4, 58, 0.85);
+      border: 1px solid var(--gold-metallic);
+      border-radius: 16px;
+      padding: 1.2rem 1.6rem;
+      max-width: 620px;
+      margin: 0 auto 1.5rem;
+      min-height: 75px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--gold-champagne);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      font-style: italic;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      transition: opacity 0.3s ease;
+    }
+
+    .continue-btn {
+      background: var(--grad-gold);
+      color: var(--purple-deep);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 0.9rem 2.4rem;
+      border-radius: var(--radius-btn);
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow-btn), var(--glow-gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: transform 0.25s;
+    }
+
+    .continue-btn:hover {
+      transform: translateY(-2px) scale(1.03);
+    }
+  </style>
+</head>
+<body>
+
+<div class="bokeh bokeh-1"></div>
+<div class="bokeh bokeh-2"></div>
+<div class="bokeh bokeh-3"></div>
+<canvas id="particles-canvas" aria-hidden="true"></canvas>
+<div class="fairy-lights" aria-hidden="true"></div>
+
+<!-- Progress Bar -->
+<div id="progress-bar" role="navigation" aria-label="Amma's party rooms progress"></div>
+
+<!-- Music Toggle -->
+<button id="music-toggle" aria-label="Toggle background music">🎵</button>
+
+<!-- Page Transition Overlay -->
+<div id="page-transition" aria-hidden="true" style="opacity:0;pointer-events:none;">
+  <div class="curtain-left"></div>
+  <div class="curtain-right"></div>
+</div>
+
+<main class="page-wrapper" role="main">
+  <div class="lobby-hero">
+
+    <!-- Happy Birthday Banner for Amma -->
+    <section aria-label="Happy Birthday Amma banner">
+      <div class="birthday-banner" role="heading" aria-level="1">
+        <div class="banner-flag">Happy</div>
+        <div class="banner-flag">🎉</div>
+        <div class="banner-flag">Birthday</div>
+        <div class="banner-flag">💜</div>
+        <div class="banner-flag">Amma</div>
+      </div>
+      <div class="banner-center">Glory Gnana Selvi</div>
+    </section>
+
+    <!-- Balloon Arch -->
+    <div class="balloon-arch" aria-hidden="true">
+      <span style="--dur:3s;--del:0s">🎈</span>
+      <span style="--dur:3.5s;--del:0.3s">💜</span>
+      <span style="--dur:2.8s;--del:0.6s">✨</span>
+      <span style="--dur:4s;--del:0.1s">🎈</span>
+      <span style="--dur:3.2s;--del:0.8s">👑</span>
+      <span style="--dur:2.5s;--del:0.4s">💛</span>
+      <span style="--dur:3.8s;--del:0.5s">🎈</span>
+      <span style="--dur:3.1s;--del:0.2s">🌸</span>
+      <span style="--dur:2.9s;--del:0.7s">🎈</span>
+    </div>
+
+    <!-- Personal Address Only For Her -->
+    <div class="amma-personal-welcome">
+      <h2>Amma, this room is for you 💜</h2>
+      <p>Take your time, relax, and explore all the little surprises we prepared for your special day.</p>
+    </div>
+
+    <!-- Schedule & Menu Table -->
+    <div class="welcome-section">
+      <!-- Party Schedule -->
+      <div class="info-card glass-card gold-border" aria-label="Amma's celebration schedule">
+        <h3>📅 Today's Celebration Journey</h3>
+        <div id="schedule-list"></div>
+      </div>
+
+      <!-- Party Menu -->
+      <div class="info-card glass-card gold-border" aria-label="Amma's favourite feast">
+        <h3>🍽️ Amma's Favourite Feast</h3>
+        <div id="menu-list"></div>
+      </div>
+    </div>
+
+    <!-- Balloon Pop Game: Gentle & No Time Pressure -->
+    <section class="game-area" aria-label="Pop 10 balloons game">
+      <div class="game-header">
+        <h2>🎈 Pop the 10 Balloons, Amma!</h2>
+        <p>
+          Each balloon holds a sweet blessing and loving truth about you. Tap them gently at your own pace to unlock your Memory Lane 📸
+        </p>
+      </div>
+
+      <div class="game-progress-tag">
+        <span>Balloons Popped:</span>
+        <span id="popped-count">0</span> / 10
+      </div>
+
+      <!-- Blessing Reveal Card -->
+      <div id="revealed-blessing-card" role="status" aria-live="polite">
+        ✨ Tap any balloon above to reveal a sweet message written just for you, Amma...
+      </div>
+
+      <!-- Balloon Grid -->
+      <div id="balloon-grid" role="group" aria-label="Balloons to pop"></div>
+
+      <!-- Unlocked Action Button -->
+      <div id="unlocked-action" style="display:none; margin-top: 1.5rem;">
+        <button class="continue-btn" id="next-room-btn">
+          <span>📸</span> Continue to Memory Lane, Amma →
+        </button>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // Page guard & shared init (Page 1)
+  guardPage(1);
+  sharedInit(1);
+
+  // ── 1. POPULATE SCHEDULE ───────────────────────────────────
+  const schedList = document.getElementById('schedule-list');
+  CONFIG.schedule.forEach(s => {
+    const div = document.createElement('div');
+    div.className = 'schedule-item';
+    div.innerHTML = `<span class="schedule-time">${s.time}</span><span>${s.event}</span>`;
+    schedList.appendChild(div);
+  });
+
+  // ── 2. POPULATE MENU ───────────────────────────────────────
+  const menuList = document.getElementById('menu-list');
+  const menuSections = [
+    { label: '🥗 Amma\'s Favourite Starters', items: CONFIG.menu.starters },
+    { label: '🍛 Royal Mains & Comfort Curries', items: CONFIG.menu.mains },
+    { label: '🍰 Traditional Sweets & Cake', items: CONFIG.menu.desserts },
+    { label: '☕ Drinks & Filter Kaapi', items: CONFIG.menu.drinks },
+  ];
+  menuSections.forEach(sec => {
+    const div = document.createElement('div');
+    div.className = 'menu-category';
+    div.innerHTML = `<h4>${sec.label}</h4><ul>${sec.items.map(i => `<li>${i}</li>`).join('')}</ul>`;
+    menuList.appendChild(div);
+  });
+
+  // ── 3. GENTLE BALLOON POPPING GAME (NO TIME PRESSURE) ──────
+  const blessings = CONFIG.balloonBlessings || [
+    "Her cooking cures every bad day and warms every broken heart 🍲",
+    "Her morning prayers are the unseen shield protecting our whole home 🕊️",
+    "Amma's smile lights up any room faster than sunrise ✨",
+    "The gentlest touch, the strongest pillar in the universe 🌸",
+    "Her laughter is the sweetest music in this house 🎶",
+    "No matter how big we grow, we will always run to her lap for peace 🧸",
+    "A mother who sacrificed her own dreams just to build ours 🌷",
+    "Chellam Amma — Queen of our home, reigning with unconditional grace 👑",
+    "God gave us angels on earth, and we were blessed to call ours Amma 💜",
+    "Born to love, nurture, and make ordinary days feel like festivals 🎉"
+  ];
+
+  const balloonIcons = ['🎈', '💜', '💛', '🎈', '✨', '🎈', '🌸', '🎈', '👑', '🎈'];
+  const grid = document.getElementById('balloon-grid');
+  const poppedCountEl = document.getElementById('popped-count');
+  const blessingCard = document.getElementById('revealed-blessing-card');
+  const nextBtnContainer = document.getElementById('unlocked-action');
+  let poppedCount = 0;
+
+  for (let i = 0; i < 10; i++) {
+    const btn = document.createElement('button');
+    btn.className = 'balloon-btn';
+    btn.style.setProperty('--dur', (2.6 + Math.random() * 1.8) + 's');
+    btn.style.setProperty('--del', (Math.random() * 1.2) + 's');
+    btn.innerHTML = balloonIcons[i % balloonIcons.length];
+    btn.setAttribute('aria-label', `Balloon ${i + 1}`);
+
+    btn.addEventListener('click', () => {
+      if (btn.classList.contains('popped')) return;
+
+      btn.classList.add('popped');
+      poppedCount++;
+      poppedCountEl.textContent = poppedCount;
+      playSound('pop');
+
+      // Reveal blessing
+      const msg = blessings[i % blessings.length];
+      blessingCard.style.opacity = '0';
+      setTimeout(() => {
+        blessingCard.innerHTML = `<strong>✨ "${msg}"</strong>`;
+        blessingCard.style.opacity = '1';
+      }, 150);
+
+      // Check completion
+      if (poppedCount >= 10) {
+        onAllBalloonsPopped();
+      }
+    });
+
+    grid.appendChild(btn);
+  }
+
+  function onAllBalloonsPopped() {
+    celebrate();
+    Progress.unlock(2);
+    blessingCard.innerHTML = `<strong>🎉 Wonderful, Amma! All 10 blessings unlocked. Memory Lane is now open for you! 📸</strong>`;
+    nextBtnContainer.style.display = 'block';
+    showToast("Memory Lane unlocked for Amma! 📸", 4000);
+  }
+
+  document.getElementById('next-room-btn').addEventListener('click', () => {
+    navigateTo('memories.html');
+  });
+</script>
+</body>
+</html>

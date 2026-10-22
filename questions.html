@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Questions Just For Amma — Her Story Keepsake 💬</title>
+  <meta name="description" content="A tender, cozy conversation with Amma across 5 precious life chapters, creating a lifelong family keepsake."/>
+  <link rel="stylesheet" href="css/theme.css"/>
+  <link rel="stylesheet" href="css/animations.css"/>
+  <style>
+    .interview-hero {
+      padding: 2rem 1rem 5rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* ─── STAR JAR (GAME REWARD) ─────────────────────────────── */
+    .jar-tracker-card {
+      background: rgba(46, 8, 84, 0.7);
+      border: 1px solid var(--gold-metallic);
+      border-radius: 20px;
+      padding: 1.2rem 1.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      flex-wrap: wrap;
+    }
+
+    .jar-info {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    .jar-icon-wrap {
+      font-size: 2.4rem;
+      position: relative;
+      filter: drop-shadow(0 0 10px rgba(255,215,0,0.4));
+    }
+
+    .jar-icon-wrap.glowing {
+      animation: pulseGlow 1.5s infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      from { filter: drop-shadow(0 0 8px rgba(255,215,0,0.6)); }
+      to   { filter: drop-shadow(0 0 25px rgba(255,215,0,1)); }
+    }
+
+    .jar-details h3 {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      color: var(--gold-champagne);
+      margin-bottom: 0.2rem;
+    }
+
+    .jar-details p {
+      font-size: 0.85rem;
+      color: var(--purple-lavender);
+      font-style: italic;
+    }
+
+    .stars-row {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .star-slot {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      border: 1px dashed rgba(212,175,55,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .star-slot.filled {
+      background: var(--grad-gold);
+      border: none;
+      box-shadow: 0 0 14px rgba(255,215,0,0.8);
+      transform: scale(1.15);
+      animation: starPop 0.6s ease;
+    }
+
+    @keyframes starPop {
+      0% { transform: scale(0.3) rotate(-30deg); }
+      70% { transform: scale(1.3) rotate(15deg); }
+      100% { transform: scale(1.15) rotate(0); }
+    }
+
+    /* ─── CHAPTER COVER CARD ──────────────────────────────────── */
+    .chapter-cover-card {
+      background: linear-gradient(135deg, rgba(88,18,150,0.85) 0%, rgba(35,6,66,0.95) 100%);
+      border: 2px solid var(--gold-metallic);
+      border-radius: var(--radius-lg);
+      padding: clamp(2rem, 5vw, 3.5rem);
+      text-align: center;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.6), var(--glow-gold);
+      animation: fadeInUp 0.6s ease both;
+    }
+
+    .chapter-cover-card .badge {
+      display: inline-block;
+      background: rgba(255,215,0,0.18);
+      border: 1px solid var(--gold-bright);
+      color: var(--gold-bright);
+      padding: 0.35rem 1.2rem;
+      border-radius: 50px;
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .chapter-cover-card h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      background: var(--grad-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.8rem;
+    }
+
+    .chapter-cover-card p {
+      color: var(--purple-lavender);
+      font-size: 1.1rem;
+      font-style: italic;
+      line-height: 1.6;
+      max-width: 620px;
+      margin: 0 auto 2rem;
+    }
+
+    /* ─── QUESTION INTERACTION CARD ───────────────────────────── */
+    .question-card {
+      background: linear-gradient(145deg, rgba(62,11,108,0.8) 0%, rgba(28,4,52,0.95) 100%);
+      border: 2px solid var(--gold-metallic);
+      border-radius: var(--radius-lg);
+      padding: clamp(1.8rem, 4vw, 3rem);
+      box-shadow: 0 10px 35px rgba(0,0,0,0.5), var(--glow-purple);
+      position: relative;
+      animation: fadeIn 0.5s ease both;
+    }
+
+    .q-meta-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      font-family: var(--font-heading);
+      font-size: 0.82rem;
+      color: var(--gold-champagne);
+      border-bottom: 1px solid rgba(212,175,55,0.2);
+      padding-bottom: 0.8rem;
+    }
+
+    .q-text-prompt {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 3.2vw, 1.7rem);
+      color: var(--gold-champagne);
+      font-style: italic;
+      line-height: 1.5;
+      margin-bottom: 1.8rem;
+      text-align: center;
+    }
+
+    .answer-box-wrap {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .answer-textarea {
+      width: 100%;
+      min-height: 130px;
+      background: rgba(20, 2, 38, 0.7);
+      border: 1.5px solid rgba(212,175,55,0.4);
+      border-radius: 14px;
+      padding: 1.1rem;
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.6;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .answer-textarea:focus {
+      border-color: var(--gold-bright);
+      box-shadow: 0 0 15px rgba(255,215,0,0.3);
+    }
+
+    .voice-dictate-btn {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(106, 27, 154, 0.7);
+      border: 1px solid var(--gold-metallic);
+      color: var(--gold-bright);
+      padding: 0.4rem 0.85rem;
+      border-radius: 50px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s;
+    }
+
+    .voice-dictate-btn:hover {
+      background: var(--purple-violet);
+    }
+
+    .voice-dictate-btn.listening {
+      background: #c62828;
+      color: #fff;
+      animation: pulse 1s infinite;
+    }
+
+    .card-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-skip {
+      background: none;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: var(--purple-lavender);
+      padding: 0.7rem 1.4rem;
+      border-radius: var(--radius-btn);
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .btn-skip:hover {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+    }
+
+    .btn-next {
+      background: var(--grad-gold);
+      color: var(--purple-deep);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.98rem;
+      padding: 0.8rem 2rem;
+      border-radius: var(--radius-btn);
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow-btn);
+      transition: transform 0.2s;
+    }
+
+    .btn-next:hover {
+      transform: translateY(-2px);
+    }
+
+    /* ─── KEEPSAKE SUMMARY (AT THE END) ───────────────────────── */
+    #keepsake-section {
+      display: none;
+      background: linear-gradient(135deg, rgba(62,11,108,0.9) 0%, rgba(28,4,52,0.95) 100%);
+      border: 2px solid var(--gold-metallic);
+      border-radius: var(--radius-lg);
+      padding: clamp(2rem, 5vw, 3.5rem);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6), var(--glow-gold);
+    }
+
+    .keepsake-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .keepsake-header h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      background: var(--grad-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.4rem;
+    }
+
+    .keepsake-entry {
+      background: rgba(20, 2, 38, 0.6);
+      border-left: 3px solid var(--gold-bright);
+      border-radius: 0 12px 12px 0;
+      padding: 1.2rem 1.5rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .keepsake-entry h4 {
+      color: var(--gold-champagne);
+      font-size: 1rem;
+      font-style: italic;
+      margin-bottom: 0.5rem;
+    }
+
+    .keepsake-entry p {
+      color: var(--purple-lavender);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    @media print {
+      body * { visibility: hidden; }
+      #keepsake-section, #keepsake-section * { visibility: visible; }
+      #keepsake-section {
+        position: absolute;
+        left: 0; top: 0; width: 100%;
+        background: white !important;
+        color: black !important;
+        border: none !important;
+      }
+      .no-print { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bokeh bokeh-1"></div>
+<div class="bokeh bokeh-2"></div>
+<div class="bokeh bokeh-3"></div>
+<canvas id="particles-canvas" aria-hidden="true"></canvas>
+<div class="fairy-lights" aria-hidden="true"></div>
+
+<!-- Progress Bar -->
+<div id="progress-bar" role="navigation" aria-label="Amma's party rooms progress"></div>
+
+<!-- Music Toggle -->
+<button id="music-toggle" aria-label="Toggle background music">🎵</button>
+
+<!-- Page Transition Overlay -->
+<div id="page-transition" aria-hidden="true" style="opacity:0;pointer-events:none;">
+  <div class="curtain-left"></div>
+  <div class="curtain-right"></div>
+</div>
+
+<main class="page-wrapper" role="main">
+  <div class="interview-hero">
+
+    <!-- Top Star Jar Tracker -->
+    <div class="jar-tracker-card" aria-label="Amma's Star Jar Tracker">
+      <div class="jar-info">
+        <div class="jar-icon-wrap" id="jar-icon">🏺</div>
+        <div class="jar-details">
+          <h3>Amma's Golden Star Jar</h3>
+          <p id="jar-status-text">Complete chapters to collect 5 golden stars ✨</p>
+        </div>
+      </div>
+      <div class="stars-row" id="stars-row" aria-label="5 chapter stars">
+        <div class="star-slot" id="star-1" title="Chapter 1: Childhood">⭐</div>
+        <div class="star-slot" id="star-2" title="Chapter 2: Youth">⭐</div>
+        <div class="star-slot" id="star-3" title="Chapter 3: Marriage">⭐</div>
+        <div class="star-slot" id="star-4" title="Chapter 4: Husband">⭐</div>
+        <div class="star-slot" id="star-5" title="Chapter 5: Gunda">⭐</div>
+      </div>
+    </div>
+
+    <!-- Active Area: Chapter Cover OR Question Card -->
+    <div id="active-interview-container">
+      <!-- Dynamically filled by JS -->
+    </div>
+
+    <!-- Keepsake Section (shown after all 5 chapters) -->
+    <section id="keepsake-section" aria-label="Amma's Story Keepsake">
+      <div class="keepsake-header">
+        <div style="font-size:2.8rem; margin-bottom:0.5rem;">📖✨</div>
+        <h2>Amma's Story Keepsake</h2>
+        <p style="color:var(--purple-lavender); font-style:italic;">
+          The sacred memories, words of wisdom, and untold stories of Glory Gnana Selvi.
+        </p>
+      </div>
+
+      <div id="keepsake-entries-list"></div>
+
+      <div class="card-actions no-print" style="margin-top:2.5rem; justify-content:center; gap:1.2rem;">
+        <button class="btn btn-gold" onclick="window.print()" style="font-size:1rem; padding:0.85rem 1.8rem;">
+          🖨️ Print / Save Keepsake as PDF
+        </button>
+        <button class="btn btn-purple" id="to-video-room-btn" style="font-size:1rem; padding:0.85rem 2rem;">
+          🎥 Continue to Family Video Wishes →
+        </button>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // Page guard & shared init (Page 3: Questions)
+  guardPage(3);
+  sharedInit(3);
+
+  const chapters = CONFIG.interviewChapters || [];
+  let currentChapterIndex = 0;
+  let currentQuestionIndex = 0;
+  let showingCover = true;
+  let answers = {};
+
+  try {
+    const saved = localStorage.getItem('amma_answers');
+    if (saved) answers = JSON.parse(saved);
+  } catch {}
+
+  const activeContainer = document.getElementById('active-interview-container');
+  const jarIcon = document.getElementById('jar-icon');
+  const jarStatusText = document.getElementById('jar-status-text');
+
+  function updateStars() {
+    for (let i = 1; i <= 5; i++) {
+      const slot = document.getElementById(`star-${i}`);
+      if (i <= currentChapterIndex) {
+        slot.classList.add('filled');
+      } else {
+        slot.classList.remove('filled');
+      }
+    }
+  }
+
+  function renderCurrentState() {
+    activeContainer.innerHTML = '';
+
+    if (currentChapterIndex >= chapters.length) {
+      showKeepsake();
+      return;
+    }
+
+    const chap = chapters[currentChapterIndex];
+
+    if (showingCover) {
+      // Render Chapter Cover Card
+      const div = document.createElement('div');
+      div.className = 'chapter-cover-card';
+      div.innerHTML = `
+        <span class="badge">${chap.badge || `Chapter ${chap.id}`}</span>
+        <h2>${chap.title}</h2>
+        <p>"${chap.subtitle}"</p>
+        <button class="btn btn-gold" id="start-chap-btn" style="padding:0.9rem 2.2rem; font-size:1.05rem;">
+          Begin Chapter ${chap.id} ✦
+        </button>
+      `;
+      activeContainer.appendChild(div);
+      document.getElementById('start-chap-btn').addEventListener('click', () => {
+        showingCover = false;
+        currentQuestionIndex = 0;
+        renderCurrentState();
+      });
+    } else {
+      // Render Question Card
+      const q = chap.questions[currentQuestionIndex];
+      const savedAns = answers[q.id] || '';
+
+      const div = document.createElement('div');
+      div.className = 'question-card';
+      div.innerHTML = `
+        <div class="q-meta-header">
+          <span>${chap.title}</span>
+          <span>Question ${currentQuestionIndex + 1} of ${chap.questions.length}</span>
+        </div>
+
+        <h3 class="q-text-prompt">"${q.text}"</h3>
+
+        <div class="answer-box-wrap">
+          <textarea
+            class="answer-textarea"
+            id="q-textarea"
+            placeholder="${q.placeholder || "Type or dictate your thoughts here, Amma..."}"
+            aria-label="Amma's answer"
+          >${savedAns}</textarea>
+          <button class="voice-dictate-btn" id="voice-btn" type="button" title="Speak to dictate">
+            🎤 Speak
+          </button>
+        </div>
+
+        <div class="card-actions">
+          <button class="btn-skip" id="skip-q-btn" type="button">
+            Skip for now →
+          </button>
+          <button class="btn-next" id="save-q-btn" type="button">
+            ${currentQuestionIndex === chap.questions.length - 1 ? 'Finish Chapter ⭐' : 'Save & Next →'}
+          </button>
+        </div>
+      `;
+      activeContainer.appendChild(div);
+
+      const textarea = document.getElementById('q-textarea');
+      const voiceBtn = document.getElementById('voice-btn');
+
+      // Voice recognition setup
+      setupVoiceRecognition(voiceBtn, textarea);
+
+      document.getElementById('save-q-btn').addEventListener('click', () => {
+        saveAnswer(q.id, textarea.value.trim());
+        advanceQuestion();
+      });
+
+      document.getElementById('skip-q-btn').addEventListener('click', () => {
+        advanceQuestion();
+      });
+    }
+  }
+
+  function saveAnswer(id, val) {
+    if (val) {
+      answers[id] = val;
+      try {
+        localStorage.setItem('amma_answers', JSON.stringify(answers));
+      } catch {}
+    }
+  }
+
+  function advanceQuestion() {
+    const chap = chapters[currentChapterIndex];
+    currentQuestionIndex++;
+
+    if (currentQuestionIndex >= chap.questions.length) {
+      // Chapter completed!
+      currentChapterIndex++;
+      updateStars();
+      playSound('success');
+      launchConfetti(40);
+      showToast(`⭐ Star collected for Chapter ${currentChapterIndex}!`);
+
+      if (currentChapterIndex < chapters.length) {
+        showingCover = true;
+        renderCurrentState();
+      } else {
+        // All 5 chapters done!
+        onAllChaptersCompleted();
+      }
+    } else {
+      renderCurrentState();
+    }
+  }
+
+  function onAllChaptersCompleted() {
+    celebrate();
+    Progress.unlock(4);
+    jarIcon.classList.add('glowing');
+    jarStatusText.innerHTML = `<strong>🎉 All 5 stars collected! The jar is glowing! 🌟</strong>`;
+    showKeepsake();
+    showToast("Family Video Wishes unlocked for Amma! 🎥", 4000);
+  }
+
+  function showKeepsake() {
+    activeContainer.style.display = 'none';
+    const keepsake = document.getElementById('keepsake-section');
+    keepsake.style.display = 'block';
+
+    const list = document.getElementById('keepsake-entries-list');
+    list.innerHTML = '';
+
+    chapters.forEach(chap => {
+      chap.questions.forEach(q => {
+        const ans = answers[q.id];
+        if (ans) {
+          const entry = document.createElement('div');
+          entry.className = 'keepsake-entry';
+          entry.innerHTML = `
+            <h4>${q.text}</h4>
+            <p>"${ans}"</p>
+          `;
+          list.appendChild(entry);
+        }
+      });
+    });
+
+    if (list.children.length === 0) {
+      list.innerHTML = `<p style="text-align:center;color:var(--purple-lavender);font-style:italic;">You navigated through all 5 chapters! You can always revisit and type in memories whenever you wish, Amma 💜</p>`;
+    }
+  }
+
+  function setupVoiceRecognition(btn, textarea) {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      btn.style.display = 'none';
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'en-IN'; // Supports English / Indian English accents
+    recognition.interimResults = false;
+    let isListening = false;
+
+    btn.addEventListener('click', () => {
+      if (!isListening) {
+        recognition.start();
+        isListening = true;
+        btn.classList.add('listening');
+        btn.textContent = '🔴 Listening...';
+      } else {
+        recognition.stop();
+        isListening = false;
+        btn.classList.remove('listening');
+        btn.textContent = '🎤 Speak';
+      }
+    });
+
+    recognition.onresult = (e) => {
+      const transcript = e.results[0][0].transcript;
+      textarea.value += (textarea.value ? ' ' : '') + transcript;
+    };
+
+    recognition.onerror = () => {
+      isListening = false;
+      btn.classList.remove('listening');
+      btn.textContent = '🎤 Speak';
+    };
+
+    recognition.onend = () => {
+      isListening = false;
+      btn.classList.remove('listening');
+      btn.textContent = '🎤 Speak';
+    };
+  }
+
+  document.getElementById('to-video-room-btn').addEventListener('click', () => {
+    navigateTo('videos.html');
+  });
+
+  // Initial render
+  updateStars();
+  renderCurrentState();
+</script>
+</body>
+</html>

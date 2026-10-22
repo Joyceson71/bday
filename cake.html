@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Cake Moment — Happy Birthday Amma! 🎂</title>
+  <meta name="description" content="Make a wish, blow out the candles, cut the cake, and celebrate Amma's birthday!"/>
+  <link rel="stylesheet" href="css/theme.css"/>
+  <link rel="stylesheet" href="css/animations.css"/>
+  <style>
+    .cake-hero {
+      padding: 2rem 1rem 5rem;
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
+    .room-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(179,136,235,0.18);
+      border: 1px solid rgba(212,175,55,0.4);
+      border-radius: 50px;
+      padding: 0.4rem 1.2rem;
+      font-size: 0.85rem;
+      color: var(--gold-champagne);
+      font-family: var(--font-heading);
+    }
+
+    /* ─── CAKE DISPLAY & CANDLES ──────────────────────────────── */
+    .cake-stage {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem;
+    }
+
+    .wish-prompt-card {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .wish-prompt-card h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      background: var(--grad-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.4rem;
+    }
+
+    .wish-prompt-card p {
+      font-size: 1.15rem;
+      color: var(--purple-lavender);
+      font-style: italic;
+      animation: pulse 2.2s infinite ease-in-out;
+    }
+
+    .cake-wrap {
+      position: relative;
+      width: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Topper */
+    .cake-topper {
+      font-family: var(--font-script);
+      font-size: 2.8rem;
+      color: var(--gold-bright);
+      text-align: center;
+      margin-bottom: -5px;
+      filter: drop-shadow(0 0 10px rgba(255,215,0,0.8));
+      z-index: 10;
+      animation: floatSlow 2.5s ease-in-out infinite;
+    }
+
+    /* 5 Fixed Decorative Candles */
+    .candles-row {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: -6px;
+      z-index: 5;
+    }
+
+    .candle {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .flame {
+      width: 14px;
+      height: 24px;
+      background: radial-gradient(ellipse at 50% 80%, #FFF 0%, #FFD700 40%, #FF5722 85%, transparent 100%);
+      border-radius: 50% 50% 20% 20% / 60% 60% 30% 30%;
+      animation: flicker 0.25s ease-in-out infinite alternate;
+      filter: drop-shadow(0 0 8px rgba(255, 180, 0, 0.95));
+      transform-origin: bottom center;
+      transition: opacity 0.5s, transform 0.5s;
+    }
+
+    .flame.out {
+      opacity: 0;
+      transform: scaleY(0);
+      filter: none;
+    }
+
+    .candle-stick {
+      width: 10px;
+      height: 38px;
+      border-radius: 4px 4px 2px 2px;
+      background: linear-gradient(to right, #FFD700, #D4AF37 40%, #FFE082 100%);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+    }
+
+    .candle:nth-child(2) .candle-stick,
+    .candle:nth-child(4) .candle-stick {
+      background: linear-gradient(to right, #B388EB, #6A1B9A 50%, #E6D5FF 100%);
+    }
+
+    /* SVG Cake Structure */
+    .cake-svg {
+      width: 320px;
+      height: auto;
+      filter: drop-shadow(0 15px 35px rgba(74, 14, 128, 0.7));
+    }
+
+    /* ─── BLOW OUT CONTROLS ───────────────────────────────────── */
+    .blow-card {
+      background: linear-gradient(135deg, rgba(62,11,108,0.85) 0%, rgba(28,4,52,0.95) 100%);
+      border: 2px solid var(--gold-metallic);
+      border-radius: var(--radius-card);
+      padding: 1.8rem 2.2rem;
+      text-align: center;
+      max-width: 520px;
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .blow-card h3 {
+      font-family: var(--font-heading);
+      color: var(--gold-bright);
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .blow-card p {
+      font-size: 0.95rem;
+      color: var(--purple-lavender);
+      margin-bottom: 1.2rem;
+    }
+
+    .blow-buttons-wrap {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .mic-btn {
+      background: rgba(179,136,235,0.2);
+      border: 1px solid var(--purple-orchid);
+      color: var(--purple-lavender);
+      padding: 0.75rem 1.4rem;
+      border-radius: var(--radius-btn);
+      font-family: var(--font-heading);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .mic-btn.listening {
+      background: #c62828;
+      color: #fff;
+      animation: pulse 1s infinite;
+    }
+
+    .tap-blow-btn {
+      background: var(--grad-gold);
+      color: var(--purple-deep);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      padding: 0.75rem 1.8rem;
+      border-radius: var(--radius-btn);
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow-btn);
+      transition: transform 0.2s;
+    }
+
+    .tap-blow-btn:hover {
+      transform: scale(1.04);
+    }
+
+    /* ─── CAKE CUTTING SECTION ────────────────────────────────── */
+    #cut-section {
+      display: none;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(88,18,150,0.8) 0%, rgba(35,6,66,0.95) 100%);
+      border: 2px solid var(--gold-bright);
+      border-radius: var(--radius-lg);
+      padding: 2.2rem;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.6), var(--glow-gold);
+      animation: fadeInUp 0.7s ease both;
+    }
+
+    .cut-knife {
+      font-size: 3.5rem;
+      display: inline-block;
+      cursor: pointer;
+      transition: transform 0.5s;
+    }
+
+    .cut-knife.slicing {
+      animation: knifeSlice 1s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+    }
+
+    @keyframes knifeSlice {
+      0%   { transform: rotate(0deg) translate(0, 0); }
+      40%  { transform: rotate(-35deg) translate(-20px, -20px); }
+      70%  { transform: rotate(-15deg) translate(10px, 40px) scale(1.1); }
+      100% { transform: rotate(0deg) translate(0, 0); }
+    }
+
+    /* ─── CATCH THE FALLING GIFTS GAME ────────────────────────── */
+    #gift-game-section {
+      display: none;
+      background: linear-gradient(135deg, rgba(74,14,128,0.7) 0%, rgba(35,6,66,0.95) 100%);
+      border: 2px solid var(--gold-metallic);
+      border-radius: var(--radius-lg);
+      padding: clamp(1.8rem, 4vw, 2.8rem);
+      text-align: center;
+      max-width: 650px;
+      width: 100%;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5), var(--glow-gold);
+      animation: fadeInUp 0.7s ease both;
+    }
+
+    #gift-canvas {
+      width: 100%;
+      max-width: 500px;
+      height: 300px;
+      background: rgba(20, 2, 40, 0.75);
+      border: 2px solid rgba(212,175,55,0.4);
+      border-radius: 14px;
+      margin: 1rem auto;
+      display: block;
+      touch-action: none;
+    }
+
+    .game-stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .stat-badge {
+      font-family: var(--font-heading);
+      color: var(--gold-bright);
+      font-size: 1.1rem;
+    }
+
+    .stat-badge span {
+      color: var(--purple-lavender);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      display: block;
+    }
+
+    .continue-btn {
+      background: var(--grad-gold);
+      color: var(--purple-deep);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 0.9rem 2.4rem;
+      border-radius: var(--radius-btn);
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow-btn), var(--glow-gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: transform 0.25s;
+    }
+
+    .continue-btn:hover {
+      transform: translateY(-2px) scale(1.03);
+    }
+  </style>
+</head>
+<body>
+
+<div class="bokeh bokeh-1"></div>
+<div class="bokeh bokeh-2"></div>
+<div class="bokeh bokeh-3"></div>
+<canvas id="particles-canvas" aria-hidden="true"></canvas>
+<div class="fairy-lights" aria-hidden="true"></div>
+
+<!-- Progress Bar -->
+<div id="progress-bar" role="navigation" aria-label="Amma's party rooms progress"></div>
+
+<!-- Music Toggle -->
+<button id="music-toggle" aria-label="Toggle background music">🎵</button>
+
+<!-- Page Transition Overlay -->
+<div id="page-transition" aria-hidden="true" style="opacity:0;pointer-events:none;">
+  <div class="curtain-left"></div>
+  <div class="curtain-right"></div>
+</div>
+
+<main class="page-wrapper" role="main">
+  <div class="cake-hero">
+
+    <div class="text-center">
+      <span class="room-badge">Room 6 ✦ The Cake Moment</span>
+      <div class="wish-prompt-card">
+        <h1>Make a Wish, Amma! ✨</h1>
+        <p>"Close your eyes, make a silent wish, and blow out your candles..."</p>
+      </div>
+    </div>
+
+    <!-- Cake Display -->
+    <div class="cake-stage" aria-label="Amma's Birthday Cake">
+
+      <div class="cake-wrap">
+        <!-- Cake Topper -->
+        <div class="cake-topper">Happy Birthday Amma</div>
+
+        <!-- 5 Fixed Decorative Candles (untied to age) -->
+        <div class="candles-row" id="candles-row" aria-label="5 birthday candles">
+          <div class="candle"><div class="flame" id="flame-0"></div><div class="candle-stick"></div></div>
+          <div class="candle"><div class="flame" id="flame-1"></div><div class="candle-stick"></div></div>
+          <div class="candle"><div class="flame" id="flame-2"></div><div class="candle-stick"></div></div>
+          <div class="candle"><div class="flame" id="flame-3"></div><div class="candle-stick"></div></div>
+          <div class="candle"><div class="flame" id="flame-4"></div><div class="candle-stick"></div></div>
+        </div>
+
+        <!-- SVG 3-Tier Purple & Gold Royal Cake -->
+        <svg class="cake-svg" viewBox="0 0 320 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Plate -->
+          <ellipse cx="160" cy="205" rx="150" ry="14" fill="url(#plateGrad)"/>
+          <ellipse cx="160" cy="202" rx="142" ry="10" fill="#E6D5FF"/>
+
+          <!-- Bottom Tier -->
+          <path d="M40 140 Q160 160 280 140 L280 190 Q160 215 40 190 Z" fill="url(#cakeDarkPurple)"/>
+          <ellipse cx="160" cy="140" rx="120" ry="18" fill="url(#cakeMidPurple)"/>
+          <!-- Gold Drips Bottom -->
+          <path d="M40 140 Q60 160 80 145 Q100 165 120 143 Q140 168 160 145 Q180 165 200 143 Q220 165 240 145 Q260 162 280 140 Q160 160 40 140 Z" fill="url(#goldGrad)"/>
+
+          <!-- Middle Tier -->
+          <path d="M70 85 Q160 102 250 85 L250 135 Q160 155 70 135 Z" fill="url(#cakeDarkPurple)"/>
+          <ellipse cx="160" cy="85" rx="90" ry="14" fill="url(#cakeMidPurple)"/>
+          <!-- Gold Drips Middle -->
+          <path d="M70 85 Q90 102 110 90 Q130 105 150 88 Q170 106 190 89 Q210 104 230 88 Q240 100 250 85 Q160 102 70 85 Z" fill="url(#goldGrad)"/>
+
+          <!-- Top Tier -->
+          <path d="M100 40 Q160 52 220 40 L220 80 Q160 95 100 80 Z" fill="url(#cakeDarkPurple)"/>
+          <ellipse cx="160" cy="40" rx="60" ry="10" fill="url(#cakeMidPurple)"/>
+          <!-- Gold Pearls & Swirls -->
+          <circle cx="160" cy="105" r="4" fill="#FFD700"/>
+          <circle cx="130" cy="108" r="3.5" fill="#FFD700"/>
+          <circle cx="190" cy="108" r="3.5" fill="#FFD700"/>
+          <circle cx="105" cy="160" r="4.5" fill="#FFD700"/>
+          <circle cx="160" cy="165" r="5" fill="#FFD700"/>
+          <circle cx="215" cy="160" r="4.5" fill="#FFD700"/>
+
+          <!-- Gradients -->
+          <defs>
+            <linearGradient id="cakeDarkPurple" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#4A0E80"/>
+              <stop offset="50%" stop-color="#2E0854"/>
+              <stop offset="100%" stop-color="#1B0334"/>
+            </linearGradient>
+            <linearGradient id="cakeMidPurple" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7B1FA2"/>
+              <stop offset="100%" stop-color="#4A0E80"/>
+            </linearGradient>
+            <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#D4AF37"/>
+              <stop offset="35%" stop-color="#FFD700"/>
+              <stop offset="70%" stop-color="#D4AF37"/>
+              <stop offset="100%" stop-color="#FFE79A"/>
+            </linearGradient>
+            <linearGradient id="plateGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#D4AF37"/>
+              <stop offset="50%" stop-color="#FFF9D2"/>
+              <stop offset="100%" stop-color="#D4AF37"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+    </div>
+
+    <!-- Candle Blow Out Controls -->
+    <div class="blow-card" id="blow-controls-card">
+      <h3>Ready, Amma?</h3>
+      <p id="candle-status">All 5 candles are burning brightly with our love!</p>
+      <div class="blow-buttons-wrap">
+        <button class="tap-blow-btn" id="tap-blow-btn" type="button">
+          💨 Tap to Blow, Amma!
+        </button>
+        <button class="mic-btn" id="mic-blow-btn" type="button">
+          🎤 Blow into Mic
+        </button>
+      </div>
+    </div>
+
+    <!-- Cut the Cake Section -->
+    <section id="cut-section" aria-label="Cut the birthday cake">
+      <h2 style="font-family:var(--font-heading); color:var(--gold-bright); font-size:1.8rem; margin-bottom:0.5rem;">
+        🎂 Happy Birthday, Amma! 🎂
+      </h2>
+      <p style="color:var(--gold-champagne); font-style:italic; font-size:1.05rem; margin-bottom:1.5rem;">
+        Tap the knife to cut the first slice!
+      </p>
+
+      <div class="cut-knife" id="knife-icon" role="button" tabindex="0" aria-label="Cut the cake knife">
+        🔪
+      </div>
+
+      <div id="cake-sliced-msg" style="display:none; margin-top:1.5rem;">
+        <p style="color:var(--gold-bright); font-family:var(--font-heading); font-size:1.2rem; margin-bottom:1rem;">
+          ✨ The sweet slice is for you, Amma! Now play the falling gifts game to continue 🎁
+        </p>
+        <button class="continue-btn" id="to-gifts-btn">
+          <span>🎁</span> Catch the Falling Gifts →
+        </button>
+      </div>
+    </section>
+
+    <!-- Catch the Falling Gifts Game -->
+    <section id="gift-game-section" aria-label="Catch the falling gifts game">
+      <h2 style="font-family:var(--font-heading); color:var(--gold-bright); font-size:1.8rem; margin-bottom:0.4rem;">
+        🎁 Catch the Falling Gifts, Amma!
+      </h2>
+      <p style="color:var(--purple-lavender); font-style:italic; margin-bottom:1.2rem;">
+        Slide the basket left and right to catch 10 sweet gifts in 30 seconds!
+      </p>
+
+      <div class="game-stats">
+        <div class="stat-badge"><span id="gifts-caught-val">0</span><span>Caught</span></div>
+        <div class="stat-badge"><span id="time-left-val">30s</span><span>Time</span></div>
+        <div class="stat-badge"><span>10</span><span>Target</span></div>
+      </div>
+
+      <canvas id="gift-canvas"></canvas>
+
+      <div id="game-end-controls" style="margin-top:1.5rem; display:none;">
+        <button class="continue-btn" id="to-photo-haul-btn">
+          <span>📸</span> Step into The Photo Haul, Amma →
+        </button>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // Page guard & shared init (Page 5: Cake)
+  guardPage(5);
+  sharedInit(5);
+  // Volume swells on cake page
+  Music.setVolume(0.45);
+
+  const NUM_CANDLES = 5; // Fixed decorative candles, untied to age
+  let candlesBlown = 0;
+  const candleStatus = document.getElementById('candle-status');
+  const blowCard = document.getElementById('blow-controls-card');
+  const cutSection = document.getElementById('cut-section');
+
+  function blowOutCandle(count = 1) {
+    for (let c = 0; c < count; c++) {
+      if (candlesBlown < NUM_CANDLES) {
+        const flame = document.getElementById(`flame-${candlesBlown}`);
+        if (flame) flame.classList.add('out');
+        candlesBlown++;
+        playSound('candle');
+      }
+    }
+
+    candleStatus.textContent = `${candlesBlown} / ${NUM_CANDLES} candles blown out!`;
+
+    if (candlesBlown >= NUM_CANDLES) {
+      onAllCandlesBlown();
+    }
+  }
+
+  function onAllCandlesBlown() {
+    candleStatus.textContent = "All candles are out! Make your wish, Amma! 🌟";
+    playHappyBirthdayTune();
+
+    setTimeout(() => {
+      celebrate();
+      launchConfetti(150);
+      spawnBalloons(10);
+      showToast("Happy Birthday, Amma! 🎉", 4000);
+      blowCard.style.display = 'none';
+      cutSection.style.display = 'block';
+      cutSection.scrollIntoView({ behavior: 'smooth' });
+    }, 800);
+  }
+
+  // Tap to blow
+  document.getElementById('tap-blow-btn').addEventListener('click', () => {
+    blowOutCandle(2);
+  });
+
+  // Web Audio happy birthday melody synthesis
+  function playHappyBirthdayTune() {
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      // Notes for Happy Birthday
+      const tune = [
+        { f: 261.63, d: 0.35 }, { f: 261.63, d: 0.2 }, { f: 293.66, d: 0.5 }, { f: 261.63, d: 0.5 },
+        { f: 349.23, d: 0.5 }, { f: 329.63, d: 0.9 },
+        { f: 261.63, d: 0.35 }, { f: 261.63, d: 0.2 }, { f: 293.66, d: 0.5 }, { f: 261.63, d: 0.5 },
+        { f: 392.00, d: 0.5 }, { f: 349.23, d: 0.9 },
+      ];
+
+      let t = ctx.currentTime + 0.1;
+      tune.forEach(n => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(n.f, t);
+        gain.gain.setValueAtTime(0.2, t);
+        gain.gain.exponentialRampToValueAtTime(0.0001, t + n.d - 0.05);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(t);
+        osc.stop(t + n.d);
+        t += n.d;
+      });
+    } catch {}
+  }
+
+  // Mic Blow via Web Audio API
+  let micStream = null, audioCtx = null, analyser = null, micAnim = null;
+  const micBtn = document.getElementById('mic-blow-btn');
+
+  micBtn.addEventListener('click', async () => {
+    if (micStream) {
+      stopMic();
+      return;
+    }
+    try {
+      micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      audioCtx = new AudioContext();
+      const source = audioCtx.createMediaStreamSource(micStream);
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 256;
+      source.connect(analyser);
+
+      micBtn.classList.add('listening');
+      micBtn.textContent = '🛑 Stop Mic';
+      candleStatus.textContent = 'Blow gently into your microphone, Amma!';
+
+      const data = new Uint8Array(analyser.frequencyBinCount);
+      let blowCount = 0;
+
+      function checkAudio() {
+        analyser.getByteFrequencyData(data);
+        const avg = data.reduce((a, b) => a + b, 0) / data.length;
+        if (avg > 40) {
+          blowCount++;
+          if (blowCount > 3) {
+            blowCount = 0;
+            blowOutCandle(1);
+          }
+        }
+        if (candlesBlown < NUM_CANDLES) {
+          micAnim = requestAnimationFrame(checkAudio);
+        } else {
+          stopMic();
+        }
+      }
+      checkAudio();
+    } catch {
+      showToast('Microphone not available — tap the blow button! 💨');
+    }
+  });
+
+  function stopMic() {
+    if (micAnim) cancelAnimationFrame(micAnim);
+    if (micStream) { micStream.getTracks().forEach(t => t.stop()); micStream = null; }
+    if (audioCtx) { audioCtx.close(); audioCtx = null; }
+    micBtn.classList.remove('listening');
+    micBtn.textContent = '🎤 Blow into Mic';
+  }
+
+  // Cake Slicing
+  const knife = document.getElementById('knife-icon');
+  knife.addEventListener('click', () => {
+    knife.classList.add('slicing');
+    playSound('success');
+    launchConfetti(80);
+    setTimeout(() => {
+      document.getElementById('cake-sliced-msg').style.display = 'block';
+    }, 600);
+  });
+
+  document.getElementById('to-gifts-btn').addEventListener('click', () => {
+    cutSection.style.display = 'none';
+    const giftSec = document.getElementById('gift-game-section');
+    giftSec.style.display = 'block';
+    giftSec.scrollIntoView({ behavior: 'smooth' });
+    startGiftGame();
+  });
+
+  // ── 3. CATCH THE FALLING GIFTS GAME (SLOW, 30S, WINNABLE) ──
+  const canvas = document.getElementById('gift-canvas');
+  const ctx = canvas.getContext('2d');
+  let gameRunning = false;
+  let giftsCaught = 0;
+  let timeLeft = 30;
+  let timerInterval = null;
+  let basketX = 200;
+  let gifts = [];
+
+  function resizeCanvas() {
+    canvas.width = Math.min(canvas.parentElement.offsetWidth - 20, 480);
+    canvas.height = 280;
+    basketX = canvas.width / 2;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  function startGiftGame() {
+    gameRunning = true;
+    giftsCaught = 0;
+    timeLeft = 30;
+    gifts = [];
+    document.getElementById('gifts-caught-val').textContent = '0';
+    document.getElementById('time-left-val').textContent = '30s';
+
+    // Touch and mouse control
+    canvas.addEventListener('pointermove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      basketX = e.clientX - rect.left;
+    });
+
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      document.getElementById('time-left-val').textContent = `${timeLeft}s`;
+      if (timeLeft <= 0 || giftsCaught >= 10) {
+        endGiftGame();
+      }
+    }, 1000);
+
+    requestAnimationFrame(gameLoop);
+  }
+
+  const giftEmojis = ['🎁', '💜', '👑', '🌸', '✨', '⭐'];
+
+  function gameLoop() {
+    if (!gameRunning) return;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Spawn gifts at gentle slow speed
+    if (Math.random() < 0.05 && gifts.length < 5) {
+      gifts.push({
+        x: 30 + Math.random() * (canvas.width - 60),
+        y: -20,
+        speed: 1.6 + Math.random() * 1.2, // Slow and easy
+        icon: giftEmojis[Math.floor(Math.random() * giftEmojis.length)]
+      });
+    }
+
+    // Draw basket
+    ctx.font = '36px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('🧺', Math.max(30, Math.min(canvas.width - 30, basketX)), canvas.height - 15);
+
+    // Update and draw gifts
+    for (let i = gifts.length - 1; i >= 0; i--) {
+      const g = gifts[i];
+      g.y += g.speed;
+      ctx.font = '28px sans-serif';
+      ctx.fillText(g.icon, g.x, g.y);
+
+      // Check catch
+      if (g.y >= canvas.height - 45 && g.y <= canvas.height - 10 && Math.abs(g.x - basketX) < 40) {
+        giftsCaught++;
+        document.getElementById('gifts-caught-val').textContent = giftsCaught;
+        playSound('pop');
+        gifts.splice(i, 1);
+
+        if (giftsCaught >= 10) {
+          endGiftGame();
+          return;
+        }
+      } else if (g.y > canvas.height + 20) {
+        gifts.splice(i, 1);
+      }
+    }
+
+    requestAnimationFrame(gameLoop);
+  }
+
+  function endGiftGame() {
+    gameRunning = false;
+    clearInterval(timerInterval);
+    celebrate();
+    Progress.unlock(6);
+    renderProgressBar(5);
+    document.getElementById('game-end-controls').style.display = 'block';
+    showToast("Photo Haul unlocked for Queen Glory! 📸", 4000);
+  }
+
+  document.getElementById('to-photo-haul-btn').addEventListener('click', () => {
+    navigateTo('photo-haul.html');
+  });
+</script>
+</body>
+</html>

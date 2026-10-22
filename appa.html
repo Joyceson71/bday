@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>A Room For Appa — For His Beloved Glory 💙</title>
+  <meta name="description" content="A quiet, sacred space dedicated to Amma's beloved father, Appa."/>
+  <link rel="stylesheet" href="css/theme.css"/>
+  <link rel="stylesheet" href="css/animations.css"/>
+  <style>
+    /* ─── SACRED ROOM FOR APPA — PURE REVERENCE ─────────────────── */
+    body {
+      background: radial-gradient(circle at 50% 30%, #18052e 0%, #0c0217 70%, #05000a 100%) !important;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: #F7E7CE;
+    }
+
+    /* Ambient Jasmine Petals */
+    .jasmine-petal {
+      position: fixed;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.65;
+      font-size: 1.1rem;
+      animation: jasmineFloat linear infinite;
+    }
+
+    @keyframes jasmineFloat {
+      0% {
+        transform: translateY(-40px) rotate(0deg) translateX(0);
+        opacity: 0;
+      }
+      20% { opacity: 0.75; }
+      80% { opacity: 0.65; }
+      100% {
+        transform: translateY(105vh) rotate(360deg) translateX(50px);
+        opacity: 0;
+      }
+    }
+
+    /* Room Badge */
+    .appa-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(106, 27, 154, 0.25);
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      border-radius: 50px;
+      padding: 0.4rem 1.4rem;
+      font-size: 0.9rem;
+      color: var(--gold-champagne);
+      font-family: var(--font-heading);
+      letter-spacing: 0.05em;
+    }
+
+    /* Stage Container & Transitions */
+    .appa-stage {
+      display: none;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+      min-height: 85vh;
+      width: 100%;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 1rem 6rem;
+    }
+
+    .appa-stage.active {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      opacity: 1;
+    }
+
+    /* ─── STAGE 1: THE DOOR ─────────────────────────────────────── */
+    .door-wrapper {
+      text-align: center;
+      margin-top: clamp(2rem, 8vh, 5rem);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .golden-door-icon {
+      width: 140px;
+      height: 200px;
+      border: 3px solid var(--gold-bright);
+      border-radius: 70px 70px 8px 8px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 50% 40%, rgba(212, 175, 55, 0.25), rgba(46, 8, 84, 0.8));
+      box-shadow: 0 0 50px rgba(212, 175, 55, 0.4), inset 0 0 30px rgba(255, 215, 0, 0.25);
+      animation: pulseGoldDoor 4s ease-in-out infinite;
+    }
+
+    @keyframes pulseGoldDoor {
+      0%, 100% {
+        box-shadow: 0 0 35px rgba(212, 175, 55, 0.35), inset 0 0 20px rgba(255, 215, 0, 0.2);
+        transform: scale(1);
+      }
+      50% {
+        box-shadow: 0 0 65px rgba(212, 175, 55, 0.65), inset 0 0 35px rgba(255, 215, 0, 0.4);
+        transform: scale(1.02);
+      }
+    }
+
+    .door-knob {
+      width: 18px;
+      height: 18px;
+      background: var(--gold-bright);
+      border-radius: 50%;
+      position: absolute;
+      right: 22px;
+      top: 55%;
+      box-shadow: 0 0 10px #FFD700;
+    }
+
+    .door-line-tamil {
+      font-family: var(--font-tamil), sans-serif;
+      font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+      font-weight: 600;
+      color: var(--gold-bright);
+      line-height: 1.6;
+      max-width: 680px;
+      filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.4));
+    }
+
+    .door-line-eng {
+      font-family: var(--font-heading);
+      font-size: clamp(1.1rem, 3vw, 1.4rem);
+      color: var(--purple-lavender);
+      font-style: italic;
+      max-width: 620px;
+      line-height: 1.7;
+    }
+
+    .btn-come-in {
+      background: var(--grad-gold);
+      color: #2E0854;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.15rem;
+      padding: 1rem 3rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+      transition: all 0.3s;
+    }
+
+    .btn-come-in:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 45px rgba(255, 215, 0, 0.8);
+    }
+
+    /* ─── STAGE 2: MEMORIES WITH APPA ───────────────────────────── */
+    .slideshow-card {
+      width: 100%;
+      max-width: 720px;
+      background: rgba(30, 8, 55, 0.7);
+      border: 2px solid rgba(212, 175, 55, 0.45);
+      border-radius: 24px;
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.7), 0 0 35px rgba(106, 27, 154, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      text-align: center;
+    }
+
+    .slideshow-frame {
+      position: relative;
+      width: 100%;
+      max-width: 540px;
+      aspect-ratio: 4/3;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 3px solid rgba(212, 175, 55, 0.6);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      background: #0d021a;
+    }
+
+    .slideshow-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.8s ease, transform 12s ease-out;
+      transform: scale(1);
+    }
+
+    .slideshow-img.kenburns {
+      transform: scale(1.09);
+    }
+
+    .slideshow-caption {
+      font-family: var(--font-display);
+      font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+      color: var(--gold-champagne);
+      font-style: italic;
+      min-height: 3.5rem;
+      line-height: 1.8;
+      max-width: 600px;
+    }
+
+    .slideshow-quote {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      color: var(--purple-orchid);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-top: 1px solid rgba(212, 175, 55, 0.25);
+      padding-top: 1rem;
+      width: 100%;
+    }
+
+    .slideshow-controls {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .ctrl-btn {
+      background: rgba(106, 27, 154, 0.4);
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      color: var(--gold-bright);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .ctrl-btn:hover {
+      background: rgba(212, 175, 55, 0.25);
+      transform: scale(1.08);
+    }
+
+    .slide-counter {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      color: var(--gold-champagne);
+    }
+
+    /* ─── STAGE 3: FIVE QUESTIONS ABOUT APPA ─────────────────────── */
+    .question-card {
+      width: 100%;
+      max-width: 720px;
+      background: rgba(28, 6, 52, 0.85);
+      border: 2px solid rgba(212, 175, 55, 0.4);
+      border-radius: 24px;
+      padding: clamp(2rem, 5vw, 3.2rem);
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      position: relative;
+    }
+
+    .q-number-pill {
+      align-self: flex-start;
+      background: rgba(179, 136, 235, 0.15);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 50px;
+      padding: 0.3rem 1rem;
+      font-size: 0.85rem;
+      color: var(--gold-champagne);
+      font-family: var(--font-heading);
+    }
+
+    .q-text-h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.25rem, 3.5vw, 1.7rem);
+      color: var(--gold-bright);
+      line-height: 1.6;
+    }
+
+    .q-answer-box {
+      width: 100%;
+      min-height: 130px;
+      background: rgba(14, 2, 28, 0.75);
+      border: 1.5px solid rgba(212, 175, 55, 0.35);
+      border-radius: 16px;
+      padding: 1.2rem;
+      color: #FFFDF8;
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      resize: vertical;
+      transition: border 0.3s;
+    }
+
+    .q-answer-box:focus {
+      outline: none;
+      border-color: var(--gold-bright);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+    }
+
+    .take-your-time-hint {
+      font-family: var(--font-display);
+      font-style: italic;
+      color: var(--purple-lavender);
+      font-size: 0.95rem;
+      text-align: center;
+      margin-top: -0.5rem;
+    }
+
+    .q-actions-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    /* Voice dictation button */
+    .voice-btn {
+      background: rgba(106, 27, 154, 0.35);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 50px;
+      padding: 0.6rem 1.2rem;
+      color: var(--gold-champagne);
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.25s;
+    }
+
+    .voice-btn.recording {
+      background: rgba(183, 28, 28, 0.5);
+      border-color: #FF5252;
+      color: #FFCDD2;
+      animation: pulseRecord 1.5s infinite;
+    }
+
+    @keyframes pulseRecord {
+      0%, 100% { box-shadow: 0 0 10px rgba(255, 82, 82, 0.4); }
+      50% { box-shadow: 0 0 25px rgba(255, 82, 82, 0.8); }
+    }
+
+    /* ─── QUESTION 5: CANDLE PAUSE SCREEN ────────────────────────── */
+    .candle-pause-wrap {
+      display: none;
+      text-align: center;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      max-width: 680px;
+      margin: clamp(2rem, 6vh, 4rem) auto;
+      animation: fadeInSlow 1.5s ease forwards;
+    }
+
+    .sacred-candle {
+      width: 70px;
+      height: 120px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .candle-flame {
+      width: 22px;
+      height: 38px;
+      background: radial-gradient(ellipse at 50% 80%, #FFFFFF 0%, #FFF176 30%, #FF9800 65%, #F44336 90%);
+      border-radius: 50% 50% 20% 20%;
+      box-shadow: 0 0 25px #FFD700, 0 0 50px #FF9800, 0 0 80px rgba(255, 152, 0, 0.6);
+      animation: sacredFlicker 2.5s ease-in-out infinite;
+    }
+
+    @keyframes sacredFlicker {
+      0%, 100% { transform: scale(1) rotate(-1deg); }
+      25% { transform: scale(1.06, 0.95) rotate(1deg); }
+      50% { transform: scale(0.96, 1.05) rotate(-0.5deg); }
+      75% { transform: scale(1.03, 1.02) rotate(1.5deg); }
+    }
+
+    .candle-wick {
+      width: 3px;
+      height: 10px;
+      background: #4A148C;
+      margin-top: -2px;
+    }
+
+    .candle-body {
+      width: 36px;
+      height: 80px;
+      background: linear-gradient(180deg, #F5ECCF, #D4AF37 70%, #9A7B1C);
+      border-radius: 6px 6px 12px 12px;
+      box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.5);
+    }
+
+    .pause-line {
+      font-family: var(--font-heading);
+      font-size: clamp(1.3rem, 4vw, 1.85rem);
+      color: var(--gold-bright);
+      line-height: 1.7;
+    }
+
+    /* ─── QUESTION 5: SACRED LETTER TO APPA ──────────────────────── */
+    .q5-sacred-stage {
+      display: none;
+      position: relative;
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+      animation: fadeInSlow 1.8s ease forwards;
+    }
+
+    .appa-bg-portrait {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: clamp(280px, 60vw, 420px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.18;
+      filter: blur(1px) drop-shadow(0 0 50px rgba(212, 175, 55, 0.5));
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .q5-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.8rem;
+    }
+
+    .q5-word-by-word {
+      font-family: var(--font-heading);
+      font-size: clamp(1.4rem, 4vw, 2.1rem);
+      color: var(--gold-bright);
+      line-height: 1.6;
+      max-width: 680px;
+      min-height: 4rem;
+      filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.4));
+    }
+
+    .q5-word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      margin-right: 0.35rem;
+    }
+
+    .q5-word.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .letter-style-box {
+      width: 100%;
+      min-height: 220px;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(26, 5, 48, 0.85),
+        rgba(26, 5, 48, 0.85) 35px,
+        rgba(212, 175, 55, 0.18) 36px
+      );
+      border: 2px solid var(--gold-metallic);
+      border-radius: 18px;
+      padding: 1.4rem 1.8rem;
+      color: #FFFDF8;
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      line-height: 36px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), inset 0 0 25px rgba(212, 175, 55, 0.12);
+      resize: vertical;
+    }
+
+    .letter-style-box:focus {
+      outline: none;
+      border-color: var(--gold-bright);
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.45);
+    }
+
+    .not-now-link {
+      background: none;
+      border: none;
+      color: var(--purple-orchid);
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: underline;
+      opacity: 0.75;
+      transition: opacity 0.25s;
+    }
+
+    .not-now-link:hover {
+      opacity: 1;
+      color: var(--gold-champagne);
+    }
+
+    /* Quiet screen: He heard you Amma */
+    .he-heard-you-screen {
+      display: none;
+      text-align: center;
+      margin: clamp(4rem, 15vh, 8rem) auto;
+      animation: fadeInSlow 2s ease forwards;
+    }
+
+    .he-heard-line {
+      font-family: var(--font-script);
+      font-size: clamp(2.8rem, 7vw, 4.2rem);
+      color: #90CAF9;
+      filter: drop-shadow(0 0 25px rgba(144, 202, 249, 0.7));
+      margin-bottom: 1.5rem;
+    }
+
+    /* ─── STAGE 4: APPA'S BIRTHDAY WISH VIDEO ─────────────────────── */
+    .cinema-wrapper {
+      width: 100%;
+      max-width: 780px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.8rem;
+      text-align: center;
+    }
+
+    .cinema-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #000;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 3px solid var(--gold-metallic);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(212, 175, 55, 0.35);
+    }
+
+    .cinema-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .video-poster-overlay {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      background-color: rgba(10, 2, 20, 0.75);
+      background-blend-mode: overlay;
+      transition: opacity 0.5s;
+      cursor: pointer;
+    }
+
+    .big-gold-play {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--grad-gold);
+      color: #2E0854;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      padding-left: 6px;
+      box-shadow: 0 0 35px rgba(255, 215, 0, 0.8);
+      transition: transform 0.3s;
+    }
+
+    .big-gold-play:hover {
+      transform: scale(1.12);
+    }
+
+    .missing-video-card {
+      display: none;
+      position: absolute;
+      inset: 0;
+      background: rgba(18, 4, 34, 0.94);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+      gap: 1rem;
+    }
+
+    .video-ended-blessing {
+      display: none;
+      animation: fadeInSlow 1.5s ease forwards;
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .blessing-text-appa {
+      font-family: var(--font-heading);
+      font-size: clamp(1.2rem, 3.5vw, 1.65rem);
+      color: #90CAF9;
+      line-height: 1.8;
+      filter: drop-shadow(0 0 15px rgba(144, 202, 249, 0.5));
+      margin-bottom: 2rem;
+    }
+
+    @keyframes fadeInSlow {
+      from { opacity: 0; transform: translateY(15px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div id="progress-bar" role="navigation" aria-label="Amma's party rooms progress"></div>
+
+<!-- Music Toggle -->
+<button id="music-toggle" aria-label="Toggle background music">🎵</button>
+
+<!-- Page Transition Overlay -->
+<div id="page-transition" aria-hidden="true" style="opacity:0;pointer-events:none;">
+  <div class="curtain-left"></div>
+  <div class="curtain-right"></div>
+</div>
+
+<main class="page-wrapper" role="main">
+
+  <!-- ══════════════════════════════════════════════════════════════
+       STAGE 1: THE DOOR
+       ══════════════════════════════════════════════════════════════ -->
+  <section class="appa-stage active" id="stage-1" aria-label="The Sacred Door for Appa">
+    <div class="text-center" style="margin-bottom: 1.5rem;">
+      <span class="appa-badge">Room 11 ✦ A Sacred Space</span>
+    </div>
+
+    <div class="door-wrapper">
+      <div class="golden-door-icon" aria-hidden="true">
+        <span style="font-size: 2.8rem; filter: drop-shadow(0 0 10px #FFD700);">🕊️</span>
+        <div class="door-knob"></div>
+      </div>
+
+      <div class="door-line-tamil" id="door-tamil-text">
+        அம்மா… இன்னும் ஒரு அறை இருக்கு. இது அப்பாவுக்காக.
+      </div>
+
+      <div class="door-line-eng" id="door-eng-text">
+        "Amma… there is one more room. This one is for Appa."
+      </div>
+
+      <button class="btn-come-in" id="come-in-btn" aria-label="Enter Appa's room, Amma">
+        ✦ Come in, Amma ✦
+      </button>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       STAGE 2: MEMORIES WITH APPA (KEN BURNS SLIDESHOW)
+       ══════════════════════════════════════════════════════════════ -->
+  <section class="appa-stage" id="stage-2" aria-label="Memories with Appa">
+    <div class="text-center" style="margin-bottom: 1.2rem;">
+      <span class="appa-badge">Memories With Appa 💙</span>
+      <h1 style="font-size:clamp(1.7rem, 4vw, 2.5rem); margin-top:0.4rem; color:var(--gold-bright);">
+        Walking Hand in Hand With Appa
+      </h1>
+    </div>
+
+    <div class="slideshow-card">
+      <div class="slideshow-frame" id="slideshow-frame" role="region" aria-label="Photo carousel with Appa">
+        <img src="assets/photos/appa/photo1.jpg" alt="Memory of Amma with Appa" class="slideshow-img kenburns" id="slide-img"/>
+      </div>
+
+      <div class="slideshow-caption" id="slide-caption">
+        Appa's proud, gentle smile holding his beloved little princess.
+      </div>
+
+      <div class="slideshow-controls">
+        <button class="ctrl-btn" id="prev-slide-btn" aria-label="Previous memory">‹</button>
+        <button class="ctrl-btn" id="pause-slide-btn" aria-label="Pause slideshow">⏸</button>
+        <span class="slide-counter" id="slide-counter">1 / 4</span>
+        <button class="ctrl-btn" id="next-slide-btn" aria-label="Next memory">›</button>
+      </div>
+
+      <div class="slideshow-quote" id="slideshow-quote">
+        "Some people are never really gone from the heart."
+      </div>
+
+      <button class="btn btn-gold" id="finish-memories-btn" style="margin-top: 0.8rem; font-size:1.05rem; padding:0.8rem 2.4rem;">
+        Continue to Appa's Questions 💙
+      </button>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       STAGE 3: FIVE QUESTIONS ABOUT APPA
+       ══════════════════════════════════════════════════════════════ -->
+  <section class="appa-stage" id="stage-3" aria-label="Questions About Appa">
+    <div class="text-center" style="margin-bottom: 1.5rem;">
+      <span class="appa-badge">Treasured Memories ✦ Just For Amma</span>
+    </div>
+
+    <!-- Questions 1 to 4 Container -->
+    <div class="question-card" id="q-regular-wrap">
+      <span class="q-number-pill" id="q-pill">Question 1 of 5</span>
+
+      <h2 class="q-text-h2" id="q-text">
+        What is one memory with your Appa that you will cherish forever? ❤️
+      </h2>
+
+      <textarea class="q-answer-box" id="q-answer" placeholder="Tell us about that cherished memory with Appa..." aria-label="Your answer"></textarea>
+
+      <div class="take-your-time-hint">
+        Take your time, Amma. There is no rush at all.
+      </div>
+
+      <div class="q-actions-row">
+        <button class="voice-btn" id="voice-btn" aria-label="Speak your answer using microphone">
+          <span>🎙️</span> <span id="voice-btn-text">Voice Dictate</span>
+        </button>
+
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <button class="btn-subtle" id="skip-q-btn" style="color:var(--purple-orchid); font-size:0.9rem;">
+            Skip for now
+          </button>
+          <button class="btn btn-gold" id="save-q-btn" style="padding:0.7rem 1.8rem; font-size:1rem;">
+            Save & Next ➔
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Question 5 Pause Screen: Diya / Single Candle -->
+    <div class="candle-pause-wrap" id="candle-pause-wrap">
+      <div class="sacred-candle" aria-hidden="true">
+        <div class="candle-flame"></div>
+        <div class="candle-wick"></div>
+        <div class="candle-body"></div>
+      </div>
+
+      <p class="pause-line">
+        Take a deep breath, Amma.<br/>
+        This one is just between you and Appa.
+      </p>
+
+      <button class="btn btn-gold" id="im-ready-btn" style="font-size:1.15rem; padding:0.9rem 2.8rem;">
+        I'm ready, Appa 💙
+      </button>
+    </div>
+
+    <!-- Question 5: Sacred Word-by-Word Reveal over Appa's Portrait -->
+    <div class="q5-sacred-stage" id="q5-sacred-stage">
+      <div class="appa-bg-portrait" id="appa-bg-portrait"></div>
+
+      <div class="q5-content">
+        <div class="q-number-pill" style="margin-bottom:0.5rem;">The Most Sacred Question</div>
+
+        <div class="q5-word-by-word" id="q5-word-wrap" aria-label="Sacred Question 5">
+          <!-- Populated word-by-word via JS -->
+        </div>
+
+        <textarea class="letter-style-box" id="q5-answer" placeholder="Tell him here, Amma… straight from your heart..." aria-label="A letter to Appa"></textarea>
+
+        <div class="take-your-time-hint">
+          No limits, no rush. Speak whatever your heart holds.
+        </div>
+
+        <div style="display:flex; align-items:center; justify-content:space-between; width:100%; gap:1rem; flex-wrap:wrap; margin-top:0.5rem;">
+          <button class="voice-btn" id="voice-btn-q5" aria-label="Speak your letter to Appa">
+            <span>🎙️</span> <span id="voice-text-q5">Voice Dictate</span>
+          </button>
+
+          <button class="btn btn-gold" id="submit-q5-btn" style="padding:0.85rem 2.4rem; font-size:1.1rem;">
+            Tell Appa 💙
+          </button>
+        </div>
+
+        <!-- Subtle 'Not now' link instead of Skip -->
+        <div style="margin-top: 1rem;">
+          <button class="not-now-link" id="not-now-link" aria-label="Postpone question 5">
+            Not now (I will come back to this later)
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Still Quiet Screen: He heard you, Amma. 💙 -->
+    <div class="he-heard-you-screen" id="he-heard-you-screen">
+      <div class="he-heard-line">
+        He heard you, Amma. 💙
+      </div>
+      <p style="color:var(--gold-champagne); font-style:italic; font-size:1.15rem;">
+        Held safe and close in eternity.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       STAGE 4: APPA'S BIRTHDAY WISH VIDEO (THE FINAL SURPRISE)
+       ══════════════════════════════════════════════════════════════ -->
+  <section class="appa-stage" id="stage-4" aria-label="Appa's Birthday Wish Video">
+    <div class="cinema-wrapper">
+      <div class="text-center">
+        <span class="appa-badge">The Final Surprise 🕊️</span>
+        <h1 style="font-size:clamp(1.7rem, 4.5vw, 2.6rem); margin-top:0.5rem; color:var(--gold-bright);">
+          Amma… Appa has something for you.
+        </h1>
+        <p style="color:var(--purple-lavender); font-style:italic; margin-top:0.3rem;">
+          "A father's blessings never fade — they echo forever."
+        </p>
+      </div>
+
+      <!-- Cinema-style Video Player -->
+      <div class="cinema-frame" id="cinema-frame">
+        <video class="cinema-video" id="appa-video" playsinline controls preload="metadata" poster="assets/photos/appa/portrait.jpg">
+          <source src="assets/videos/appa-birthday-wish.mp4" type="video/mp4"/>
+          Your browser does not support video playback.
+        </video>
+
+        <!-- Tap to Play Overlay -->
+        <div class="video-poster-overlay" id="video-overlay" style="background-image: url('assets/photos/appa/portrait.jpg');">
+          <div class="big-gold-play" aria-label="Play Appa's birthday wish video">▶</div>
+          <p style="font-family:var(--font-heading); color:#FFF; font-size:1.1rem; text-shadow:0 2px 10px rgba(0,0,0,0.8);">
+            Tap to Watch Appa's Birthday Blessing
+          </p>
+        </div>
+
+        <!-- Missing Video Placeholder / Fallback -->
+        <div class="missing-video-card" id="missing-video-card">
+          <div style="font-size:3rem;">💙</div>
+          <h3 style="color:var(--gold-bright); font-family:var(--font-heading);">
+            Appa's Birthday Blessing
+          </h3>
+          <p style="color:var(--gold-champagne); max-width:440px; font-size:0.95rem; line-height:1.6;">
+            "Happy Birthday, Amma. Appa's blessings are always with you. 💙"<br/>
+            <small style="opacity:0.7;">(Place video at <code>assets/videos/appa-birthday-wish.mp4</code> or select a local file below)</small>
+          </p>
+          <div style="display:flex; gap:0.8rem; margin-top:0.5rem; flex-wrap:wrap; justify-content:center;">
+            <label class="btn btn-glass" style="font-size:0.85rem; cursor:pointer;">
+              📁 Select Appa's Video File
+              <input type="file" id="local-video-input" accept="video/*" style="display:none;"/>
+            </label>
+            <button class="btn btn-gold" id="simulate-watch-btn" style="font-size:0.85rem;">
+              Blessings Received 💙
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video Ended Blessing & Continue to Letter -->
+      <div class="video-ended-blessing" id="video-ended-blessing">
+        <p class="blessing-text-appa" id="appa-blessing-text">
+          Happy Birthday, Amma. Appa's blessings are always with you. 💙
+        </p>
+
+        <div style="display:flex; gap:1.2rem; justify-content:center; flex-wrap:wrap;">
+          <button class="btn btn-glass" id="rewatch-btn" style="font-size:1rem; padding:0.8rem 2rem;">
+            ↺ Watch Again
+          </button>
+          <button class="btn btn-gold" id="to-letter-btn" style="font-size:1.1rem; padding:0.9rem 2.8rem;">
+            Continue to The Final Letter 💌
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // Page guard & shared init (Page 10: A Room For Appa)
+  guardPage(10);
+  sharedInit(10);
+
+  // Music in Appa's sacred room softens to a gentle whisper
+  Music.setVolume(0.09);
+
+  // Soft Drifting Jasmine Petals (quiet and serene, no confetti)
+  function initJasminePetals() {
+    const symbols = ['🌸', '✨', '🕊️', '🤍'];
+    for (let i = 0; i < 14; i++) {
+      const p = document.createElement('div');
+      p.className = 'jasmine-petal';
+      p.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      p.style.left = (Math.random() * 100) + 'vw';
+      p.style.animationDuration = (8 + Math.random() * 9) + 's';
+      p.style.animationDelay = (Math.random() * 6) + 's';
+      p.style.fontSize = (0.9 + Math.random() * 0.7) + 'rem';
+      document.body.appendChild(p);
+    }
+  }
+  initJasminePetals();
+
+  // ─── STAGE MANAGEMENT ────────────────────────────────────────
+  let currentStage = 1;
+  const stages = {
+    1: document.getElementById('stage-1'),
+    2: document.getElementById('stage-2'),
+    3: document.getElementById('stage-3'),
+    4: document.getElementById('stage-4'),
+  };
+
+  function transitionToStage(stageNum) {
+    if (!stages[stageNum]) return;
+    const fromStage = stages[currentStage];
+    const toStage   = stages[stageNum];
+
+    fromStage.style.opacity = '0';
+    setTimeout(() => {
+      fromStage.classList.remove('active');
+      toStage.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => {
+        toStage.style.opacity = '1';
+      }, 50);
+      currentStage = stageNum;
+    }, 1000);
+  }
+
+  // ─── STAGE 1: THE DOOR ───────────────────────────────────────
+  const appaData = CONFIG.appa || {};
+  if (appaData.doorTamil) {
+    document.getElementById('door-tamil-text').textContent = appaData.doorTamil;
+  }
+  if (appaData.doorEnglish) {
+    document.getElementById('door-eng-text').textContent = `"${appaData.doorEnglish}"`;
+  }
+
+  document.getElementById('come-in-btn').addEventListener('click', () => {
+    playSound('bell');
+    transitionToStage(2);
+    startSlideshow();
+  });
+
+  // ─── STAGE 2: MEMORIES WITH APPA SLIDESHOW ───────────────────
+  const photos = appaData.photos || [
+    { src: 'assets/photos/appa/photo1.jpeg', caption: "Appa's proud, gentle smile holding his beloved little princess." },
+    { src: 'assets/photos/appa/photo2.jpeg', caption: "The safest place in the world — walking hand in hand by Appa's side." },
+  ];
+
+  let currentSlide = 0;
+  let slideTimer = null;
+  let isPaused = false;
+  const slideImg = document.getElementById('slide-img');
+  const slideCaption = document.getElementById('slide-caption');
+  const slideCounter = document.getElementById('slide-counter');
+  const pauseBtn = document.getElementById('pause-slide-btn');
+
+  function renderSlide(index) {
+    currentSlide = (index + photos.length) % photos.length;
+    slideImg.style.opacity = '0';
+    setTimeout(() => {
+      slideImg.src = photos[currentSlide].src;
+      slideCaption.textContent = photos[currentSlide].caption || '';
+      slideCounter.textContent = `${currentSlide + 1} / ${photos.length}`;
+      slideImg.style.opacity = '1';
+      slideImg.classList.remove('kenburns');
+      void slideImg.offsetWidth; // trigger reflow
+      slideImg.classList.add('kenburns');
+    }, 400);
+  }
+
+  function startSlideshow() {
+    if (slideTimer) clearInterval(slideTimer);
+    slideTimer = setInterval(() => {
+      if (!isPaused) renderSlide(currentSlide + 1);
+    }, 6000);
+  }
+
+  document.getElementById('prev-slide-btn').addEventListener('click', () => {
+    renderSlide(currentSlide - 1);
+  });
+
+  document.getElementById('next-slide-btn').addEventListener('click', () => {
+    renderSlide(currentSlide + 1);
+  });
+
+  pauseBtn.addEventListener('click', () => {
+    isPaused = !isPaused;
+    pauseBtn.textContent = isPaused ? '▶' : '⏸';
+  });
+
+  // Touch Swipe for Mobile
+  let touchStartX = 0;
+  const frameEl = document.getElementById('slideshow-frame');
+  frameEl.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  frameEl.addEventListener('touchend', (e) => {
+    const diff = e.changedTouches[0].screenX - touchStartX;
+    if (diff > 50) renderSlide(currentSlide - 1);
+    else if (diff < -50) renderSlide(currentSlide + 1);
+  }, { passive: true });
+
+  document.getElementById('finish-memories-btn').addEventListener('click', () => {
+    if (slideTimer) clearInterval(slideTimer);
+    transitionToStage(3);
+    initQuestionsStage();
+  });
+
+  // ─── STAGE 3: FIVE QUESTIONS ABOUT APPA ───────────────────────
+  const appaQuestions = appaData.questions || [
+    { id: 'appa_q1', text: "What is one memory with your Appa that you will cherish forever? ❤️", placeholder: "Tell us about that cherished memory..." },
+    { id: 'appa_q2', text: "If you could relive one day with your Appa, which day would you choose and why?", placeholder: "The day you would relive with Appa..." },
+    { id: 'appa_q3', text: "What is the one thing your Appa did that always made you feel loved and protected?", placeholder: "How Appa made you feel so safe..." },
+    { id: 'appa_q4', text: "What is something about your Appa that you miss the most, but rarely express? 🥹", placeholder: "That quiet feeling you hold close..." },
+    { id: 'appa_q5', text: "If your Appa were standing in front of you right now, what would be the first thing you would tell him? ❤️🩹", placeholder: "Tell him here, Amma… straight from your heart...", isLetterToAppa: true }
+  ];
+
+  let currentQIndex = 0;
+  let savedAppaAnswers = {};
+  try {
+    savedAppaAnswers = JSON.parse(localStorage.getItem('amma_appa_answers') || '{}');
+  } catch {}
+
+  const qRegularWrap   = document.getElementById('q-regular-wrap');
+  const qPill          = document.getElementById('q-pill');
+  const qText          = document.getElementById('q-text');
+  const qAnswer        = document.getElementById('q-answer');
+  const candleWrap     = document.getElementById('candle-pause-wrap');
+  const q5SacredStage  = document.getElementById('q5-sacred-stage');
+  const q5WordWrap     = document.getElementById('q5-word-wrap');
+  const q5Answer       = document.getElementById('q5-answer');
+  const heHeardScreen  = document.getElementById('he-heard-you-screen');
+
+  function initQuestionsStage() {
+    currentQIndex = 0;
+    renderCurrentQuestion();
+  }
+
+  function renderCurrentQuestion() {
+    if (currentQIndex < 4) {
+      // Questions 1 to 4
+      qRegularWrap.style.display = 'flex';
+      candleWrap.style.display = 'none';
+      q5SacredStage.style.display = 'none';
+      heHeardScreen.style.display = 'none';
+
+      const q = appaQuestions[currentQIndex];
+      qPill.textContent = `Question ${currentQIndex + 1} of 5`;
+      qText.textContent = q.text;
+      qAnswer.placeholder = q.placeholder || "Tell us here, Amma...";
+      qAnswer.value = savedAppaAnswers[q.id] || '';
+      qAnswer.focus();
+    } else {
+      // Question 5 — Show Candle Pause First!
+      qRegularWrap.style.display = 'none';
+      candleWrap.style.display = 'flex';
+      q5SacredStage.style.display = 'none';
+      heHeardScreen.style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  function saveAndNextQ(skip = false) {
+    const q = appaQuestions[currentQIndex];
+    if (!skip && qAnswer.value.trim()) {
+      savedAppaAnswers[q.id] = qAnswer.value.trim();
+      localStorage.setItem('amma_appa_answers', JSON.stringify(savedAppaAnswers));
+    }
+    currentQIndex++;
+    renderCurrentQuestion();
+  }
+
+  document.getElementById('save-q-btn').addEventListener('click', () => saveAndNextQ(false));
+  document.getElementById('skip-q-btn').addEventListener('click', () => saveAndNextQ(true));
+
+  // Voice Dictation for Questions 1-4
+  setupVoiceDictation('voice-btn', 'voice-btn-text', qAnswer);
+
+  // ── Question 5: When "I'm ready" is clicked ───────────────────
+  document.getElementById('im-ready-btn').addEventListener('click', () => {
+    candleWrap.style.display = 'none';
+    q5SacredStage.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Set background portrait
+    const portraitBg = document.getElementById('appa-bg-portrait');
+    portraitBg.style.backgroundImage = `url('${appaData.portrait || "assets/photos/appa/photo1.jpeg"}')`;
+
+    // Word by word reveal
+    const q5 = appaQuestions[4];
+    q5WordWrap.innerHTML = '';
+    const words = q5.text.split(' ');
+    words.forEach(w => {
+      const span = document.createElement('span');
+      span.className = 'q5-word';
+      span.textContent = w;
+      q5WordWrap.appendChild(span);
+    });
+
+    const spans = q5WordWrap.querySelectorAll('.q5-word');
+    spans.forEach((span, idx) => {
+      setTimeout(() => {
+        span.classList.add('visible');
+      }, (idx + 1) * 220);
+    });
+
+    // Load previously saved answer if any
+    q5Answer.value = savedAppaAnswers['appa_q5'] || localStorage.getItem('amma_letter_to_appa') || '';
+    setupVoiceDictation('voice-btn-q5', 'voice-text-q5', q5Answer);
+  });
+
+  // Question 5 Submit: "Tell Appa 💙"
+  document.getElementById('submit-q5-btn').addEventListener('click', () => {
+    const val = q5Answer.value.trim();
+    if (val) {
+      savedAppaAnswers['appa_q5'] = val;
+      localStorage.setItem('amma_appa_answers', JSON.stringify(savedAppaAnswers));
+      localStorage.setItem('amma_letter_to_appa', val);
+    }
+
+    // Still quiet screen: "He heard you, Amma. 💙"
+    q5SacredStage.style.display = 'none';
+    heHeardScreen.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Softly fade music for the sacred pause
+    Music.setVolume(0.04);
+
+    setTimeout(() => {
+      transitionToStage(4);
+      initVideoStage();
+    }, 4500);
+  });
+
+  // Question 5 "Not now" gentle postponement
+  document.getElementById('not-now-link').addEventListener('click', () => {
+    const confirmPostpone = confirm("Would you like to come back to this question later, Amma? Appa's room will always be waiting for you.");
+    if (confirmPostpone) {
+      localStorage.setItem('amma_appa_q5_postponed', 'true');
+      q5SacredStage.style.display = 'none';
+      transitionToStage(4);
+      initVideoStage();
+    }
+  });
+
+  // ─── STAGE 4: APPA'S BIRTHDAY WISH VIDEO ───────────────────────
+  const videoEl         = document.getElementById('appa-video');
+  const videoOverlay    = document.getElementById('video-overlay');
+  const missingCard     = document.getElementById('missing-video-card');
+  const videoEndedBox   = document.getElementById('video-ended-blessing');
+
+  function initVideoStage() {
+    Music.setVolume(0.02); // Fade music so video audio is clear
+    videoEl.poster = appaData.wishVideo?.poster || appaData.portrait || 'assets/photos/appa/photo1.jpeg';
+    if (appaData.wishVideo?.src) {
+      videoEl.src = appaData.wishVideo.src;
+    }
+  }
+
+  // Handle Play Click
+  videoOverlay.addEventListener('click', () => {
+    videoOverlay.style.display = 'none';
+    Music.pauseForVideo();
+    videoEl.play().catch(() => {
+      // If play failed or file missing
+      missingCard.style.display = 'flex';
+      Music.resumeAfterVideo();
+    });
+  });
+
+  // Handle Video Error (missing local file)
+  videoEl.addEventListener('error', () => {
+    videoOverlay.style.display = 'none';
+    missingCard.style.display = 'flex';
+    Music.resumeAfterVideo();
+  });
+
+  // Local file input fallback so family can play local video on phone/PC
+  document.getElementById('local-video-input').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const url = URL.createObjectURL(file);
+      videoEl.src = url;
+      missingCard.style.display = 'none';
+      Music.pauseForVideo();
+      videoEl.play();
+    }
+  });
+
+  // Simulate / Proceed if video not present
+  document.getElementById('simulate-watch-btn').addEventListener('click', () => {
+    missingCard.style.display = 'none';
+    onVideoFinished();
+  });
+
+  // Video Ended Event
+  videoEl.addEventListener('ended', onVideoFinished);
+
+  function onVideoFinished() {
+    videoEndedBox.style.display = 'block';
+    videoEndedBox.scrollIntoView({ behavior: 'smooth' });
+    // Unlock room 11 (letter.html)
+    Progress.unlock(11);
+    renderProgressBar(10);
+    Music.resumeAfterVideo();
+  }
+
+  document.getElementById('rewatch-btn').addEventListener('click', () => {
+    videoEl.currentTime = 0;
+    videoEndedBox.style.display = 'none';
+    videoEl.play();
+  });
+
+  document.getElementById('to-letter-btn').addEventListener('click', () => {
+    navigateTo('letter.html');
+  });
+
+  // ─── VOICE DICTATION HELPER ────────────────────────────────────
+  function setupVoiceDictation(btnId, labelId, targetInput) {
+    const btn = document.getElementById(btnId);
+    const label = document.getElementById(labelId);
+    if (!btn || !('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+      if (btn) btn.style.display = 'none';
+      return;
+    }
+
+    const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+    let recognition = null;
+    let isRecording = false;
+
+    btn.addEventListener('click', () => {
+      if (!isRecording) {
+        recognition = new SpeechRec();
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.lang = 'en-IN'; // Works for Indian English, Tamil accent, etc.
+
+        recognition.onstart = () => {
+          isRecording = true;
+          btn.classList.add('recording');
+          label.textContent = 'Listening...';
+        };
+
+        recognition.onresult = (event) => {
+          let transcript = '';
+          for (let i = event.resultIndex; i < event.results.length; i++) {
+            transcript += event.results[i][0].transcript;
+          }
+          if (transcript) {
+            targetInput.value = (targetInput.value ? targetInput.value + ' ' : '') + transcript;
+          }
+        };
+
+        recognition.onerror = () => {
+          stopDictation();
+        };
+
+        recognition.onend = () => {
+          stopDictation();
+        };
+
+        recognition.start();
+      } else {
+        stopDictation();
+      }
+    });
+
+    function stopDictation() {
+      isRecording = false;
+      btn.classList.remove('recording');
+      label.textContent = 'Voice Dictate';
+      if (recognition) {
+        try { recognition.stop(); } catch {}
+      }
+    }
+  }
+</script>
+</body>
+</html>

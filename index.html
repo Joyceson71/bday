@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday, Amma — Glory Gnana Selvi 💜</title>
+  <meta name="description" content="A private, heartfelt interactive birthday celebration made only for our dearest Amma, Glory Gnana Selvi."/>
+  <link rel="stylesheet" href="css/theme.css"/>
+  <link rel="stylesheet" href="css/animations.css"/>
+
+  <style>
+    /* ─── FULLSCREEN OPENING SCREEN (SECTION 1) ──────────────── */
+    #opening-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: radial-gradient(ellipse at 50% 40%, #3D0B6E 0%, #1F043A 60%, #0D0119 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.2s;
+    }
+
+    #opening-screen.fade-out {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .opening-tamil {
+      font-family: var(--font-tamil), sans-serif;
+      font-size: clamp(2.2rem, 6vw, 4.2rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #FFE79A 0%, #FFD700 40%, #E5A93C 70%, #FFEFC2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.65));
+      margin-bottom: 1.2rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: openReveal 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+    }
+
+    .opening-phonetic {
+      font-family: var(--font-heading);
+      font-size: clamp(1.1rem, 3vw, 1.8rem);
+      color: var(--purple-lavender);
+      font-style: italic;
+      letter-spacing: 0.1em;
+      opacity: 0;
+      transform: translateY(15px);
+      animation: openReveal 1.8s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards;
+      margin-bottom: 0.6rem;
+    }
+
+    .opening-english {
+      font-family: var(--font-script);
+      font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+      color: var(--gold-champagne);
+      filter: drop-shadow(0 0 15px rgba(212,175,55,0.5));
+      opacity: 0;
+      transform: translateY(15px);
+      animation: openReveal 1.8s cubic-bezier(0.16, 1, 0.3, 1) 1.9s forwards;
+    }
+
+    .opening-skip-btn {
+      margin-top: 2.5rem;
+      background: rgba(255, 215, 0, 0.12);
+      border: 1px solid rgba(255, 215, 0, 0.35);
+      color: var(--gold-champagne);
+      padding: 0.5rem 1.4rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-family: var(--font-heading);
+      cursor: pointer;
+      opacity: 0;
+      animation: openReveal 1s ease 3.5s forwards;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .opening-skip-btn:hover {
+      background: rgba(255, 215, 0, 0.25);
+      transform: scale(1.05);
+    }
+
+    @keyframes openReveal {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ─── GATE MAIN STYLES ────────────────────────────────────── */
+    .gate-hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1rem 5rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .invitation-card {
+      background: linear-gradient(145deg, rgba(74,14,128,0.7) 0%, rgba(35,6,66,0.9) 100%);
+      border: 2px solid var(--gold-metallic);
+      border-radius: var(--radius-lg);
+      padding: clamp(2rem, 5vw, 3.8rem);
+      max-width: 660px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 12px 45px rgba(0,0,0,0.65), var(--glow-gold);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+    }
+
+    .invitation-card::before {
+      content: '';
+      position: absolute;
+      inset: 6px;
+      border: 1px dashed rgba(212,175,55,0.4);
+      border-radius: calc(var(--radius-lg) - 6px);
+      pointer-events: none;
+    }
+
+    .invite-label {
+      font-family: var(--font-heading);
+      font-size: 0.78rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold-champagne);
+      margin-bottom: 0.8rem;
+    }
+
+    .invite-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.2rem, 5.5vw, 3.5rem);
+      font-weight: 700;
+      background: var(--grad-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.15;
+      margin-bottom: 0.3rem;
+    }
+
+    .invite-name {
+      font-family: var(--font-script);
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      color: var(--gold-champagne);
+      display: block;
+      margin: 0.2rem 0 0.8rem;
+      filter: drop-shadow(0 0 12px rgba(255,215,0,0.5));
+    }
+
+    .invite-subtitle {
+      font-size: 1.05rem;
+      color: var(--purple-lavender);
+      font-style: italic;
+      line-height: 1.7;
+      margin-bottom: 1.8rem;
+    }
+
+    .tamil-greeting-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(179,136,235,0.18);
+      border: 1px solid rgba(212,175,55,0.4);
+      border-radius: 50px;
+      padding: 0.45rem 1.4rem;
+      font-size: 0.95rem;
+      color: var(--gold-champagne);
+      margin-bottom: 1.8rem;
+      font-family: var(--font-tamil), sans-serif;
+    }
+
+    .invite-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 0.9rem;
+      margin: 1.5rem 0;
+    }
+
+    .detail-chip {
+      background: rgba(212,175,55,0.1);
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: 14px;
+      padding: 0.75rem 1rem;
+      font-size: 0.86rem;
+      line-height: 1.5;
+    }
+
+    .detail-chip .label {
+      font-family: var(--font-heading);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold-metallic);
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .gold-divider-h {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-metallic), transparent);
+      margin: 1.8rem 0;
+      opacity: 0.55;
+    }
+
+    /* ─── KEY DRAG GAME ───────────────────────────────────────── */
+    .key-game-section {
+      text-align: center;
+      position: relative;
+    }
+
+    .key-game-section h3 {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      color: var(--gold-bright);
+      margin-bottom: 0.4rem;
+    }
+
+    .key-game-section p.game-hint {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      margin-bottom: 1.4rem;
+    }
+
+    .door-stage {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+      height: 200px;
+      margin: 0 auto 1.5rem;
+      background: rgba(20, 2, 40, 0.65);
+      border-radius: 16px;
+      border: 1px dashed rgba(212,175,55,0.35);
+      overflow: hidden;
+      touch-action: none;
+    }
+
+    .door-frame {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 170px;
+      bottom: 0;
+      display: flex;
+      justify-content: space-between;
+      perspective: 700px;
+    }
+
+    .door-panel {
+      width: 58px;
+      height: 170px;
+      background: linear-gradient(135deg, #4A0E80, #6A1B9A);
+      border: 2px solid var(--gold-metallic);
+      border-radius: 6px 6px 0 0;
+      transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    }
+
+    .door-panel:first-child { transform-origin: left center; }
+    .door-panel:last-child  { transform-origin: right center; }
+
+    .door-panel.open:first-child { transform: perspective(700px) rotateY(-88deg); }
+    .door-panel.open:last-child  { transform: perspective(700px) rotateY(88deg); }
+
+    .door-panel::after {
+      content: '✦';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: rgba(212,175,55,0.5);
+      font-size: 1.6rem;
+    }
+
+    .door-knob {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--gold-bright);
+      right: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      box-shadow: 0 0 8px rgba(255,215,0,0.9);
+    }
+
+    .door-drop-zone {
+      position: absolute;
+      inset: 0;
+      border-radius: 6px;
+      z-index: 10;
+    }
+
+    .door-panel.drag-over {
+      box-shadow: 0 0 25px rgba(255,215,0,0.9), inset 0 0 15px rgba(255,215,0,0.7);
+    }
+
+    .key-drag {
+      position: absolute;
+      font-size: 2.8rem;
+      top: 20px;
+      left: 20px;
+      cursor: grab;
+      user-select: none;
+      filter: drop-shadow(0 0 10px rgba(255,215,0,0.9));
+      z-index: 20;
+      transition: transform 0.15s;
+      animation: floatSlow 2.5s ease-in-out infinite;
+    }
+
+    .key-drag:active { cursor: grabbing; transform: scale(1.2); }
+
+    .light-burst {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 0; height: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,215,0,0.95), rgba(179,136,235,0.6) 50%, transparent 75%);
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    .light-burst.active {
+      animation: burstAnim 0.9s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+    }
+
+    @keyframes burstAnim {
+      0%   { width: 0; height: 0; opacity: 1; }
+      100% { width: 500px; height: 500px; opacity: 0; }
+    }
+
+    .tap-fallback-btn {
+      background: var(--grad-gold);
+      color: var(--purple-deep);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.85rem 2rem;
+      border-radius: var(--radius-btn);
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow-btn), var(--glow-gold);
+      transition: transform 0.25s, box-shadow 0.25s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .tap-fallback-btn:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 6px 25px rgba(255,215,0,0.6);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── 1. THE OPENING MESSAGE (SECTION 1) ── -->
+<div id="opening-screen" role="dialog" aria-modal="true" aria-label="Welcome opening blessing for Amma">
+  <div class="opening-tamil">பிறந்ததற்கு நன்றி, அம்மா 💜</div>
+  <div class="opening-phonetic">Porandhadhuku nandri, Amma.</div>
+  <div class="opening-english">Thank you for being born.</div>
+  <button class="opening-skip-btn" id="open-now-btn" aria-label="Enter celebration">
+    Enter Amma's Party ✦
+  </button>
+</div>
+
+<!-- Ambient Canvas & FX -->
+<div class="bokeh bokeh-1"></div>
+<div class="bokeh bokeh-2"></div>
+<div class="bokeh bokeh-3"></div>
+<canvas id="particles-canvas" aria-hidden="true"></canvas>
+<div class="fairy-lights" aria-hidden="true"></div>
+
+<!-- Progress Bar (Gold Hearts) -->
+<div id="progress-bar" role="navigation" aria-label="Amma's party rooms progress"></div>
+
+<!-- Music Toggle -->
+<button id="music-toggle" aria-label="Toggle background music">🎵</button>
+
+<!-- Page Transition Overlay -->
+<div id="page-transition" aria-hidden="true" style="opacity:0;pointer-events:none;">
+  <div class="curtain-left"></div>
+  <div class="curtain-right"></div>
+</div>
+
+<!-- ── MAIN INVITATION CARD ── -->
+<main class="gate-hero" role="main">
+
+  <article class="invitation-card" aria-label="Birthday celebration invitation for Amma">
+
+    <p class="invite-label">✦ Made With All Our Love, Only For You ✦</p>
+
+    <h1 class="invite-title">Happy Birthday, Amma 🎉</h1>
+    <span class="invite-name" id="page-fullname">Glory Gnana Selvi</span>
+
+    <div class="tamil-greeting-pill">
+      <span>🌸</span>
+      <span>அன்பும் நன்றியும் நிறைந்த இதயத்தோடு, அம்மா</span>
+      <span>🌸</span>
+    </div>
+
+    <p class="invite-subtitle">
+      "A little party for the woman who made every day of ours a celebration.<br>
+      Step inside, Amma — every room in this house of memories has your love in it."
+    </p>
+
+    <div class="invite-details" role="list" aria-label="Celebration details">
+      <div class="detail-chip" role="listitem">
+        <span class="label">📅 Date</span>
+        <span id="page-date">October 22, 2026</span>
+      </div>
+      <div class="detail-chip" role="listitem">
+        <span class="label">⏰ Duration</span>
+        <span id="page-time">A Lifetime of Love</span>
+      </div>
+      <div class="detail-chip" role="listitem">
+        <span class="label">📍 Where</span>
+        <span id="page-venue">In Our Hearts Forever</span>
+      </div>
+    </div>
+
+    <!-- Welcome Back Returning Progress Notice -->
+    <div id="welcome-back-card" style="display:none; background:rgba(212,175,55,0.15); border:1px solid var(--gold-bright); border-radius:14px; padding:1rem 1.4rem; margin-bottom:1.5rem; text-align:center;">
+      <p style="color:var(--gold-bright); font-family:var(--font-heading); font-size:1.05rem; margin-bottom:0.6rem;">
+        🎉 Welcome back, Amma!
+      </p>
+      <p id="welcome-back-text" style="color:var(--gold-champagne); font-size:0.9rem; font-style:italic; margin-bottom:0.8rem;"></p>
+      <button class="btn btn-gold" id="continue-saved-room-btn" style="padding:0.5rem 1.4rem; font-size:0.88rem;">
+        Continue Where I Left Off →
+      </button>
+    </div>
+
+    <!-- Key Drag Game -->
+    <div class="key-game-section" aria-label="Unlock the party doors">
+      <h3>Amma, the doors are waiting for you ✨</h3>
+      <p class="game-hint">Drag the golden key to the doors, or simply tap below to step inside!</p>
+
+      <div class="door-stage" id="door-stage" role="application" aria-label="Door lock puzzle">
+        <div class="light-burst" id="light-burst"></div>
+
+        <div
+          class="key-drag"
+          id="key"
+          draggable="true"
+          role="button"
+          aria-label="Golden key — drag me to the door"
+          tabindex="0"
+          title="Drag me to the door, Amma!"
+        >🗝️</div>
+
+        <div class="door-frame" id="door-frame">
+          <div class="door-panel" id="door-left">
+            <div class="door-knob"></div>
+            <div class="door-drop-zone" id="door-drop"></div>
+          </div>
+          <div class="door-panel" id="door-right"></div>
+        </div>
+      </div>
+
+      <button class="tap-fallback-btn" id="tap-enter" aria-label="Tap to open the door">
+        <span>✨</span> Tap to Open, Amma! <span>🚪</span>
+      </button>
+    </div>
+
+  </article>
+</main>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // Fill config text
+  document.getElementById('page-fullname').textContent = CONFIG.fullName || "Glory Gnana Selvi";
+  document.getElementById('page-date').textContent     = CONFIG.date;
+  document.getElementById('page-time').textContent     = CONFIG.time;
+  document.getElementById('page-venue').textContent    = CONFIG.venue;
+
+  // Initialize shared scripts (Page 0: Gate)
+  sharedInit(0);
+
+  // Returning progress check
+  const savedProg = Progress.get();
+  if (savedProg > 0 && savedProg < PAGES.length) {
+    const card = document.getElementById('welcome-back-card');
+    const txt  = document.getElementById('welcome-back-text');
+    const targetRoom = PAGES[savedProg];
+    txt.textContent = `You have already unlocked up to Room ${savedProg + 1}: ${targetRoom.label}!`;
+    card.style.display = 'block';
+    document.getElementById('continue-saved-room-btn').addEventListener('click', () => {
+      navigateTo(targetRoom.file);
+    });
+  }
+
+  // ─── 1. OPENING SCREEN TRANSITION (4-5 SECONDS) ───────────
+  const openingScreen = document.getElementById('opening-screen');
+  const openNowBtn    = document.getElementById('open-now-btn');
+
+  let transitioned = false;
+  function transitionToParty() {
+    if (transitioned) return;
+    transitioned = true;
+    openingScreen.classList.add('fade-out');
+    // Start ambient music softly
+    Music.start();
+    launchConfetti(40);
+  }
+
+  // Auto transition after 4.8 seconds
+  const autoTimer = setTimeout(transitionToParty, 4800);
+
+  openNowBtn.addEventListener('click', () => {
+    clearTimeout(autoTimer);
+    transitionToParty();
+  });
+
+  // ─── 2. DRAG & DROP KEY INTERACTION ───────────────────────
+  const key       = document.getElementById('key');
+  const doorDrop  = document.getElementById('door-drop');
+  const doorLeft  = document.getElementById('door-left');
+  const doorRight = document.getElementById('door-right');
+  const burst     = document.getElementById('light-burst');
+
+  let dragging = false, startX, startY, kX, kY;
+
+  key.addEventListener('pointerdown', (e) => {
+    e.preventDefault();
+    dragging = true;
+    key.setPointerCapture(e.pointerId);
+    startX = e.clientX; startY = e.clientY;
+    kX = key.offsetLeft; kY = key.offsetTop;
+    key.style.animation = 'none';
+    key.style.transition = 'none';
+  });
+
+  key.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+    key.style.left = (kX + dx) + 'px';
+    key.style.top  = (kY + dy) + 'px';
+
+    const kr = key.getBoundingClientRect();
+    const dr = document.getElementById('door-frame').getBoundingClientRect();
+    const overlap = !(kr.right < dr.left || kr.left > dr.right || kr.bottom < dr.top || kr.top > dr.bottom);
+    doorLeft.classList.toggle('drag-over', overlap);
+    doorRight.classList.toggle('drag-over', overlap);
+  });
+
+  key.addEventListener('pointerup', (e) => {
+    if (!dragging) return;
+    dragging = false;
+    doorLeft.classList.remove('drag-over');
+    doorRight.classList.remove('drag-over');
+
+    const kr = key.getBoundingClientRect();
+    const dr = document.getElementById('door-frame').getBoundingClientRect();
+    const overlap = !(kr.right < dr.left || kr.left > dr.right || kr.bottom < dr.top || kr.top > dr.bottom);
+    if (overlap) {
+      openDoors();
+    } else {
+      key.style.left = '20px';
+      key.style.top  = '20px';
+      key.style.animation = 'floatSlow 2.5s ease-in-out infinite';
+    }
+  });
+
+  // Keyboard support
+  key.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') openDoors();
+  });
+
+  // Tap fallback button
+  document.getElementById('tap-enter').addEventListener('click', openDoors);
+
+  let opened = false;
+  function openDoors() {
+    if (opened) return;
+    opened = true;
+    Music.start();
+    playSound('success');
+
+    doorLeft.classList.add('open');
+    doorRight.classList.add('open');
+    burst.classList.add('active');
+
+    setTimeout(() => {
+      launchConfetti(80);
+      spawnBalloons(6);
+    }, 200);
+
+    showToast("Welcome, Amma! Your party begins 🎈", 3500);
+
+    Progress.unlock(1);
+    setTimeout(() => {
+      navigateTo('lobby.html', 700);
+    }, 1200);
+  }
+</script>
+</body>
+</html>

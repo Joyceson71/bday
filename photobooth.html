@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="refresh" content="0; url=photo-haul.html"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Photo Haul — Redirecting...</title>
+  <script>
+    window.location.replace("photo-haul.html" + window.location.search + window.location.hash);
+  </script>
+  <link rel="stylesheet" href="css/theme.css"/>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 2rem;
+      background: radial-gradient(circle at center, #2d1847 0%, #150921 100%);
+      color: #fff;
+      font-family: var(--font-body, system-ui, sans-serif);
+    }
+    .card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(212,175,55,0.4);
+      padding: 2.5rem 2rem;
+      border-radius: 16px;
+      max-width: 480px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    a.btn {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.8rem 1.8rem;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #d4af37, #f7e7a9);
+      color: #1a0f2e;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div style="font-size: 3rem; margin-bottom: 0.5rem;">📸</div>
+    <h2 style="font-family: var(--font-heading, serif); color: #f7e7a9;">Entering Amma's Photo Haul</h2>
+    <p style="opacity: 0.85; margin-top: 0.5rem;">Redirecting you to the grand showcase of all our memories...</p>
+    <a href="photo-haul.html" class="btn">Click here if not redirected →</a>
+  </div>
+</body>
+</html>
