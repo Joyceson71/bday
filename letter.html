@@ -676,16 +676,16 @@
 
   // ── 1. EXACT LETTER TEXT ───────────────────────────────────
   const letterObj = CONFIG.letter || {};
-  const paragraphs = letterObj.paragraphs || [
+  // Filter out empty/null paragraphs so placeholder lines never appear
+  const paragraphs = (letterObj.paragraphs || [
     "I have tried many times to find the right words for you, and every time I realise there aren't any big enough. So I built you a little party instead, because you have spent your whole life building ours.",
     "Thank you for being born, Amma. Because you were born, I have a home, a name, a heart that knows how to love. Everything good in me started with you.",
     "You sacrificed more than we will ever fully know. You were awake when we slept, you smiled when you were tired, and you made every ordinary day feel like a celebration.",
-    "I remember [ADD A SPECIFIC MEMORY]. I didn't say it then, but it meant everything.",
     "I am sorry for the days I forgot to say thank you. Thank you for your patience, your prayers, your scolding that was really love, and your hugs that fixed everything.",
     "This year, I wish you health, peace, laughter, and the rest you have always saved for others. May you feel as loved as you have made us feel.",
     "You are my first home, my strength and my whole heart.",
     "Happy Birthday, Glory Gnana Selvi. I love you more than any website could say."
-  ];
+  ]).filter(p => p && p.trim().length > 0);
 
   // ── 2. OPEN ENVELOPE INTERACTION ───────────────────────────
   let isOpened = false;

@@ -696,7 +696,7 @@ const AnswersSync = {
         fetch(webhookUrl.trim(), {
           method: 'POST',
           mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(recordObj)
         }).catch(err => console.warn('Background sheet sync notice:', err));
       } catch (e) {
@@ -804,3 +804,20 @@ function sharedInit(currentPageIndex) {
 
   loadSounds();
 }
+
+// ─── SERVICE WORKER REGISTRATION ─────────────────────────────
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {
+      // SW registration failed (e.g. file:// protocol) — ignore silently
+    });
+  });
+}
+
+// ─── LAZY LOADING FOR ALL IMAGES ─────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('img:not([loading])').forEach(img => {
+    img.setAttribute('loading', 'lazy');
+  });
+});
+

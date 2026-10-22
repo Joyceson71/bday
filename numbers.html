@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Life in Numbers — Amma's Birthday 💜</title>
+  <meta name="description" content="A gentle celebration of all the beautiful numbers that make up Amma's remarkable life."/>
+  <link rel="stylesheet" href="css/theme.css"/>
+  <link rel="stylesheet" href="css/animations.css"/>
+  <style>
+    .numbers-hero {
+      padding: 2rem 1rem 6rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .room-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(179,136,235,0.18);
+      border: 1px solid rgba(212,175,55,0.4);
+      border-radius: 50px;
+      padding: 0.4rem 1.2rem;
+      font-size: 0.85rem;
+      color: var(--gold-champagne);
+      font-family: var(--font-heading);
+      margin-bottom: 0.8rem;
+    }
+
+    /* ─── GRID ────────────────────────────────────────────────── */
+    .numbers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin: 2rem 0 3rem;
+    }
+
+    .number-card {
+      background: linear-gradient(145deg, rgba(62,11,108,0.75) 0%, rgba(28,4,52,0.92) 100%);
+      border: 1.5px solid rgba(212,175,55,0.4);
+      border-radius: 20px;
+      padding: 1.8rem 1.2rem 1.4rem;
+      text-align: center;
+      box-shadow: 0 6px 28px rgba(0,0,0,0.5);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
+    }
+
+    .number-card:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.65), var(--glow-gold);
+    }
+
+    .number-card::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      left: -40%;
+      width: 180%;
+      height: 180%;
+      background: radial-gradient(circle, rgba(212,175,55,0.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .card-emoji {
+      font-size: 2.4rem;
+      display: block;
+      margin-bottom: 0.5rem;
+      filter: drop-shadow(0 0 10px rgba(255,215,0,0.5));
+    }
+
+    .card-count {
+      font-family: var(--font-heading);
+      font-size: 3rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #FFE79A 0%, #FFD700 50%, #E5A93C 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 12px rgba(255,215,0,0.5));
+      display: block;
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .card-unit {
+      font-family: var(--font-heading);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold-metallic);
+      margin-bottom: 0.6rem;
+    }
+
+    .card-label {
+      font-size: 0.93rem;
+      color: var(--gold-champagne);
+      line-height: 1.5;
+      font-style: italic;
+    }
+
+    /* ─── QUOTE BANNER ───────────────────────────────────────── */
+    .quote-banner {
+      background: linear-gradient(135deg, rgba(74,14,128,0.65), rgba(35,6,66,0.88));
+      border: 2px solid var(--gold-metallic);
+      border-radius: 20px;
+      padding: 2.2rem 2rem;
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.5), var(--glow-gold);
+      margin: 0 0 2rem;
+    }
+
+    .quote-banner p {
+      font-family: var(--font-script);
+      font-size: clamp(1.3rem, 3.5vw, 2.1rem);
+      color: var(--gold-champagne);
+      line-height: 1.6;
+      filter: drop-shadow(0 0 10px rgba(255,215,0,0.3));
+    }
+
+    .quote-banner .attrib {
+      font-size: 0.82rem;
+      color: var(--purple-lavender);
+      margin-top: 0.8rem;
+      letter-spacing: 0.1em;
+      font-style: normal;
+      font-family: var(--font-heading);
+    }
+
+    /* ─── CONTINUE ───────────────────────────────────────────── */
+    .next-btn {
+      background: var(--grad-gold);
+      color: var(--purple-deep);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 0.9rem 2.4rem;
+      border-radius: var(--radius-btn);
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow-btn), var(--glow-gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: transform 0.25s;
+    }
+
+    .next-btn:hover { transform: translateY(-2px) scale(1.03); }
+
+    @media (max-width: 520px) {
+      .numbers-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+      .card-count { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bokeh bokeh-1"></div>
+<div class="bokeh bokeh-2"></div>
+<div class="bokeh bokeh-3"></div>
+<canvas id="particles-canvas" aria-hidden="true"></canvas>
+<div class="fairy-lights" aria-hidden="true"></div>
+
+<div id="progress-bar" role="navigation" aria-label="Amma's party rooms progress"></div>
+<button id="music-toggle" aria-label="Toggle background music">🎵</button>
+
+<div id="page-transition" aria-hidden="true" style="opacity:0;pointer-events:none;">
+  <div class="curtain-left"></div>
+  <div class="curtain-right"></div>
+</div>
+
+<main class="page-wrapper" role="main">
+  <div class="numbers-hero">
+
+    <div class="text-center">
+      <span class="room-badge">✦ Life in Numbers ✦</span>
+      <h1 class="invite-title" style="font-size:clamp(1.8rem, 5vw, 3rem); margin-bottom:0.4rem;">
+        Amma, Your Life in Numbers 💜
+      </h1>
+      <p style="color:var(--purple-lavender); font-style:italic; max-width:640px; margin:0 auto 2rem;">
+        "Every number here is a heartbeat of love, a moment of grace, a memory that shaped who you are."
+      </p>
+    </div>
+
+    <!-- Numbers grid — rendered from CONFIG.lifeInNumbers -->
+    <div class="numbers-grid" id="numbers-grid">
+      <!-- Filled by JS -->
+    </div>
+
+    <!-- Quote banner -->
+    <div class="quote-banner">
+      <p>"No number can count the ways you have loved us,<br>no word can measure what you mean to this family."</p>
+      <p class="attrib">— From Kavin, with his whole heart 💜</p>
+    </div>
+
+    <!-- Continue -->
+    <div class="text-center">
+      <button class="next-btn" id="next-room-btn">
+        <span>📸</span> Continue to Photo Haul →
+      </button>
+    </div>
+
+  </div>
+</main>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+<script>
+  sharedInit(0); // Accessible without guard — this page is a bonus
+
+  // ── LIFE IN NUMBERS DATA ──────────────────────────────────────
+  // If CONFIG.lifeInNumbers is defined, use it; else fall back to defaults.
+  const defaultNumbers = [
+    { emoji: '☕', end: 10000, unit: 'cups',     label: 'Filter Kaapis brewed with love for our family' },
+    { emoji: '🍲', end: 15000, unit: 'meals',    label: 'Hot, soulful meals cooked from the heart' },
+    { emoji: '🙏', end: 36500, unit: 'prayers',  label: 'Silent morning prayers offered for her children' },
+    { emoji: '🤗', end: 50000, unit: 'hugs',     label: 'Warm embraces that fixed every broken day' },
+    { emoji: '💜', end: 100,   unit: '% love',   label: 'Everything she gives — always one hundred percent' },
+    { emoji: '🌙', end: 18000, unit: 'nights',   label: 'Nights she stayed awake so we could sleep soundly' },
+    { emoji: '😊', end: 999,   unit: 'smiles',   label: 'Reasons we smile because of her every single day' },
+    { emoji: '🎂', end: 1,     unit: 'Amma',     label: 'One irreplaceable, one-of-a-kind, one and only — Amma' },
+  ];
+
+  const data = (CONFIG.lifeInNumbers && CONFIG.lifeInNumbers.length)
+    ? CONFIG.lifeInNumbers
+    : defaultNumbers;
+
+  const grid = document.getElementById('numbers-grid');
+
+  data.forEach((item, idx) => {
+    const card = document.createElement('div');
+    card.className = 'number-card';
+    card.style.animationDelay = (idx * 0.08) + 's';
+    card.innerHTML = `
+      <span class="card-emoji">${item.emoji}</span>
+      <span class="card-count" data-end="${item.end}" data-duration="1800">0</span>
+      <div class="card-unit">${item.unit}</div>
+      <p class="card-label">${item.label}</p>
+    `;
+    grid.appendChild(card);
+  });
+
+  // ── ANIMATED COUNTERS (Intersection Observer) ─────────────────
+  function animateCounter(el) {
+    const end      = parseInt(el.dataset.end, 10);
+    const dur      = parseInt(el.dataset.duration, 10) || 1800;
+    const start    = performance.now();
+    const isPercent = el.nextElementSibling && el.nextElementSibling.textContent.includes('%');
+
+    function step(now) {
+      const elapsed  = now - start;
+      const progress = Math.min(elapsed / dur, 1);
+      // easeOutExpo
+      const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      const current = Math.round(ease * end);
+      el.textContent = current.toLocaleString();
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = end.toLocaleString();
+    }
+    requestAnimationFrame(step);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.card-count').forEach(el => observer.observe(el));
+
+  // ── CONTINUE ──────────────────────────────────────────────────
+  document.getElementById('next-room-btn').addEventListener('click', () => {
+    navigateTo('photo-haul.html');
+  });
+</script>
+</body>
+</html>

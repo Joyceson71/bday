@@ -366,6 +366,76 @@
       transform: translateY(-2px) scale(1.03);
       box-shadow: 0 6px 25px rgba(255,215,0,0.6);
     }
+
+    /* ─── COUNTDOWN SECTION ──────────────────────────────────── */
+    #countdown-section {
+      margin: 1.6rem 0 0;
+      animation: openReveal 1s ease 2s both;
+    }
+
+    .countdown-label {
+      font-family: var(--font-heading);
+      font-size: 0.78rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold-champagne);
+      margin-bottom: 0.9rem;
+      opacity: 0.85;
+    }
+
+    .countdown-digits {
+      display: flex;
+      justify-content: center;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+    }
+
+    .countdown-unit {
+      background: rgba(212,175,55,0.12);
+      border: 1px solid rgba(212,175,55,0.4);
+      border-radius: 14px;
+      padding: 0.65rem 0.9rem;
+      min-width: 70px;
+      text-align: center;
+    }
+
+    .countdown-unit .num {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #FFE79A 0%, #FFD700 50%, #E5A93C 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 8px rgba(255,215,0,0.7));
+      display: block;
+      line-height: 1.1;
+    }
+
+    .countdown-unit .unit-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gold-champagne);
+      opacity: 0.75;
+      margin-top: 0.2rem;
+    }
+
+    #today-msg {
+      font-family: var(--font-script);
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      color: var(--gold-bright);
+      filter: drop-shadow(0 0 14px rgba(255,215,0,0.7));
+      margin: 0.6rem 0;
+      animation: heartPulse 1.4s ease-in-out infinite;
+    }
+
+    .countdown-locked-note {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      margin-top: 0.6rem;
+      font-style: italic;
+    }
   </style>
 </head>
 <body>
@@ -446,8 +516,28 @@
       </button>
     </div>
 
+    <!-- Countdown / Today Banner -->
+    <div id="countdown-section">
+      <!-- Shown before birthday: countdown -->
+      <div id="countdown-wrap" style="display:none;">
+        <p class="countdown-label">🎁 Your party opens on October 23, 2026 in...</p>
+        <div class="countdown-digits">
+          <div class="countdown-unit"><span class="num" id="cd-days">--</span><div class="unit-label">Days</div></div>
+          <div class="countdown-unit"><span class="num" id="cd-hours">--</span><div class="unit-label">Hours</div></div>
+          <div class="countdown-unit"><span class="num" id="cd-mins">--</span><div class="unit-label">Minutes</div></div>
+          <div class="countdown-unit"><span class="num" id="cd-secs">--</span><div class="unit-label">Seconds</div></div>
+        </div>
+        <p class="countdown-locked-note">The doors will open at midnight, Amma 🪔<br><em>(Hint: press Shift+S to preview now 🤫)</em></p>
+      </div>
+      <!-- Shown on the birthday -->
+      <div id="today-wrap" style="display:none;">
+        <p id="today-msg">🎉 Today is the day, Amma! 🎉</p>
+        <p style="color:var(--gold-champagne); font-size:0.92rem; font-style:italic;">The doors are wide open — step right in, our Queen! 💜</p>
+      </div>
+    </div>
+
     <!-- Key Drag Game -->
-    <div class="key-game-section" aria-label="Unlock the party doors">
+    <div class="key-game-section" id="key-game-section" aria-label="Unlock the party doors">
       <h3>Amma, the doors are waiting for you ✨</h3>
       <p class="game-hint">Drag the golden key to the doors, or simply tap below to step inside!</p>
 
@@ -489,6 +579,57 @@
   document.getElementById('page-date').textContent     = CONFIG.date;
   document.getElementById('page-time').textContent     = CONFIG.time;
   document.getElementById('page-venue').textContent    = CONFIG.venue;
+
+  // ─── COUNTDOWN LOGIC ────────────────────────────────────────
+  (function setupCountdown() {
+    const bdayISO = (CONFIG.birthdayISO) || "2026-10-23T00:00:00+05:30";
+    const bdayTime = new Date(bdayISO).getTime();
+
+    // developer bypass via Shift+S
+    let bypass = sessionStorage.getItem('bday_shift_s') === '1';
+    document.addEventListener('keydown', (e) => {
+      if (e.shiftKey && e.key === 'S') {
+        bypass = true;
+        sessionStorage.setItem('bday_shift_s', '1');
+        updateCountdown();
+        showToast("🤫 Developer bypass active — happy testing!", 3000);
+      }
+    });
+
+    function updateCountdown() {
+      const now   = Date.now();
+      const diff  = bdayTime - now;
+      const isBirthday = diff <= 0 || bypass;
+
+      const cdWrap    = document.getElementById('countdown-wrap');
+      const todayWrap = document.getElementById('today-wrap');
+      const keyGame   = document.getElementById('key-game-section');
+
+      if (isBirthday) {
+        cdWrap.style.display    = 'none';
+        todayWrap.style.display = 'block';
+        if (keyGame) keyGame.style.display = 'block';
+      } else {
+        cdWrap.style.display    = 'block';
+        todayWrap.style.display = 'none';
+        if (keyGame) keyGame.style.display = 'none';
+
+        const totalSecs = Math.floor(diff / 1000);
+        const d = Math.floor(totalSecs / 86400);
+        const h = Math.floor((totalSecs % 86400) / 3600);
+        const m = Math.floor((totalSecs % 3600) / 60);
+        const s = totalSecs % 60;
+        const pad = n => String(n).padStart(2, '0');
+        document.getElementById('cd-days').textContent  = pad(d);
+        document.getElementById('cd-hours').textContent = pad(h);
+        document.getElementById('cd-mins').textContent  = pad(m);
+        document.getElementById('cd-secs').textContent  = pad(s);
+      }
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  })();
 
   // Initialize shared scripts (Page 0: Gate)
   sharedInit(0);

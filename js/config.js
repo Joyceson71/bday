@@ -1,25 +1,17 @@
-// ============================================================
-//  HAPPY BIRTHDAY, AMMA  —  CONFIGURATION FILE
-//  Made with all our love for Glory Gnana Selvi ("Amma")
-//  Edit this file to personalise anything without touching HTML.
-// ============================================================
-
 const CONFIG = {
 
   // ─── BASICS ───────────────────────────────────────────────
   name:        "Amma",               // Called Amma everywhere
   fullName:    "Glory Gnana Selvi",  // Used on invitation and letter
   sonName:     "Kavin",              // Her Gunda
-  date:        "October 22, 2026",
+  date:        "October 23, 2026",
+  birthdayISO: "2026-10-23T00:00:00+05:30",
   time:        "A Lifetime of Love",
   venue:       "In Our Hearts Forever",
 
-  // ─── GOOGLE SHEETS / EXCEL SYNC ────────────────────────────
-  // Paste your Google Apps Script Web App URL or SheetDB endpoint here to receive answers in real-time!
-  // All answers are also saved in local storage and can be exported to Excel (.csv) with one click.
-  sheetsWebhookUrl: "",
+  sheetsWebhookUrl: "https://script.google.com/macros/s/AKfycbw1L_t3xkBneb9N734MjdMIDuH40OBNhv20xrOKGLVjdoq4Afhivjqd6yz8Tlf57_E2yQ/exec",
 
-  // ─── AMMA'S FAVOURITE MENU ─────────────────────────────────
+
   menu: {
     starters:  [
       "Crispy Medu Vada with hot Sambhar & Coconut Chutney",
@@ -738,7 +730,8 @@ const CONFIG = {
       "I have tried many times to find the right words for you, and every time I realise there aren't any big enough. So I built you a little party instead, because you have spent your whole life building ours.",
       "Thank you for being born, Amma. Because you were born, I have a home, a name, a heart that knows how to love. Everything good in me started with you.",
       "You sacrificed more than we will ever fully know. You were awake when we slept, you smiled when you were tired, and you made every ordinary day feel like a celebration.",
-      "I remember [ADD A SPECIFIC MEMORY]. I didn't say it then, but it meant everything.",
+      // Keep this paragraph empty string to hide it, or fill in a real memory:
+      "",
       "I am sorry for the days I forgot to say thank you. Thank you for your patience, your prayers, your scolding that was really love, and your hugs that fixed everything.",
       "Maybe I can't hug you whenever I want to, Ma, but that's okay. Even if I can't be the son who gets to hug you whenever he wants, I'll always be your loving son, and you'll always be my lovely Amma. ❤️🥹",
       "This year, I wish you health, peace, laughter, and the rest you have always saved for others. May you feel as loved as you have made us feel.",

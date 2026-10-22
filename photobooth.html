@@ -2,51 +2,715 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <meta http-equiv="refresh" content="0; url=photo-haul.html"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Photo Haul — Redirecting...</title>
-  <script>
-    window.location.replace("photo-haul.html" + window.location.search + window.location.hash);
-  </script>
+  <title>Photo Booth — Amma's Birthday 📸</title>
+  <meta name="description" content="Strike a pose, Amma! Take your very own birthday photo with frames, stickers and filters."/>
   <link rel="stylesheet" href="css/theme.css"/>
+  <link rel="stylesheet" href="css/animations.css"/>
   <style>
-    body {
+    .booth-hero {
+      padding: 2rem 1rem 6rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .room-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(179,136,235,0.18);
+      border: 1px solid rgba(212,175,55,0.4);
+      border-radius: 50px;
+      padding: 0.4rem 1.2rem;
+      font-size: 0.85rem;
+      color: var(--gold-champagne);
+      font-family: var(--font-heading);
+      margin-bottom: 0.8rem;
+    }
+
+    .camera-stage {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      margin: 1.8rem auto 1.2rem;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 3px solid var(--gold-metallic);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.7), var(--glow-gold);
+      background: #000;
+      aspect-ratio: 4/3;
+    }
+
+    #camera-video, #camera-canvas {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      position: absolute;
+      inset: 0;
+    }
+
+    #camera-canvas { display: none; z-index: 2; }
+
+    .countdown-overlay {
+      position: absolute;
+      inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
-      text-align: center;
-      padding: 2rem;
-      background: radial-gradient(circle at center, #2d1847 0%, #150921 100%);
-      color: #fff;
-      font-family: var(--font-body, system-ui, sans-serif);
+      pointer-events: none;
+      z-index: 20;
     }
-    .card {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(212,175,55,0.4);
-      padding: 2.5rem 2rem;
-      border-radius: 16px;
-      max-width: 480px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+
+    #countdown-number {
+      font-family: var(--font-heading);
+      font-size: 8rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #FFE79A, #FFD700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 30px rgba(255,215,0,0.95));
+      display: none;
+      transition: transform 0.25s, opacity 0.25s;
     }
-    a.btn {
-      display: inline-block;
-      margin-top: 1.5rem;
-      padding: 0.8rem 1.8rem;
+
+    .flash-overlay {
+      position: absolute;
+      inset: 0;
+      background: #fff;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 30;
+      transition: opacity 0.05s;
+    }
+
+    .flash-overlay.flashing { opacity: 1; }
+
+    #sticker-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+    }
+
+    .booth-controls {
+      display: flex;
+      gap: 0.8rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+    }
+
+    .ctrl-btn {
+      background: rgba(212,175,55,0.13);
+      border: 1.5px solid rgba(212,175,55,0.45);
+      color: var(--gold-champagne);
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      padding: 0.55rem 1.1rem;
       border-radius: 50px;
-      background: linear-gradient(135deg, #d4af37, #f7e7a9);
-      color: #1a0f2e;
-      text-decoration: none;
-      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .ctrl-btn:hover, .ctrl-btn.active {
+      background: rgba(212,175,55,0.28);
+      transform: scale(1.04);
+    }
+
+    .filters-strip {
+      display: flex;
+      gap: 0.6rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 0.6rem 0;
+    }
+
+    .filter-btn {
+      background: rgba(74,14,128,0.55);
+      border: 1.5px solid rgba(179,136,235,0.4);
+      color: var(--purple-orchid);
+      font-size: 0.78rem;
+      font-family: var(--font-heading);
+      padding: 0.38rem 0.9rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.04em;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: rgba(179,136,235,0.35);
+      color: var(--gold-bright);
+      border-color: var(--gold-bright);
+    }
+
+    .stickers-bar {
+      display: flex;
+      gap: 0.7rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 0.8rem 0;
+    }
+
+    .sticker-btn {
+      font-size: 1.8rem;
+      background: rgba(74,14,128,0.5);
+      border: 1.5px solid rgba(212,175,55,0.35);
+      border-radius: 14px;
+      padding: 0.35rem 0.7rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+      user-select: none;
+    }
+
+    .sticker-btn:hover { transform: scale(1.2) rotate(-5deg); }
+
+    .sticker-btn.text-sticker {
+      font-size: 0.75rem;
+      font-family: var(--font-heading);
+      color: var(--gold-bright);
+      white-space: nowrap;
+      padding: 0.4rem 0.9rem;
+    }
+
+    .strip-counter {
+      font-family: var(--font-heading);
+      font-size: 0.88rem;
+      color: var(--gold-champagne);
+      text-align: center;
+      margin: 0.4rem 0;
+    }
+
+    .gallery-title {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      color: var(--gold-bright);
+      margin: 1.8rem 0 0.8rem;
+      text-align: center;
+    }
+
+    .photo-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 0.9rem;
+    }
+
+    .gallery-item {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 2px solid rgba(212,175,55,0.4);
+      position: relative;
+      background: #000;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.5);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      display: block;
+    }
+
+    .gallery-item .dl-btn {
+      position: absolute;
+      bottom: 6px;
+      right: 6px;
+      background: var(--grad-gold);
+      color: var(--purple-deep);
+      border: none;
+      border-radius: 8px;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    #shoot-btn {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--grad-gold);
+      color: var(--purple-deep);
+      font-size: 2rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 30px rgba(255,215,0,0.8), 0 8px 20px rgba(0,0,0,0.4);
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      flex-shrink: 0;
+    }
+
+    #shoot-btn:hover { transform: scale(1.12); }
+    #shoot-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    #no-camera-fallback {
+      display: none;
+      text-align: center;
+      margin: 1.5rem auto;
+      max-width: 440px;
+    }
+
+    .next-room-btn {
+      background: var(--grad-gold);
+      color: var(--purple-deep);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 0.9rem 2.4rem;
+      border-radius: var(--radius-btn);
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow-btn), var(--glow-gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: transform 0.25s;
+      margin-top: 2rem;
+    }
+
+    .next-room-btn:hover { transform: translateY(-2px) scale(1.03); }
+
+    .section-card {
+      background: linear-gradient(145deg, rgba(62,11,108,0.7) 0%, rgba(28,4,52,0.9) 100%);
+      border: 1.5px solid rgba(212,175,55,0.35);
+      border-radius: 18px;
+      padding: 1.4rem 1.6rem;
+      margin-top: 1.4rem;
+    }
+
+    .section-card h3 {
+      font-family: var(--font-heading);
+      color: var(--gold-bright);
+      font-size: 0.92rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    @media (max-width: 480px) {
+      #shoot-btn { width: 60px; height: 60px; font-size: 1.6rem; }
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div style="font-size: 3rem; margin-bottom: 0.5rem;">📸</div>
-    <h2 style="font-family: var(--font-heading, serif); color: #f7e7a9;">Entering Amma's Photo Haul</h2>
-    <p style="opacity: 0.85; margin-top: 0.5rem;">Redirecting you to the grand showcase of all our memories...</p>
-    <a href="photo-haul.html" class="btn">Click here if not redirected →</a>
+
+<div class="bokeh bokeh-1"></div>
+<div class="bokeh bokeh-2"></div>
+<div class="bokeh bokeh-3"></div>
+<canvas id="particles-canvas" aria-hidden="true"></canvas>
+<div class="fairy-lights" aria-hidden="true"></div>
+
+<div id="progress-bar" role="navigation" aria-label="Amma's party rooms progress"></div>
+<button id="music-toggle" aria-label="Toggle background music">🎵</button>
+
+<div id="page-transition" aria-hidden="true" style="opacity:0;pointer-events:none;">
+  <div class="curtain-left"></div>
+  <div class="curtain-right"></div>
+</div>
+
+<main class="page-wrapper" role="main">
+  <div class="booth-hero">
+
+    <div class="text-center">
+      <span class="room-badge">Room 7 ✦ Amma's Photo Booth 📸</span>
+      <h1 class="invite-title" style="font-size:clamp(1.8rem, 5vw, 3rem); margin-bottom:0.4rem;">
+        Strike a Pose, Amma! 📷
+      </h1>
+      <p style="color:var(--purple-lavender); font-style:italic; max-width:600px; margin:0 auto;">
+        "Take a selfie, add your royal crown and stickers, and keep this memory forever."
+      </p>
+    </div>
+
+    <!-- Camera Stage -->
+    <div class="camera-stage" id="camera-stage">
+      <video id="camera-video" playsinline muted autoplay></video>
+      <canvas id="camera-canvas"></canvas>
+      <canvas id="sticker-layer"></canvas>
+      <div class="countdown-overlay">
+        <span id="countdown-number"></span>
+      </div>
+      <div class="flash-overlay" id="flash-overlay"></div>
+    </div>
+
+    <!-- Strip counter -->
+    <div class="strip-counter" id="strip-counter" style="display:none;"></div>
+
+    <!-- Main action row -->
+    <div style="display:flex; align-items:center; justify-content:center; gap:1.2rem; margin:0.8rem 0;">
+      <button class="ctrl-btn" id="flip-btn" title="Flip camera">🔄 Flip</button>
+      <button id="shoot-btn" aria-label="Take photo">📷</button>
+      <button class="ctrl-btn" id="mode-toggle-btn">🎞️ Strip (4)</button>
+    </div>
+
+    <!-- Filters -->
+    <div class="section-card">
+      <h3>✨ Filters</h3>
+      <div class="filters-strip" id="filters-strip">
+        <button class="filter-btn active" data-filter="none">Normal</button>
+        <button class="filter-btn" data-filter="grayscale(100%)">B&amp;W</button>
+        <button class="filter-btn" data-filter="sepia(80%)">Vintage</button>
+        <button class="filter-btn" data-filter="hue-rotate(270deg) saturate(1.5)">Purple Glow</button>
+        <button class="filter-btn" data-filter="contrast(1.2) brightness(1.1) saturate(1.3)">Vivid</button>
+        <button class="filter-btn" data-filter="brightness(0.85) contrast(1.3) saturate(0.6)">Cinematic</button>
+      </div>
+    </div>
+
+    <!-- Stickers -->
+    <div class="section-card">
+      <h3>👑 Stickers — Tap to add, tap sticker in preview to remove</h3>
+      <div class="stickers-bar" id="stickers-bar">
+        <button class="sticker-btn" data-sticker="👑">👑</button>
+        <button class="sticker-btn" data-sticker="💜">💜</button>
+        <button class="sticker-btn" data-sticker="✨">✨</button>
+        <button class="sticker-btn" data-sticker="🌸">🌸</button>
+        <button class="sticker-btn" data-sticker="🎂">🎂</button>
+        <button class="sticker-btn" data-sticker="🎉">🎉</button>
+        <button class="sticker-btn text-sticker" data-sticker="text:Best Amma Ever!">Best Amma Ever!</button>
+        <button class="sticker-btn text-sticker" data-sticker="text:Queen 👑">Queen 👑</button>
+        <button class="sticker-btn" id="clear-stickers-btn">🗑️ Clear</button>
+      </div>
+    </div>
+
+    <!-- File upload fallback -->
+    <div id="no-camera-fallback" class="section-card">
+      <h3>📁 Upload a Photo Instead</h3>
+      <p style="font-size:0.9rem; color:var(--gold-champagne); margin-bottom:1rem;">
+        Camera not available? Upload a photo from your gallery to dress it up with stickers &amp; filters!
+      </p>
+      <label style="cursor:pointer;">
+        <input type="file" id="upload-input" accept="image/*" style="display:none;"/>
+        <span class="ctrl-btn" style="display:inline-block;">📂 Choose Photo</span>
+      </label>
+    </div>
+
+    <!-- Gallery -->
+    <div id="gallery-section" style="display:none;">
+      <p class="gallery-title">💜 Your Birthday Photos, Amma</p>
+      <div class="photo-gallery" id="photo-gallery"></div>
+    </div>
+
+    <!-- Continue -->
+    <div class="text-center" id="continue-section" style="display:none; margin-top:2rem;">
+      <button class="next-room-btn" id="next-room-btn">
+        <span>📸</span> Visit the Grand Photo Haul →
+      </button>
+    </div>
+
   </div>
+</main>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+<script>
+  guardPage(6);
+  sharedInit(6);
+
+  const video      = document.getElementById('camera-video');
+  const mainCanvas = document.getElementById('camera-canvas');
+  const ctx        = mainCanvas.getContext('2d');
+  const stickerCvs = document.getElementById('sticker-layer');
+  const stickerCtx = stickerCvs.getContext('2d');
+  const flashEl    = document.getElementById('flash-overlay');
+  const cdNum      = document.getElementById('countdown-number');
+  const shootBtn   = document.getElementById('shoot-btn');
+  const gallery    = document.getElementById('photo-gallery');
+  const galSection = document.getElementById('gallery-section');
+  const contSection= document.getElementById('continue-section');
+
+  let stream        = null;
+  let facingMode    = 'user';
+  let currentFilter = 'none';
+  let stickers      = [];
+  let stripMode     = false;
+  let stripCount    = 0;
+  let stripImages   = [];
+  let shooting      = false;
+  let photosTaken   = 0;
+
+  // ── Camera ────────────────────────────────────────────────────
+  async function startCamera() {
+    try {
+      if (stream) stream.getTracks().forEach(t => t.stop());
+      stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode, width: {ideal:1280}, height: {ideal:960} },
+        audio: false
+      });
+      video.srcObject = stream;
+      video.style.display = 'block';
+      mainCanvas.style.display = 'none';
+      document.getElementById('no-camera-fallback').style.display = 'none';
+      sizeCanvases();
+    } catch(e) {
+      video.style.display = 'none';
+      document.getElementById('no-camera-fallback').style.display = 'block';
+      console.warn('Camera:', e);
+    }
+  }
+
+  function sizeCanvases() {
+    const stage = document.getElementById('camera-stage');
+    const w = stage.offsetWidth;
+    const h = stage.offsetHeight;
+    stickerCvs.width = w; stickerCvs.height = h;
+    stickerCvs.style.width  = w + 'px';
+    stickerCvs.style.height = h + 'px';
+    redrawStickers();
+  }
+
+  startCamera();
+  window.addEventListener('resize', sizeCanvases);
+
+  document.getElementById('flip-btn').addEventListener('click', () => {
+    facingMode = facingMode === 'user' ? 'environment' : 'user';
+    startCamera();
+  });
+
+  // ── Mode toggle ───────────────────────────────────────────────
+  const modeBtn = document.getElementById('mode-toggle-btn');
+  modeBtn.addEventListener('click', () => {
+    stripMode = !stripMode;
+    modeBtn.textContent = stripMode ? '📷 Single Shot' : '🎞️ Strip (4)';
+    modeBtn.classList.toggle('active', stripMode);
+    stripImages = []; stripCount = 0;
+    updateStripCounter();
+  });
+
+  function updateStripCounter() {
+    const el = document.getElementById('strip-counter');
+    if (stripMode) {
+      el.style.display = 'block';
+      el.textContent = `📸 Photos taken: ${stripCount}/4`;
+    } else {
+      el.style.display = 'none';
+    }
+  }
+
+  // ── Filters ───────────────────────────────────────────────────
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.filter;
+      video.style.filter = currentFilter !== 'none' ? currentFilter : '';
+    });
+  });
+
+  // ── Stickers ──────────────────────────────────────────────────
+  document.querySelectorAll('.sticker-btn[data-sticker]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const val = btn.dataset.sticker;
+      stickers.push({
+        type:  val.startsWith('text:') ? 'text' : 'emoji',
+        value: val.startsWith('text:') ? val.slice(5) : val,
+        x: 0.25 + Math.random() * 0.5,
+        y: 0.1  + Math.random() * 0.55
+      });
+      redrawStickers();
+      playSound('pop');
+    });
+  });
+
+  document.getElementById('clear-stickers-btn').addEventListener('click', () => {
+    stickers = []; redrawStickers();
+  });
+
+  stickerCvs.style.pointerEvents = 'auto';
+  stickerCvs.addEventListener('click', (e) => {
+    const r = stickerCvs.getBoundingClientRect();
+    const cx = (e.clientX - r.left) / r.width;
+    const cy = (e.clientY - r.top)  / r.height;
+    const idx = stickers.findIndex(s => Math.hypot(s.x-cx, s.y-cy) < 0.09);
+    if (idx !== -1) { stickers.splice(idx, 1); redrawStickers(); }
+  });
+
+  function redrawStickers() {
+    const w = stickerCvs.width, h = stickerCvs.height;
+    stickerCtx.clearRect(0, 0, w, h);
+    stickers.forEach(s => {
+      const x = s.x * w, y = s.y * h;
+      if (s.type === 'emoji') {
+        stickerCtx.font = `${Math.round(w * 0.1)}px serif`;
+        stickerCtx.textAlign = 'center'; stickerCtx.textBaseline = 'middle';
+        stickerCtx.fillText(s.value, x, y);
+      } else {
+        const fs = Math.round(w * 0.055);
+        stickerCtx.font = `bold ${fs}px serif`;
+        stickerCtx.textAlign = 'center'; stickerCtx.textBaseline = 'middle';
+        stickerCtx.fillStyle = '#FFD700';
+        stickerCtx.shadowColor = 'rgba(0,0,0,0.85)'; stickerCtx.shadowBlur = 6;
+        stickerCtx.fillText(s.value, x, y);
+        stickerCtx.shadowBlur = 0;
+      }
+    });
+  }
+
+  // ── Shoot ─────────────────────────────────────────────────────
+  async function doShoot() {
+    if (shooting) return;
+    shooting = true; shootBtn.disabled = true;
+
+    for (let i = 3; i >= 1; i--) {
+      cdNum.textContent = i;
+      cdNum.style.display = 'block';
+      cdNum.style.transform = 'scale(1.6)';
+      cdNum.style.opacity = '1';
+      if (typeof playSound === 'function') playSound('click');
+      await new Promise(r => setTimeout(r, 300));
+      cdNum.style.transform = 'scale(0.9)';
+      cdNum.style.opacity = '0.3';
+      await new Promise(r => setTimeout(r, 650));
+    }
+    cdNum.style.display = 'none';
+
+    // Flash
+    flashEl.classList.add('flashing');
+    setTimeout(() => flashEl.classList.remove('flashing'), 300);
+
+    // Capture onto main canvas
+    const vw = video.videoWidth  || 800;
+    const vh = video.videoHeight || 600;
+    mainCanvas.width  = vw;
+    mainCanvas.height = vh;
+    ctx.filter = currentFilter !== 'none' ? currentFilter : 'none';
+    ctx.save();
+    if (facingMode === 'user') { ctx.translate(vw, 0); ctx.scale(-1, 1); }
+    ctx.drawImage(video, 0, 0, vw, vh);
+    ctx.restore();
+    ctx.filter = 'none';
+
+    // Draw stickers at video resolution
+    stickers.forEach(s => {
+      const x = s.x * vw, y = s.y * vh;
+      if (s.type === 'emoji') {
+        ctx.font = `${Math.round(vw * 0.1)}px serif`;
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(s.value, x, y);
+      } else {
+        const fs = Math.round(vw * 0.055);
+        ctx.font = `bold ${fs}px serif`;
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillStyle = '#FFD700';
+        ctx.shadowColor = 'rgba(0,0,0,0.85)'; ctx.shadowBlur = 8;
+        ctx.fillText(s.value, x, y);
+        ctx.shadowBlur = 0;
+      }
+    });
+
+    // Watermark
+    const wm = Math.max(14, Math.round(vw * 0.025));
+    ctx.font = `bold ${wm}px serif`;
+    ctx.fillStyle = 'rgba(255,215,0,0.85)';
+    ctx.textAlign = 'right'; ctx.textBaseline = 'bottom';
+    ctx.fillText('Happy Birthday, Amma \u{1F49C}', vw - 12, vh - 12);
+
+    const dataUrl = mainCanvas.toDataURL('image/png');
+
+    if (stripMode) {
+      stripImages.push(dataUrl);
+      stripCount++;
+      updateStripCounter();
+      if (stripCount >= 4) {
+        const stripUrl = await composeStrip(stripImages);
+        addToGallery(stripUrl, 'Birthday Strip');
+        stripImages = []; stripCount = 0;
+        updateStripCounter();
+        showToast('Your 4-photo strip is ready, Amma! \u{1F49C}', 3500);
+      } else {
+        showToast(`\u{1F4F8} Photo ${stripCount}/4 taken! Keep going!`, 2000);
+      }
+    } else {
+      addToGallery(dataUrl, `Photo #${photosTaken + 1}`);
+      showToast('Beautiful! Amma looks stunning! \u{1F451}', 2500);
+    }
+
+    photosTaken++;
+    if (typeof launchConfetti === 'function') launchConfetti(25);
+    if (typeof playSound === 'function') playSound('success');
+    Progress.unlock(7);
+
+    shooting = false; shootBtn.disabled = false;
+  }
+
+  async function composeStrip(images) {
+    const loadImg = src => new Promise((res, rej) => {
+      const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src;
+    });
+    const imgs = await Promise.all(images.map(loadImg));
+    const pad = 10, border = 14;
+    const w = imgs[0].width, h = imgs[0].height;
+    const sc = document.createElement('canvas');
+    sc.width  = w + border * 2;
+    sc.height = imgs.length * h + (imgs.length - 1) * pad + border * 2 + 60;
+    const s = sc.getContext('2d');
+    s.fillStyle = '#1F043A'; s.fillRect(0, 0, sc.width, sc.height);
+    s.strokeStyle = '#D4AF37'; s.lineWidth = 3;
+    s.strokeRect(3, 3, sc.width - 6, sc.height - 6);
+    imgs.forEach((img, i) => s.drawImage(img, border, border + i * (h + pad), w, h));
+    s.font = 'bold 22px serif';
+    s.fillStyle = '#FFD700'; s.textAlign = 'center';
+    s.fillText('Happy Birthday, Amma \u{1F49C}', sc.width / 2, sc.height - 18);
+    return sc.toDataURL('image/png');
+  }
+
+  function addToGallery(dataUrl, label) {
+    galSection.style.display  = 'block';
+    contSection.style.display = 'block';
+    const item = document.createElement('div');
+    item.className = 'gallery-item';
+    const img = document.createElement('img');
+    img.src = dataUrl; img.alt = label;
+    const dl = document.createElement('button');
+    dl.className = 'dl-btn'; dl.textContent = '\u{2B07} Save';
+    dl.addEventListener('click', () => {
+      const a = document.createElement('a');
+      a.href = dataUrl; a.download = `amma-birthday-${Date.now()}.png`; a.click();
+    });
+    item.append(img, dl);
+    gallery.prepend(item);
+  }
+
+  shootBtn.addEventListener('click', doShoot);
+
+  // ── File upload fallback ──────────────────────────────────────
+  document.getElementById('upload-input').addEventListener('change', e => {
+    const file = e.target.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const img = new Image();
+      img.onload = () => {
+        mainCanvas.width = img.width; mainCanvas.height = img.height;
+        ctx.filter = currentFilter !== 'none' ? currentFilter : 'none';
+        ctx.drawImage(img, 0, 0);
+        ctx.filter = 'none';
+        stickers.forEach(s => {
+          const x = s.x * img.width, y = s.y * img.height;
+          if (s.type === 'emoji') {
+            ctx.font = `${Math.round(img.width * 0.1)}px serif`;
+            ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+            ctx.fillText(s.value, x, y);
+          } else {
+            ctx.font = `bold ${Math.round(img.width * 0.055)}px serif`;
+            ctx.fillStyle = '#FFD700'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+            ctx.fillText(s.value, x, y);
+          }
+        });
+        const wm = Math.max(14, Math.round(img.width * 0.03));
+        ctx.font = `bold ${wm}px serif`;
+        ctx.fillStyle = 'rgba(255,215,0,0.85)'; ctx.textAlign = 'right'; ctx.textBaseline = 'bottom';
+        ctx.fillText('Happy Birthday, Amma \u{1F49C}', img.width - 16, img.height - 16);
+        addToGallery(mainCanvas.toDataURL('image/png'), 'Uploaded');
+        showToast('Photo dressed up, Amma! \u{1F49C}', 2500);
+        if (typeof playSound === 'function') playSound('success');
+        Progress.unlock(7);
+      };
+      img.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+
+  document.getElementById('next-room-btn').addEventListener('click', () => {
+    navigateTo('photo-haul.html');
+  });
+</script>
 </body>
 </html>
