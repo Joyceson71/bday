@@ -1,6 +1,6 @@
 /* ============================================================
    MAIN.JS  —  Continuous Music Engine, Progress, Transitions,
-   Ambient FX, Toast, Confetti, 13 Rooms Architecture
+   Ambient FX, Toast, Confetti, 14 Rooms Architecture
    ============================================================ */
 
 // ─── PAGE DEFINITIONS (14 ROOMS) ─────────────────────────────
@@ -430,37 +430,27 @@ function playSound(name) {
   } catch {}
 }
 
-// ─── PAGE TRANSITION WITH VIEW TRANSITION API / CSS FALLBACK ──
+// ─── PAGE TRANSITION WITH CURTAIN OVERLAY ────────────────────
 function navigateTo(href, delay = 600) {
-  const doNavigation = () => {
-    const overlay = document.getElementById('page-transition');
-    if (overlay) {
-      overlay.style.transition = 'none';
-      overlay.style.opacity = '1';
-      overlay.style.pointerEvents = 'all';
-      const left  = overlay.querySelector('.curtain-left');
-      const right = overlay.querySelector('.curtain-right');
-      if (left && right) {
-        left.style.transform  = 'translateX(-100%)';
-        right.style.transform = 'translateX(100%)';
-        left.style.transition  = `transform ${delay}ms cubic-bezier(0.77,0,0.18,1)`;
-        right.style.transition = `transform ${delay}ms cubic-bezier(0.77,0,0.18,1)`;
-        requestAnimationFrame(() => {
-          left.style.transform  = 'translateX(0)';
-          right.style.transform = 'translateX(0)';
-        });
-      }
+  const overlay = document.getElementById('page-transition');
+  if (overlay) {
+    overlay.style.transition = 'none';
+    overlay.style.opacity = '1';
+    overlay.style.pointerEvents = 'all';
+    const left  = overlay.querySelector('.curtain-left');
+    const right = overlay.querySelector('.curtain-right');
+    if (left && right) {
+      left.style.transform  = 'translateX(-100%)';
+      right.style.transform = 'translateX(100%)';
+      left.style.transition  = `transform ${delay}ms cubic-bezier(0.77,0,0.18,1)`;
+      right.style.transition = `transform ${delay}ms cubic-bezier(0.77,0,0.18,1)`;
+      requestAnimationFrame(() => {
+        left.style.transform  = 'translateX(0)';
+        right.style.transform = 'translateX(0)';
+      });
     }
-    setTimeout(() => { window.location.href = href; }, delay + 50);
-  };
-
-  if (document.startViewTransition) {
-    document.startViewTransition(() => {
-      doNavigation();
-    });
-  } else {
-    doNavigation();
   }
+  setTimeout(() => { window.location.href = href; }, delay + 50);
 }
 
 // ─── AMBIENT PARTICLES ───────────────────────────────────────
@@ -632,7 +622,12 @@ function initFairyLights() {
 
 // ─── TOAST NOTIFICATION ───────────────────────────────────────
 function showToast(msg, duration = 3000) {
-  document.querySelectorAll('.toast').forEach(t => t.remove());
+  // Shift existing toasts up before adding a new one
+  document.querySelectorAll('.toast').forEach(t => {
+    t.style.transition = 'bottom 0.3s ease';
+    const curBottom = parseFloat(getComputedStyle(t).bottom) || 80;
+    t.style.bottom = (curBottom + 50) + 'px';
+  });
   const toast = document.createElement('div');
   toast.className = 'toast';
   toast.textContent = msg;

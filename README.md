@@ -5,7 +5,7 @@ A deeply personal, interactive multi-page birthday website built with plain HTML
 
 ---
 
-## 🗂️ Project Structure (13 Dedicated Rooms)
+## 🗂️ Project Structure (14 Dedicated Rooms)
 
 ```
 bday/
@@ -177,6 +177,7 @@ Update the captions in `config.js` under `photos` and `appa.photos`.
 | 11 | `appa.html` | A Room For Appa | Reverent 4-stage experience: Door → Memories → 5 Questions (with sacred diya pause & Question 5) → Appa's Wish Video |
 | 12 | `letter.html` | The Final Letter | Tap wax seal to unfold letter, view Amma's Keepsake Book, tap "A hug from me, Amma 🤗" |
 | 13 | `hug.html` | A Virtual Hug | Tap/hold the glowing heart to receive a beating hug pulse, floating hearts, and handwritten card |
+| 14 | `jd.html` | A Wish From JD | Typewriter message from JD with optional photo/video/voice note, then view Amma's Answer Keepsake |
 
 ---
 

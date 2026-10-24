@@ -3,7 +3,7 @@
 //  Caches all pages and assets for offline use.
 // ============================================================
 
-const CACHE_NAME = 'amma-bday-v2';
+const CACHE_NAME = 'amma-bday-v3';
 
 const PRECACHE = [
   '/',

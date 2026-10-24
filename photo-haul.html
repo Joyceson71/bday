@@ -401,10 +401,10 @@
 
     <!-- Category Filter Tabs -->
     <div class="filter-tabs-wrap" role="tablist">
-      <button class="filter-tab active" data-cat="all">🌟 All Memories (37)</button>
-      <button class="filter-tab" data-cat="current">👑 Queen Glory Today (29)</button>
-      <button class="filter-tab" data-cat="marriage">💍 Sacred Marriage (5)</button>
-      <button class="filter-tab" data-cat="college">🎓 College Days (3)</button>
+      <button class="filter-tab active" data-cat="all" id="tab-all">🌟 All Memories</button>
+      <button class="filter-tab" data-cat="current" id="tab-current">👑 Queen Glory Today</button>
+      <button class="filter-tab" data-cat="marriage" id="tab-marriage">💍 Sacred Marriage</button>
+      <button class="filter-tab" data-cat="college" id="tab-college">🎓 College Days</button>
     </div>
 
     <!-- Photo Grid -->
@@ -464,6 +464,18 @@
   // Load photos from config, strictly excluding any Appa photos (Appa media is exclusively in Room 11)
   const allPhotos = (CONFIG.photoHaul || []).filter(p => p.category !== 'appa' && !p.src.includes('/appa/'));
   document.getElementById('total-photos-count').textContent = allPhotos.length;
+
+  // Update filter tab counts dynamically
+  const countByCategory = {};
+  allPhotos.forEach(p => { countByCategory[p.category] = (countByCategory[p.category] || 0) + 1; });
+  const tabAll = document.getElementById('tab-all');
+  const tabCurrent = document.getElementById('tab-current');
+  const tabMarriage = document.getElementById('tab-marriage');
+  const tabCollege = document.getElementById('tab-college');
+  if (tabAll)      tabAll.textContent      = `🌟 All Memories (${allPhotos.length})`;
+  if (tabCurrent)  tabCurrent.textContent  = `👑 Queen Glory Today (${countByCategory['current'] || 0})`;
+  if (tabMarriage) tabMarriage.textContent = `💍 Sacred Marriage (${countByCategory['marriage'] || 0})`;
+  if (tabCollege)  tabCollege.textContent  = `🎓 College Days (${countByCategory['college'] || 0})`;
 
   let activeCategory = 'all';
   let viewLovedOnly = false;
